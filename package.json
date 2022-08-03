@@ -1,0 +1,55 @@
+{
+  "name": "pointautomatioon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/wdio tests/config/config.js --spec tests/specs/open.close.browser.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "7.17.6",
+    "@babel/core": "7.17.5",
+    "@babel/preset-env": "7.16.11",
+    "@babel/register": "7.17.0",
+    "@babel/traverse": "7.17.3",
+    "@babel/types": "7.17.0",
+    "@wdio/selenium-standalone-service": "^7.20.7",
+    "@wdio/spec-reporter": "^7.20.7",
+    "@wdio/sync": "^7.20.7",
+    "webdriverio": "^7.20.7"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "@wdio/cli": "^7.20.7",
+    "@wdio/local-runner": "^7.20.7",
+    "@wdio/mocha-framework": "^7.20.7",
+    "wdio-electron-service": "^3.5.0",
+    "electron-chromedriver": "^19.0.0",
+    "await-spawn": "^4.0.2"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "standard": {
+    "plugins": [
+      "webdriverio"
+    ],
+    "env": [
+      "mocha",
+      "webdriverio/wdio"
+    ]
+  }
+}
