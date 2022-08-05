@@ -1,0 +1,31 @@
+import Page from './page'
+
+class LoginExistingAccountPage extends Page {
+    get confirmAndLoginButton() {
+        return $("//button[text() = 'Confirm & Login']")
+    }
+
+    getSecretField(index) {
+        return $("input[name='" + index + "']")
+    }
+
+    async waitForPageToBeLoaded() {
+        await this.confirmAndLoginButton.waitForDisplayed();
+    }
+
+    async fillSecretWords(secretWords) {
+        //const secretWords = process.env.SECRET_WORDS.split(' ')
+        let counter = 0
+        while (counter < 12) {
+            await super.setValueInElement(this.getSecretField(counter), secretWords[counter])
+            counter += 1
+        }
+        console.log('Secret words on metamask were added')
+    }
+
+    async clickOnConfirmAndLoginButton() {
+        await super.clickElement(this.confirmAndLoginButton);
+    }
+}
+
+export default new LoginExistingAccountPage()

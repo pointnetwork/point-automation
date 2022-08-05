@@ -146,4 +146,25 @@ export default class Page {
       }
     }
   }
+
+  /**
+   * Method to wait for an element to have text.
+   * @param element Element
+   */
+  async waitToHaveText(element) {
+    let text = '';
+    let timeout = 0;
+
+    while (text === '' && timeout <= 60) {
+      if ((await element.getText()) !== '') {
+        text = true;
+      }
+      await browser.pause(1000);
+      timeout += 1;
+    }
+  }
+
+  sendTabKey() {
+    browser.keys('Tab');
+  }
 }

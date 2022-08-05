@@ -18,13 +18,25 @@ class DashboardPage extends Page {
     }
 
     get loadingMessage() {
-        return $("//*[contains(text(), 'Starting')]")
+        return $("//*[@role='dialog']")
     }
 
     get checkingForUpdatesLabel() {
         return $("//*[contains(text(), 'Checking for updates...')]")
     }
-que
+
+    get logoutIcon() {
+        return $("//*[@data-testid='LogoutIcon']/ancestor::button")
+    }
+
+    get confirmLogoutButton() {
+        return $("//button[text() = 'Log Out']")
+    }
+
+    get updatingMessage() {
+        return $("//*[contains(text(), 'Updating')]")
+    }
+
     async waitForDashboardDisplayed() {
         await this.pointDashboardTitle.waitForDisplayed();
     }
@@ -47,6 +59,17 @@ que
                 browser.pause(2000);
             }
         }
+
+        await browser.pause(2000);
+        await this.updatingMessage.waitForDisplayed({reverse:true, timeout: 120000})
+    }
+
+    async clickOnLogout() {
+        await super.clickElement(this.logoutIcon);
+    }
+
+    async confirmLogout() {
+        await super.clickElement(this.confirmLogoutButton);
     }
 }
 
