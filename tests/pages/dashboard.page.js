@@ -46,8 +46,13 @@ class DashboardPage extends Page {
     }
 
     async waitForProcessesRunning() {
-        await this.loadingMessage.waitForDisplayed();
-        await this.loadingMessage.waitForDisplayed({reverse:true, timeout: 120000})
+        try {
+            await this.loadingMessage.waitForDisplayed({timeout: 5000});
+            await this.loadingMessage.waitForDisplayed({reverse:true, timeout: 120000})
+        }catch(exception){
+            await console.log("Loading message is not displayed");
+        }
+
         let allProcessesWorking = false;
         let timeout = 30;
 

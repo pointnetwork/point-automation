@@ -1,9 +1,11 @@
 import DashboardPage from '../pages/dashboard.page'
 import BashProcesses from '../utilities/bash.processes'
+import CommonSteps from "../utilities/common.steps";
 
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 5;
+        await CommonSteps.loginIfUserIsLoggedOut();
 
         while(attempts > 0) {
             //Open dashboard and browser

@@ -22,7 +22,7 @@ class LoginExistingAccountPage extends Page {
     }
 
     get confirmAndLoginButton() {
-        return $("//button[text() = 'Confirm & Login']")
+        return $("//button[text() = 'Confirm and Login']")
     }
 
     async waitForPageToBeLoaded() {
@@ -35,7 +35,6 @@ class LoginExistingAccountPage extends Page {
         let word = 0;
         while(word < 12) {
             const wordElement = await this.getSecretWord(word+1);
-            await super.waitToHaveText(wordElement);
             await secretWords.push(await wordElement.getText());
             word += 1;
         }
@@ -44,7 +43,7 @@ class LoginExistingAccountPage extends Page {
     }
 
     async clickOnGenerate() {
-        await super.clickElement(this.generateButton);
+        await super.clickElementAndWait(this.generateButton, 1000);
     }
 
     async clickOnContinue() {
