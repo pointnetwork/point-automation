@@ -13,6 +13,10 @@ class LoginPage extends Page {
         await this.noGenerateOneButton.waitForDisplayed();
     }
 
+    async waitForLoginPage() {
+        await this.noGenerateOneButton.waitForDisplayed({timeout: 7000});
+    }
+
     async clickOnNoGenerateOne() {
         await super.clickElement(this.noGenerateOneButton);
     }

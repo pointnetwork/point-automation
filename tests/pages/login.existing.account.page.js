@@ -6,7 +6,7 @@ class LoginExistingAccountPage extends Page {
     }
 
     getSecretField(index) {
-        return $("input[name='" + index + "']")
+        return $("input[id='input_" + index + "']")
     }
 
     async waitForPageToBeLoaded() {
@@ -14,10 +14,12 @@ class LoginExistingAccountPage extends Page {
     }
 
     async fillSecretWords(secretWords) {
-        //const secretWords = process.env.SECRET_WORDS.split(' ')
         let counter = 0
         while (counter < 12) {
-            await super.setValueInElement(this.getSecretField(counter), secretWords[counter])
+            const secretField = await this.getSecretField(counter)
+            await super.clickElement(secretField);
+            await secretField.setValue(secretWords[counter]);
+            await super.sendTabKey();
             counter += 1
         }
         console.log('Secret words on metamask were added')
