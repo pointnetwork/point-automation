@@ -5,7 +5,7 @@ import LoginNewAccountPage from '../pages/login.new.account.page';
 import CommonSteps from "../utilities/common.steps";
 
 describe('Open/Close Browser', () => {
-    it('Open dashboard, Logout, generate a new key and close browser 3 times.', async () => {
+    it('Open dashboard, Logout, import existing key and close browser 3 times.', async () => {
         let attempts = 3;
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
@@ -19,12 +19,7 @@ describe('Open/Close Browser', () => {
             expect(LoginPage.noGenerateOneButton).toBeDisplayed();
 
             //Generate new keys
-            await LoginPage.clickOnNoGenerateOne();
-            await LoginNewAccountPage.clickOnGenerate();
-            const words = await LoginNewAccountPage.getSecretWords();
-            await LoginNewAccountPage.clickOnContinue();
-            await LoginNewAccountPage.enterThreeFirstWords(words[0], words[2], words[11]);
-            await LoginNewAccountPage.clickOnConfirmAndLoginButton();
+            await CommonSteps.loginUser();
 
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning();
