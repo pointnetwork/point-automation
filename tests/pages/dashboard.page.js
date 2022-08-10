@@ -37,6 +37,14 @@ class DashboardPage extends Page {
         return $("//*[contains(text(), 'Updating')]")
     }
 
+    get settingsButton() {
+        return $("//*[@data-testid='SettingsIcon']/ancestor::button")
+    }
+
+    get uninstallButton() {
+        return $("//*[@data-testid='CancelPresentationIcon']/ancestor::ul")
+    }
+
     async waitForDashboardDisplayed() {
         await this.pointDashboardTitle.waitForDisplayed();
     }
@@ -75,6 +83,14 @@ class DashboardPage extends Page {
 
     async confirmLogout() {
         await super.clickElement(this.confirmLogoutButton);
+    }
+
+    async clickOnSettingsButton() {
+        await super.clickElement(this.settingsButton);
+    }
+
+    async clickOnUninstallButton() {
+        await super.clickElement(this.uninstallButton);
     }
 }
 

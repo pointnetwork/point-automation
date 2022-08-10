@@ -4,7 +4,7 @@ import LoginExistingAccountPage from "../pages/login.existing.account.page"
 module.exports = {
     async loginIfUserIsLoggedOut() {
         try {
-            this.loginUser()
+            await this.loginUser()
         }catch(exception){
             await console.log("User is logged in")
         }
