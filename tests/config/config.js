@@ -20,7 +20,6 @@ exports.config = {
     specs: ['./tests/specs/*.js'],
     // Patterns to exclude.
     exclude: [],
-    browserType: 'firefox',
     //
     // ============
     // Capabilities
