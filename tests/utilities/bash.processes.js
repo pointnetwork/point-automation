@@ -18,7 +18,7 @@ module.exports = {
     async getCommandToRun(processName) {
         switch (process.platform) {
             case 'win32': return `tasklist`
-            case 'darwin': return `ps -ax | grep '${processName}'`
+            case 'darwin': return `ps -ax | grep '${processName}' | sort -r`
             case 'linux': return `ps -A`
             default: return false
         }

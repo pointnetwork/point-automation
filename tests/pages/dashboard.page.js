@@ -46,7 +46,7 @@ class DashboardPage extends Page {
     }
 
     async waitForDashboardDisplayed() {
-        await this.pointDashboardTitle.waitForDisplayed();
+        await (await this.pointDashboardTitle).chromeBrowser.waitForDisplayed();
     }
 
     async clickOnLaunchPointBrowser() {
@@ -55,8 +55,8 @@ class DashboardPage extends Page {
 
     async waitForProcessesRunning() {
         try {
-            await this.loadingMessage.waitForDisplayed({timeout: 5000});
-            await this.loadingMessage.waitForDisplayed({reverse:true, timeout: 120000})
+            await (await this.loadingMessage).chromeBrowser.waitForDisplayed({timeout: 5000});
+            await (await this.loadingMessage).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
         }catch(exception){
             await console.log("Loading message is not displayed");
         }
@@ -65,7 +65,7 @@ class DashboardPage extends Page {
         let timeout = 30;
 
         while(!allProcessesWorking && timeout > 0) {
-            if(this.processesSuccessStatus.length === 3) {
+            if(await this.processesSuccessStatus.length === 3) {
                 allProcessesWorking = true;
             }else{
                 timeout -= 1;
@@ -74,23 +74,23 @@ class DashboardPage extends Page {
         }
 
         await browser.pause(2000);
-        await this.updatingMessage.waitForDisplayed({reverse:true, timeout: 120000})
+        await (await this.updatingMessage).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
     }
 
     async clickOnLogout() {
-        await super.clickElement(this.logoutIcon);
+        await super.clickElement((await this.logoutIcon).chromeBrowser);
     }
 
     async confirmLogout() {
-        await super.clickElement(this.confirmLogoutButton);
+        await super.clickElement((await this.confirmLogoutButton).chromeBrowser);
     }
 
     async clickOnSettingsButton() {
-        await super.clickElement(this.settingsButton);
+        await super.clickElement((await this.settingsButton).chromeBrowser);
     }
 
     async clickOnUninstallButton() {
-        await super.clickElement(this.uninstallButton);
+        await super.clickElement((await this.uninstallButton).chromeBrowser);
     }
 }
 

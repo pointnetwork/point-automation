@@ -26,8 +26,8 @@ class LoginExistingAccountPage extends Page {
     }
 
     async waitForPageToBeLoaded() {
-        await this.importantLabel.waitForDisplayed();
-        await this.generateButton.waitForDisplayed();
+        await (await this.importantLabel).chromeBrowser.waitForDisplayed();
+        await (await this.generateButton).chromeBrowser.waitForDisplayed();
     }
 
     async getSecretWords() {
@@ -35,7 +35,7 @@ class LoginExistingAccountPage extends Page {
         let word = 0;
         while(word < 12) {
             const wordElement = await this.getSecretWord(word+1);
-            await secretWords.push(await wordElement.getText());
+            await secretWords.push(await (await wordElement).chromeBrowser.getText());
             word += 1;
         }
 
@@ -43,22 +43,22 @@ class LoginExistingAccountPage extends Page {
     }
 
     async clickOnGenerate() {
-        await super.clickElementAndWait(this.generateButton, 1000);
+        await super.clickElementAndWait((await this.generateButton).chromeBrowser, 1000);
     }
 
     async clickOnContinue() {
-        await super.clickElement(this.continueButton);
+        await super.clickElement((await this.continueButton).chromeBrowser);
     }
 
     async enterThreeFirstWords(word1, word2, word3) {
-        await super.setValueInElement(this.getSecretField(0), word1)
-        await super.setValueInElement(this.getSecretField(1), word2)
-        await super.setValueInElement(this.getSecretField(2), word3)
+        await super.setValueInElement((await this.getSecretField(0)).chromeBrowser, word1)
+        await super.setValueInElement((await this.getSecretField(1)).chromeBrowser, word2)
+        await super.setValueInElement((await this.getSecretField(2)).chromeBrowser, word3)
         await super.sendTabKey()
     }
 
     async clickOnConfirmAndLoginButton() {
-        await super.clickElement(this.confirmAndLoginButton);
+        await super.clickElement((await this.confirmAndLoginButton).chromeBrowser);
     }
 }
 

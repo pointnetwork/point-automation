@@ -14,5 +14,8 @@ module.exports = {
         await LoginPage.clickOnYesIHaveIt();
         await LoginExistingAccountPage.fillSecretWords(process.env.SECRET_WORDS.split(' '))
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
+    },
+    async openPointInNewFirefox() {
+        await browser.firefoxBrowser.url("https://point")
     }
 }

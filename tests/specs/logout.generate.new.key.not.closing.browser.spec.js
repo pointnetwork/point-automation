@@ -16,7 +16,7 @@ describe('Open/Close Browser', () => {
             await DashboardPage.clickOnLogout();
             await DashboardPage.confirmLogout();
             await LoginPage.waitForPageToBeLoaded();
-            expect(LoginPage.noGenerateOneButton).toBeDisplayed();
+            expect(LoginPage.noGenerateOneButton.browserChrome).toBeDisplayed();
 
             //Generate new keys
             await LoginPage.clickOnNoGenerateOne();

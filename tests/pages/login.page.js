@@ -10,19 +10,19 @@ class LoginPage extends Page {
     }
 
     async waitForPageToBeLoaded() {
-        await this.noGenerateOneButton.waitForDisplayed();
+        await (await this.noGenerateOneButton).chromeBrowser.waitForDisplayed();
     }
 
     async waitForLoginPage() {
-        await this.noGenerateOneButton.waitForDisplayed({timeout: 7000});
+        await (await this.noGenerateOneButton).chromeBrowser.waitForDisplayed({timeout: 7000});
     }
 
     async clickOnNoGenerateOne() {
-        await super.clickElement(this.noGenerateOneButton);
+        await super.clickElement((await this.noGenerateOneButton).chromeBrowser);
     }
 
     async clickOnYesIHaveIt() {
-        await super.clickElement(this.yesIHaveItButton);
+        await super.clickElement((await this.yesIHaveItButton).chromeBrowser);
     }
 }
 

@@ -89,7 +89,11 @@ exports.config = {
                 // be stored (uses the config.outputDir by default when not set).
                 outputDir: './logs'
             }
-        ]
+        ],
+        ['firefox-profile', {
+            'browser.startup.homepage': 'https://webdriver.io',
+            profileDirectory: "/Users/workmac/.point/keystore/liveprofile"
+        }]
     ],
     reporters: [
         'spec',

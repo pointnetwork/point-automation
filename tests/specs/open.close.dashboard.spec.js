@@ -16,7 +16,7 @@ describe('Open/Close Browser', () => {
             expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
 
             attempts -= 1;
-            await browser.reloadSession();
+            await browser.chromeBrowser.reloadSession();
         }
     });
 });
