@@ -6,7 +6,7 @@ import CommonSteps from "../utilities/common.steps";
 
 describe('Open/Close Browser', () => {
     it('Open dashboard, Logout, import existing key and close browser 3 times.', async () => {
-        let attempts = 1;
+        let attempts = 3;
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();
@@ -18,7 +18,7 @@ describe('Open/Close Browser', () => {
             await LoginPage.waitForPageToBeLoaded();
             expect(LoginPage.noGenerateOneButton.chromeBrowser).toBeDisplayed();
 
-            //Generate new keys
+            //Login
             await CommonSteps.loginUser();
 
             await DashboardPage.waitForDashboardDisplayed();

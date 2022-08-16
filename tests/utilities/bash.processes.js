@@ -10,7 +10,7 @@ module.exports = {
                 found = true;
             }else {
                 timeout -= 1;
-                browser.pause(2000);
+                await browser.pause(2000);
             }
         }
         return await this.isProcessRunning("[f]irefox", "firefox")
@@ -49,5 +49,19 @@ module.exports = {
                 resolve(idProcess);
             })
         })
-    }
+    },
+    async getPointProcessClosed() {
+        let found = false;
+        let timeout = 15;
+
+        while(!found && timeout > 0) {
+            if(await this.isProcessRunning("[p]oint.app/Contents", "point.app/Contents")){
+                timeout -= 1;
+                await browser.pause(2000);
+            }else {
+                found = true;
+            }
+        }
+        return await this.isProcessRunning("[p]oint", "point")
+    },
 };

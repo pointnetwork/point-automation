@@ -69,7 +69,7 @@ exports.config = {
     framework: 'mocha',
     mochaOpts: {
         ui: 'bdd',
-        timeout: 360000,
+        timeout: 420000,
         compilers: ['js:@babel/register'],
         bail: false,
     },
