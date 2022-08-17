@@ -19,8 +19,21 @@ class InstallerWelcomePage extends Page {
 
     async waitForInstallationCompleted() {
         await (await this.installingTitle).chromeBrowser.waitForDisplayed()
-        //Wait for the installation to take a max of 3 mins.
-        await (await this.installingTitle).chromeBrowser.waitForDisplayed({reverse:true, timeout:180000})
+        let timeout = 30
+        let finished = false
+
+        while(!finished && timeout > 0) {
+            try {
+                if(await (await this.installingTitle).chromeBrowser.isExisting()) {
+                    timeout -= 1;
+                    await browser.pause(10000);
+                }else{
+                    finished = true;
+                }
+            }catch(exception) {
+                await browser.chromeBrowser.reloadSession();
+            }
+        }
     }
 }
 

@@ -7,10 +7,10 @@ import LoginNewAccountPage from "../pages/login.new.account.page";
 import InstallerWelcomePage from '../pages/installer/installer.welcome.page'
 
 
-describe('Open/Close Browser', () => {
+describe.skip('Open/Close Browser', () => {
     before(function () {
         Utils.rmDirIfExists(require('os').homedir() + "/.point");
-        browser.reloadSession();
+        browser.chromeBrowser.reloadSession();
     });
     it('Remove .point folder, cancel terms and conditions, accept terms and conditions and signup', async () => {
         let attempts = 1;
@@ -20,7 +20,7 @@ describe('Open/Close Browser', () => {
             await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
             await InstallerTermsConditionsPage.clickOnCancelButton();
             expect(await BashProcesses.getPointProcessClosed()).toEqual(true);
-            await browser.reloadSession();
+            await browser.chromeBrowser.reloadSession();
             await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
             await InstallerTermsConditionsPage.clickOnUnderstandAndAgreeButton();
             await InstallerWelcomePage.waitForInstallerToBeDisplayed();

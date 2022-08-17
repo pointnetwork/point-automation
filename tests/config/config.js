@@ -62,14 +62,14 @@ exports.config = {
     deprecationWarnings: true,
     waitforTimeout: 60000, // Default timeout for all waitFor* commands.
     connectionRetryTimeout: 60000, // Default timeout in milliseconds for request if Selenium Grid doesn't send response
-    connectionRetryCount: 3, // Default request retries count
+    connectionRetryCount: 1, // Default request retries count
     specFileRetries: 1,
     specFileRetriesDelay: 0,
     specFileRetriesDeferred: false,
     framework: 'mocha',
     mochaOpts: {
         ui: 'bdd',
-        timeout: 420000,
+        timeout: 600000,
         compilers: ['js:@babel/register'],
         bail: false,
     },
