@@ -1,4 +1,5 @@
 import Page from '../page'
+import BashProcesses from "../../utilities/bash.processes";
 
 class InstallerWelcomePage extends Page {
     get startInstallationButton() {
@@ -24,13 +25,13 @@ class InstallerWelcomePage extends Page {
 
         while(!finished && timeout > 0) {
             try {
-                if(await (await this.installingTitle).chromeBrowser.isExisting()) {
-                    timeout -= 1;
-                    await browser.pause(10000);
-                }else{
-                    finished = true;
-                }
+                const element = await browser.chromeBrowser.$("//*[text() = 'Installing']");
+                await element.waitForDisplayed({timeout:5000})
+                timeout -= 1;
+                await browser.pause(10000);
             }catch(exception) {
+                finished = true
+                await BashProcesses.killPoint();
                 await browser.chromeBrowser.reloadSession();
             }
         }

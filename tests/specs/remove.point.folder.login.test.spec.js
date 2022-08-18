@@ -6,7 +6,7 @@ import CommonSteps from "../utilities/common.steps";
 import DashboardPage from "../pages/dashboard.page";
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 
-describe.skip('Open/Close Browser', () => {
+describe('Open/Close Browser', () => {
     before(function () {
         Utils.rmDirIfExists(require('os').homedir() + "/.point");
         browser.reloadSession();

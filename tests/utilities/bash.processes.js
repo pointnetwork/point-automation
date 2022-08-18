@@ -62,6 +62,14 @@ module.exports = {
                 found = true;
             }
         }
-        return await this.isProcessRunning("[p]oint", "point")
+        return found;
+    },
+    async killPoint() {
+        const processId = await this.getProcessId("[A]pplications/point.app/Contents/MacOS/point")
+        return new Promise((resolve) => {
+            childProcess.exec("kill -9 " + processId, (err, stdout, stderr) => {
+                resolve(stdout)
+            })
+        })
     },
 };
