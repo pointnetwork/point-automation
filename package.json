@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "simple-test": "node_modules/.bin/wdio tests/config/config.js --spec tests/specs/open.close.browser.spec.js",
     "test": "node_modules/.bin/wdio tests/config/config.js --spec tests/specs/*.spec.js"
   },
   "keywords": [],
