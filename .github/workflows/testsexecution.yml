@@ -8,7 +8,7 @@ name: Tests Execution
         default: main
 
 jobs:
-  build_on_mac:
+  test_on_mac:
     runs-on: macos-latest
     steps:
       - name: Checkout Repo
