@@ -78,6 +78,10 @@ jobs:
         run: echo $(codesign -dvvv ./out/point.dmg)
       - name: Compress and package Installer
         run: ./scripts/package_macos_installer.sh
+      - name: Mount Point
+        run: hdiutil attach point.dmg
+      - name: Install Point
+        run: cp -R /Volumes/point/point.app /Application
       - name: Run Tests
         run: |
           cd
