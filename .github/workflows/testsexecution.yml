@@ -79,13 +79,8 @@ jobs:
       - name: Compress and package Installer
         run: ./scripts/package_macos_installer.sh
       - name: Run Tests
-          run: |
-            cd
-            cd point-automation
-            echo "Running tests"
-            npm run simple-test
-      - uses: actions/upload-artifact@v1
-          if: failure()
-          with:
-            name: logs
-            path: logs
+        run: |
+          cd
+          cd point-automation
+          echo "Running tests"
+          npm run simple-test
