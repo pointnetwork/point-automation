@@ -1,5 +1,8 @@
 // to use debug option run `DEBUG=true followed by your .conf.js`
 /* eslint-disable global-require */
+const wdioHtmlReporter = require('@rpii/wdio-html-reporter')
+const log4j = require('log4js')
+
 exports.config = {
     //
     // ====================
@@ -96,6 +99,22 @@ exports.config = {
     ],
     reporters: [
         'spec',
+        [
+            wdioHtmlReporter.HtmlReporter,
+            {
+                debug: false,
+                outputDir: './tests/reports/html-reports/',
+                filename: 'report.html',
+                reportTitle: 'Test Automation Report',
+
+                // to show the report in a browser when done
+                showInBrowser: false,
+
+                // to turn on screenshots after every test
+                useOnAfterCommandForScreenshot: false,
+                LOG: log4j.getLogger('default')
+            }
+        ]
     ],
     //
     // =====

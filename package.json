@@ -23,7 +23,9 @@
     "wdio-geckodriver-service": "^3.0.3",
     "geckodriver": "^3.0.2",
     "@wdio/firefox-profile-service": "^7.20.7",
-    "@faker-js/faker": "^7.4.0"
+    "@faker-js/faker": "^7.4.0",
+    "@rpii/wdio-html-reporter": "6.1.1",
+    "log4js": "^6.4.2"
   },
   "devDependencies": {
     "chai": "^4.3.6",
