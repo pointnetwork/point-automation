@@ -24,8 +24,12 @@ jobs:
         with:
           repo: 'pointnetwork/pointnetwork-dashboard/releases'
           file: 'point-v0.2.61-MacOS-installer.tar.gz'
+      - name: Display downloaded files
+        run: ls
       - name: Unzip file
         run: gunzip -c point-v0.2.61-MacOS-installer.tar.gz | tar xopf -
+      - name: Display unzipped files
+        run: ls
       - name: Mount Point
         run: hdiutil attach point.dmg
       - name: Install Point
