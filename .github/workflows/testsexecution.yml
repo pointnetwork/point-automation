@@ -18,66 +18,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-      - name: Install Pnpm
-        run: npm install -g pnpm
       - name: Install
         run: npm install
-      - name: Move to origin folder
-        run: cd
-      - name: Checkout Dev Repo
-        uses: actions/checkout@v3
+      - uses: dsaltares/fetch-gh-release-asset@master
         with:
-          repository: pointnetwork/pointnetwork-dashboard
-          path: develop
-      - name: Install the Apple certificate and provisioning profile
-        env:
-          BUILD_CERTIFICATE_BASE64: ${{ secrets.APPLE_DEV_ID_APPLICATION_CERTIFICATE_P12_BASE64 }}
-          P12_PASSWORD: ${{ secrets.APPLE_DEV_ID_DECRYPTION_PASSWORD }}
-          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.APPLE_DEV_ID_PROFILE }}
-          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-        run: |
-          # create variables
-          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-          # import certificate and provisioning profile from secrets
-          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
-          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode --output $PP_PATH
-          # create temporary keychain
-          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-          # import certificate to keychain
-          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-          security list-keychain -d user -s $KEYCHAIN_PATH
-          # apply provisioning profile
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-      - name: list identities
-        run: echo $(security find-identity)
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@master
-        with:
-          node-version: 14
-      - name: Install dependencies
-        run: npm install
-      - name: Build Installer dist
-        run: npm run make
-        env:
-          APPLE_IDENTITY: ${{secrets.APPLE_DEV_IDENTITY}}
-          APPLE_ID: ${{secrets.APPLE_DEV_ID}}
-          APPLE_DEV_ID_APP_SPECIFIC_PASSWORD: ${{secrets.APPLE_DEV_ID_APP_SPECIFIC_PASSWORD}}
-          DEBUG: electron
-      - name: Check sign app
-        run: echo $(codesign -dvvv ./out/point-darwin-x64/point.app)
-      - name: Build Installer
-        run: npm run create-installer-mac
-      - name: Compress and package executables
-        run: ./scripts/package_macos_executables.sh
-      - name: Check sign dmg
-        run: echo $(codesign -dvvv ./out/point.dmg)
-      - name: Compress and package Installer
-        run: ./scripts/package_macos_installer.sh
+          repo: 'pointnetwork/pointnetwork-dashboard/releases'
+          latest: true
+          file: 'point-v0.2.60-MacOS-installer.tar.gz'
+      - name: Unzip file
+        run: gunzip -c point-v0.2.60-MacOS-installer.tar.gz | tar xopf -
       - name: Mount Point
         run: hdiutil attach point.dmg
       - name: Install Point
