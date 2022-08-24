@@ -23,7 +23,6 @@ jobs:
       - uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: 'pointnetwork/pointnetwork-dashboard/releases'
-          latest: true
           file: 'point-v0.2.61-MacOS-installer.tar.gz'
       - name: Unzip file
         run: gunzip -c point-v0.2.61-MacOS-installer.tar.gz | tar xopf -
