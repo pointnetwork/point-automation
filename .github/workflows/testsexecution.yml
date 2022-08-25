@@ -36,3 +36,7 @@ jobs:
         run: |
           echo "Running tests"
           npm run simple-test
+      - uses: actions/upload-artifact@v1
+        with:
+          name: report
+          path: "./tests/reports/html-reports/"
