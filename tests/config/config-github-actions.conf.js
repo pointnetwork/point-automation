@@ -10,14 +10,6 @@ config.capabilities = [
           args: ["app='/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point'"]
         }
       }
-    },
-    firefoxBrowser: {
-      capabilities: {
-        browserName: 'firefox'
-      },
-      "moz:firefoxOptions": {
-        args: ['-headless']
-      },
     }
   }
 ];
