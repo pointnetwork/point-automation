@@ -23,17 +23,15 @@ jobs:
       - uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: 'pointnetwork/pointnetwork-dashboard/releases'
-          file: 'point-v0.2.61-MacOS-installer.tar.gz'
+          file: 'point-v0.2.61-MacOS-app.zip'
       - name: Display downloaded files
         run: ls
+      - name: Display Path
+        run: pwd
       - name: Unzip file
-        run: gunzip -c point-v0.2.61-MacOS-installer.tar.gz | tar xopf -
+        run: unzip point-v0.2.61-MacOS-app.zip
       - name: Display unzipped files
         run: ls
-      - name: Mount Point
-        run: hdiutil attach point.dmg
-      - name: Install Point
-        run: cp -R /Volumes/point/point.app /Application
       - name: Run Tests
         run: |
           cd
