@@ -11,6 +11,7 @@ class InstallerTermsConditionsPage extends Page {
 
     async waitForInstallerToBeDisplayed() {
         await (await this.understandAndAgreeToContinueButton).chromeBrowser.waitForDisplayed()
+        await console.log("Installer is displayed")
     }
 
     async clickOnCancelButton() {
@@ -19,6 +20,7 @@ class InstallerTermsConditionsPage extends Page {
 
     async clickOnUnderstandAndAgreeButton() {
         await super.clickElement((await this.understandAndAgreeToContinueButton).chromeBrowser)
+        await console.log("I Understand button was clicked")
     }
 }
 

@@ -11,6 +11,7 @@ class LoginPage extends Page {
 
     async waitForPageToBeLoaded() {
         await (await this.noGenerateOneButton).chromeBrowser.waitForDisplayed();
+        await console.log("Login page is displayed")
     }
 
     async waitForLoginPage() {

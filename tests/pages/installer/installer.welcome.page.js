@@ -16,10 +16,12 @@ class InstallerWelcomePage extends Page {
 
     async clickOnStartInstallationButton() {
         await super.clickElement((await this.startInstallationButton).chromeBrowser)
+        await console.log("Clicked on 'Start Installation' button")
     }
 
     async waitForInstallationCompleted() {
         await (await this.installingTitle).chromeBrowser.waitForDisplayed()
+        await console.log("Installation in progress...")
         let timeout = 30
         let finished = false
 
@@ -30,9 +32,10 @@ class InstallerWelcomePage extends Page {
                 timeout -= 1;
                 await browser.pause(10000);
             }catch(exception) {
+                await console.log("Killing Point process and reloading session")
                 finished = true
                 await BashProcesses.killPoint();
-                await browser.chromeBrowser.reloadSession();
+                await browser.reloadSession();
             }
         }
     }

@@ -10,6 +10,7 @@ module.exports = {
         }
     },
     async loginUser() {
+        await console.log("Logging in user...")
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
         await LoginExistingAccountPage.fillSecretWords(process.env.SECRET_WORDS.split(' '))
