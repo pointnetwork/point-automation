@@ -2,6 +2,10 @@
 /* eslint-disable global-require */
 const wdioHtmlReporter = require('@rpii/wdio-html-reporter')
 const log4j = require('log4js')
+const drivers = {
+    chrome: { version: '98.0.4758.102' },
+    firefox: { version: '0.31.0' },
+}
 
 exports.config = {
     //
@@ -38,11 +42,6 @@ exports.config = {
                     args: ["app='/Applications/point.app/Contents/MacOS/point'"]
                 }
             }
-        },
-        firefoxBrowser: {
-            capabilities: {
-                browserName: 'firefox'
-            }
         }
     },
     //
@@ -77,29 +76,10 @@ exports.config = {
         bail: false,
     },
     services: [
-        [
-            'geckodriver',
-            // service options
-            {
-                // OPTIONAL: Arguments passed to geckdriver executable.
-                // Check geckodriver --help for all options. Example:
-                // ['--log=debug', '--binary=/var/ff50/firefox']
-                // Default: empty array
-                args: ['--log=info'],
-
-                // The path where the output of the Geckodriver server should
-                // be stored (uses the config.outputDir by default when not set).
-                outputDir: './logs'
-            }
-        ],
-        ['firefox-profile', {
-            'browser.startup.homepage': 'https://webdriver.io',
-            profileDirectory: "/Users/workmac/.point/keystore/liveprofile"
-        }],
-        ['chromedriver', {
-            logFileName: 'wdio-chromedriver.log', // default
-            outputDir: 'driver-logs', // overwrites the config.outputDir
-            args: ['--silent']
+        ['selenium-standalone', {
+            logPath: 'logs',
+            installArgs: { drivers }, // drivers to install
+            args: { drivers } // drivers to use
         }]
     ],
     reporters: [
