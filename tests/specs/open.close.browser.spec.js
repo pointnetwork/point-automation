@@ -1,11 +1,25 @@
 import DashboardPage from '../pages/dashboard.page'
 import BashProcesses from '../utilities/bash.processes'
 import CommonSteps from "../utilities/common.steps";
+import InstallerTermsConditionsPage from "../pages/installer/installer.terms.conditions.page";
+import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
+import LoginPage from "../pages/login.page";
 
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 1;
-        await CommonSteps.loginIfUserIsLoggedOut();
+
+        await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
+        await InstallerTermsConditionsPage.clickOnUnderstandAndAgreeButton();
+        await InstallerWelcomePage.waitForInstallerToBeDisplayed();
+        await InstallerWelcomePage.clickOnStartInstallationButton();
+        await InstallerWelcomePage.waitForInstallationCompleted();
+
+        await LoginPage.waitForPageToBeLoaded();
+        expect(LoginPage.noGenerateOneButton.chromeBrowser).toBeDisplayed();
+
+        //Login
+        await CommonSteps.loginUser();
 
         while(attempts > 0) {
             //Open dashboard and browser
