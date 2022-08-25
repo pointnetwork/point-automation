@@ -36,7 +36,7 @@
     "wdio-electron-service": "^3.5.0",
     "electron-chromedriver": "^19.0.0",
     "await-spawn": "^4.0.2",
-    "chromedriver": "^104.0.0"
+    "wdio-chromedriver-service": "^7.3.2"
   },
   "babel": {
     "presets": [

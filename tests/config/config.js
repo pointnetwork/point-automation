@@ -95,6 +95,11 @@ exports.config = {
         ['firefox-profile', {
             'browser.startup.homepage': 'https://webdriver.io',
             profileDirectory: "/Users/workmac/.point/keystore/liveprofile"
+        }],
+        ['chromedriver', {
+            logFileName: 'wdio-chromedriver.log', // default
+            outputDir: 'driver-logs', // overwrites the config.outputDir
+            args: ['--silent']
         }]
     ],
     reporters: [
