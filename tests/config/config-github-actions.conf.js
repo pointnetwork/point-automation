@@ -14,7 +14,10 @@ config.capabilities = [
     firefoxBrowser: {
       capabilities: {
         browserName: 'firefox'
-      }
+      },
+      "moz:firefoxOptions": {
+        args: ['-headless']
+      },
     }
   }
 ];
