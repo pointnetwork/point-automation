@@ -29,7 +29,7 @@ jobs:
       - name: Display Path
         run: pwd
       - name: Unzip file
-        run: unzip point-v0.2.61-MacOS-app.zip
+        run: unzip point-v0.2.64-MacOS-app.zip
       - name: Display unzipped files
         run: ls
       - name: Run Tests
