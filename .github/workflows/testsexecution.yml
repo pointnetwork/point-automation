@@ -24,14 +24,8 @@ jobs:
         with:
           repo: 'pointnetwork/pointnetwork-dashboard/releases'
           file: 'point-v0.2.64-MacOS-app.zip'
-      - name: Display downloaded files
-        run: ls
-      - name: Display Path
-        run: pwd
       - name: Unzip file
         run: unzip point-v0.2.64-MacOS-app.zip
-      - name: Display unzipped files
-        run: ls
       - name: Run Tests
         run: |
           echo "Running tests"
