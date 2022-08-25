@@ -1,6 +1,6 @@
 const { config } = require('./config');
 
-config.capabilities = [
+config.capabilities =
   {
     chromeBrowser: {
       capabilities: {
@@ -12,5 +12,4 @@ config.capabilities = [
       }
     }
   }
-];
 exports.config = config;
