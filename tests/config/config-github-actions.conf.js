@@ -6,8 +6,8 @@ config.capabilities = [
       capabilities: {
         browserName: 'chrome',
         'goog:chromeOptions': {
-          binary: 'point.app/Contents/MacOS/point',
-          args: ["app='point.app/Contents/MacOS/point'"]
+          binary: '/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point',
+          args: ["app='/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point'"]
         }
       }
     },

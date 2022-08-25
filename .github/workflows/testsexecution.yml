@@ -34,7 +34,5 @@ jobs:
         run: ls
       - name: Run Tests
         run: |
-          cd
-          cd point-automation
           echo "Running tests"
           npm run simple-test
