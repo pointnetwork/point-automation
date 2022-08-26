@@ -33,8 +33,10 @@ jobs:
           echo "Running tests"
           npm run simple-test
       - name: Display Files
+        if: always()
         run: ls
       - uses: actions/upload-artifact@v1
+        if: always()
         with:
           name: report
           path: "tests/reports/html-reports/"
