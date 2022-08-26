@@ -36,7 +36,9 @@
     "wdio-electron-service": "^3.5.0",
     "electron-chromedriver": "^19.0.0",
     "await-spawn": "^4.0.2",
-    "@wdio/selenium-standalone-service": "7.20.1"
+    "@wdio/selenium-standalone-service": "7.20.1",
+    "moment": "2.29.3",
+    "moment-timezone": "0.5.34"
   },
   "babel": {
     "presets": [

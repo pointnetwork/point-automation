@@ -2,9 +2,34 @@
 /* eslint-disable global-require */
 const wdioHtmlReporter = require('@rpii/wdio-html-reporter')
 const log4j = require('log4js')
+const path = require('path')
+const fs = require('fs')
 const drivers = {
     chrome: { version: '98.0.4758.102' },
     firefox: { version: '0.31.0' },
+}
+
+function rmdir (dir) {
+    try {
+        const list = fs.readdirSync(dir)
+        for (let i = 0; i < list.length; i++) {
+            const filename = path.join(dir, list[i])
+            const stat = fs.statSync(filename)
+
+            if (filename === '.' || filename === '..') {
+                // pass these files
+            } else if (stat.isDirectory()) {
+                // rmdir recursively
+                rmdir(filename)
+            } else {
+                // rm fiilename
+                fs.unlinkSync(filename)
+            }
+        }
+        fs.rmdirSync(dir)
+    } catch (exception) {
+        console.log('It was not possible to remove directory. Exception : ' + exception)
+    }
 }
 
 exports.config = {
@@ -65,7 +90,7 @@ exports.config = {
     waitforTimeout: 60000, // Default timeout for all waitFor* commands.
     connectionRetryTimeout: 60000, // Default timeout in milliseconds for request if Selenium Grid doesn't send response
     connectionRetryCount: 1, // Default request retries count
-    specFileRetries: 1,
+    specFileRetries: 0,
     specFileRetriesDelay: 0,
     specFileRetriesDeferred: false,
     framework: 'mocha',
@@ -105,8 +130,34 @@ exports.config = {
     // =====
     // Hooks
     // =====
-    onPrepare(config, capabilities) {
-        console.log("**** Starting test... ****");
+    onPrepare (config, capabilities) {
+        console.log('**** Starting test... ****')
+        const screenshotsFolder = './tests/reports/screenshots'
+        const pathForLog = './tests/reports/logs'
+
+        if (!fs.existsSync(screenshotsFolder)) {
+            // if it doesn't exist, create it
+            fs.mkdirSync(screenshotsFolder, { recursive: true })
+        } else {
+            rmdir(screenshotsFolder)
+            fs.mkdirSync(screenshotsFolder, { recursive: true })
+        }
+
+        if (!fs.existsSync(pathForLog)) {
+            // if it doesn't exist, create it
+            fs.mkdirSync(pathForLog, { recursive: true })
+        }
+        const reportAggregator = new wdioHtmlReporter.ReportAggregator({
+            outputDir: './tests/reports/html-reports/',
+            filename: 'master-report.html',
+            reportTitle: 'Master Report'
+            // to use the template override option, can point to your own file in the test project:
+            // templateFilename: path.resolve(__dirname, '../template/wdio-html-reporter-alt-template.hbs')
+        })
+
+        reportAggregator.clean()
+
+        global.reportAggregator = reportAggregator
     },
     /**
      * Gets executed just before initialising the webdriver session and test framework. It allows you
@@ -132,13 +183,39 @@ exports.config = {
         global.assert = chai.assert;
         global.should = chai.should();
     },
-    afterTest: function (test, context, { error, result, duration, passed, retries }) {},
+    afterTest (test) {
+        try {
+            const path = require('path')
+            const moment = require('moment')
+
+            // if test passed, ignore, else take and save screenshot.
+            if (test.passed) {
+                return
+            }
+            const timestamp = moment().format('YYYYMMDD-HHmmss.SSS')
+            const filepath = path.join(
+                'tests/reports/html-reports/screenshots/',
+                `${timestamp}.png`
+            )
+            browser.saveScreenshot(filepath)
+            process.emit('test:screenshot', filepath)
+        } catch (exception) {
+            console.log('It was not possible to take screenshot after test. Error : ' + exception)
+        }
+    },
     /**
      * Gets executed after all workers got shut down and the process is about to exit. It is not
      * possible to defer the end of the process using a promise.
      * @param {Object} exitCode 0 - success, 1 - fail
      */
-    onComplete(exitCode, config, capabilities, results) {
-        console.log('**** Test Finished ****');
-    },
+    onComplete (exitCode, config, capabilities, results) {
+        console.log('**** Test Finished ****')
+        try {
+            (async () => {
+                await global.reportAggregator.createReport()
+            })()
+        } catch (exception) {
+            console.log('Error creating report aggregator : ' + exception)
+        }
+    }
 };
