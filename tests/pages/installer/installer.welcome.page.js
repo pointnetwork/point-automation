@@ -21,7 +21,7 @@ class InstallerWelcomePage extends Page {
 
     async waitForInstallationCompleted() {
         await (await this.installingTitle).chromeBrowser.waitForDisplayed()
-        await console.log("Installation in progress...")
+        await console.log("Installation in progress..." + Date.now());
         let timeout = 30
         let finished = false
 
@@ -38,7 +38,7 @@ class InstallerWelcomePage extends Page {
                 await browser.reloadSession();
             }
         }
-        await console.log("Installation completed!")
+        await console.log("Installation completed!" + Date.now())
     }
 }
 
