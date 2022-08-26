@@ -28,7 +28,7 @@ class InstallerWelcomePage extends Page {
         while(!finished && timeout > 0) {
             try {
                 const element = await browser.chromeBrowser.$("//*[text() = 'Installing']");
-                await element.waitForDisplayed({timeout:5000})
+                await element.waitForDisplayed({timeout:6000})
                 timeout -= 1;
                 await browser.pause(10000);
             }catch(exception) {
@@ -38,6 +38,7 @@ class InstallerWelcomePage extends Page {
                 await browser.reloadSession();
             }
         }
+        await console.log("Installation completed!")
     }
 }
 
