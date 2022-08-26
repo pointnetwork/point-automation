@@ -14,7 +14,6 @@ describe('Open/Close Browser', () => {
         await InstallerWelcomePage.waitForInstallerToBeDisplayed();
         await InstallerWelcomePage.clickOnStartInstallationButton();
         await InstallerWelcomePage.waitForInstallationCompleted();
-        await browser.reloadSession();
 
         await LoginPage.waitForPageToBeLoaded();
         expect(LoginPage.noGenerateOneButton.chromeBrowser).toBeDisplayed();
