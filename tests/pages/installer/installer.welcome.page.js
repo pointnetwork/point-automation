@@ -26,11 +26,13 @@ class InstallerWelcomePage extends Page {
         let finished = false
 
         while(!finished && timeout > 0) {
+            await console.log("Checking Installation...")
             try {
                 const element = await browser.chromeBrowser.$("//*[text() = 'Installing']");
                 await element.waitForDisplayed({timeout:6000})
                 timeout -= 1;
                 await browser.pause(10000);
+                await console.log("Still Installing...")
             }catch(exception) {
                 await console.log("Killing Point process and reloading session")
                 finished = true
