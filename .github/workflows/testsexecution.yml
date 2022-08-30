@@ -31,7 +31,7 @@ jobs:
       - name: Run Tests
         run: |
           echo "Running tests"
-          npm run simple-test
+          sudo npm run simple-test
       - name: Display Files
         if: always()
         run: ls
