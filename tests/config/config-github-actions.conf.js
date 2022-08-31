@@ -7,7 +7,7 @@ config.capabilities =
         browserName: 'chrome',
         'goog:chromeOptions': {
           binary: '/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point',
-          args: ['test']
+          args: ['--test']
         }
       }
     }
