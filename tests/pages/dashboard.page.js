@@ -2,7 +2,7 @@ import Page from './page'
 
 class DashboardPage extends Page {
     get pointDashboardTitle() {
-        return $('//h1')
+        return $('//div//h1')
     }
 
     get launchPointBrowserButton() {

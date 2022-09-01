@@ -1,5 +1,6 @@
 import LoginPage from "../pages/login.page";
 import LoginExistingAccountPage from "../pages/login.existing.account.page"
+import BashProcesses from "./bash.processes";
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
@@ -15,6 +16,10 @@ module.exports = {
         await LoginPage.clickOnYesIHaveIt();
         await LoginExistingAccountPage.fillSecretWords(process.env.SECRET_WORDS.split(' '))
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
+        if(browser.config.os === "Linux") {
+            await BashProcesses.killPoint();
+            await browser.reloadSession();
+        }
     },
     async openPointInNewFirefox() {
         await browser.firefoxBrowser.url("https://point")

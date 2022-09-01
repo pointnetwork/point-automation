@@ -19,7 +19,7 @@ module.exports = {
         switch (process.platform) {
             case 'win32': return `tasklist`
             case 'darwin': return `ps -ax | grep '${processName}' | sort -r`
-            case 'linux': return `ps -A`
+            case 'linux': return `ps aux | grep '${processName}' | sort -r'`
             default: return false
         }
     },
@@ -65,11 +65,22 @@ module.exports = {
         return found;
     },
     async killPoint() {
-        const processId = await this.getProcessId("[A]pplications/point.app/Contents/MacOS/point")
+        const processId = await this.getProcessId(await this.getProcessToKillPoint())
         return new Promise((resolve) => {
             childProcess.exec("kill -9 " + processId, (err, stdout, stderr) => {
                 resolve(stdout)
             })
         })
     },
+    async getProcessToKillPoint() {
+        switch(process.platform) {
+            case "darwin":
+                return "[A]pplications/point.app/Contents/MacOS/point";
+            case "linux":
+                return "/usr/lib/point/point";
+            default:
+                return ""
+
+        }
+    }
 };
