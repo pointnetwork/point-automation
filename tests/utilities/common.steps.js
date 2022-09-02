@@ -16,9 +16,11 @@ module.exports = {
         await LoginPage.clickOnYesIHaveIt();
         await LoginExistingAccountPage.fillSecretWords(process.env.SECRET_WORDS.split(' '))
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
-        if(browser.config.os === "Linux") {
-            await BashProcesses.killPoint();
+        if(process.platform === "linux") {
+            await BashProcesses.killPointLinux();
+            await browser.pause(5000);
             await browser.reloadSession();
+            await browser.pause(5000);
         }
     },
     async openPointInNewFirefox() {
