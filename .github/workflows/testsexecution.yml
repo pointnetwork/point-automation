@@ -11,7 +11,7 @@ jobs:
   test_on_mac:
     runs-on: macos-latest
     env:
-      SECRET_WORDS: '${{ secrets.SECRET_WORDS }}'
+      SECRET_WORDS: 'rice result card portion rent card parent neck soon skill broom grab'
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
