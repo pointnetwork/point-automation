@@ -12,6 +12,8 @@ on:
 jobs:
   mac-os-test:
     runs-on: macos-latest
+    env:
+      SECRET_WORDS: ALEXIS
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -33,8 +35,6 @@ jobs:
         run: |
           echo "Running Tests"
           npm run simple-test
-        env:
-          SECRET_WORDS: ALEXIS
       - name: Display Files
         if: always()
         run: ls
