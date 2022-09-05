@@ -34,7 +34,7 @@ describe('Open/Close Browser', () => {
             await (await DashboardPage.launchPointBrowserButton).chromeBrowser.waitForDisplayed();
             expect((await DashboardPage.launchPointBrowserButton).chromeBrowser).toBeDisplayed();
             attempts -= 1;
-            await browser.reloadSession();
+            await browser.chromeBrowser.reloadSession();
         }
     });
 });

@@ -6,25 +6,25 @@ module.exports = {
         let timeout = 15;
 
         while(!found && timeout > 0) {
-            if(await this.isProcessRunning("[f]irefox", "firefox")){
+            if(await this.isProcessRunning(await this.getFirefoxProcessName(), "firefox")){
                 found = true;
             }else {
                 timeout -= 1;
                 await browser.pause(2000);
             }
         }
-        return await this.isProcessRunning("[f]irefox", "firefox")
+        return await this.isProcessRunning(await this.getFirefoxProcessName(), "firefox")
     },
     async getCommandToRun(processName) {
         switch (process.platform) {
             case 'win32': return `tasklist`
             case 'darwin': return `ps -ax | grep '${processName}' | sort -r`
-            case 'linux': return `ps aux | grep '${processName}' | sort -r'`
+            case 'linux': return `ps aux | grep '${processName}' | sort -r`
             default: return false
         }
     },
     async killFirefox() {
-        const processId = await this.getProcessId("[f]irefox")
+        const processId = await this.getProcessId(await this.getFirefoxProcessName())
         return new Promise((resolve) => {
             childProcess.exec("kill -9 " + processId, (err, stdout, stderr) => {
                 resolve(stdout)
@@ -44,9 +44,7 @@ module.exports = {
         const cmd = await this.getCommandToRun(processName);
         return new Promise((resolve) => {
             childProcess.exec(cmd, (err, stdout, stderr) => {
-                let idProcess = stdout.toLowerCase().split("??")[0]
-                idProcess = idProcess.replace(/\s+/g, "");
-                resolve(idProcess);
+                resolve(this.getProcessIdFromCommandLine(stdout))
             })
         })
     },
@@ -65,10 +63,42 @@ module.exports = {
         return found;
     },
     async killPoint() {
+        switch(process.platform) {
+            case "darwin":
+                await this.killPointMacOS()
+                break;
+            case "linux":
+                await this.killPointLinux()
+                break;
+            default:
+                return ""
+        }
+    },
+    async killPointMacOS() {
         const processId = await this.getProcessId(await this.getProcessToKillPoint())
         return new Promise((resolve) => {
             childProcess.exec("kill -9 " + processId, (err, stdout, stderr) => {
                 resolve(stdout)
+            })
+        })
+    },
+    async killPointLinux() {
+        let finished = false
+
+        while(!finished) {
+            const size = await this.getPointLinuxProcessesSize()
+            if(size > 2) {
+                await this.killPoint()
+            }else {
+                finished = true
+            }
+        }
+    },
+    async getPointLinuxProcessesSize() {
+        const cmd = await this.getCommandToRun(await this.getProcessToKillPoint());
+        return new Promise((resolve) => {
+            childProcess.exec(cmd, (err, stdout, stderr) => {
+                return resolve(stdout.toLowerCase().split("\n").length-1)
             })
         })
     },
@@ -77,10 +107,37 @@ module.exports = {
             case "darwin":
                 return "[A]pplications/point.app/Contents/MacOS/point";
             case "linux":
-                return "/usr/lib/point/point";
+                return "/usr/lib/point/point --allow-pre-commit-input";
             default:
                 return ""
 
+        }
+    },
+    async getFirefoxProcessName() {
+        switch(process.platform) {
+            case "darwin":
+                return "[f]irefox";
+            case "linux":
+                return "/.point/src/point-browser/firefox/firefox --first-startup";
+            default:
+                return ""
+
+        }
+    },
+    async getProcessIdFromCommandLine(stdout) {
+        let idProcess;
+        switch(process.platform) {
+            case "darwin":
+                idProcess = stdout.toLowerCase().split("??")[0]
+                return idProcess.replace(/\s+/g, "");
+            case "linux":
+                idProcess = stdout.toLowerCase().split("\n")[2]
+                idProcess = idProcess.split("   ")
+                const splitNumber = idProcess[1].split("  ")
+                const splitNumberToReturn = splitNumber[0].split(" ")
+                return splitNumberToReturn[0]
+            default:
+                return ""
         }
     }
 };

@@ -37,7 +37,9 @@ class InstallerWelcomePage extends Page {
                 await console.log("Killing Point process and reloading session")
                 finished = true
                 await BashProcesses.killPoint();
+                await browser.pause(5000);
                 await browser.reloadSession();
+                await browser.pause(5000);
             }
         }
         await console.log("Installation completed!" + Date.now())
