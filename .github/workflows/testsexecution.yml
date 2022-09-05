@@ -1,5 +1,5 @@
 name: Tests Execution
-'on':
+on:
   workflow_dispatch:
     inputs:
       testsBranch:
@@ -7,7 +7,7 @@ name: Tests Execution
         required: true
         default: main
 env:
-  SECRET_WORDS: 'rice result card portion rent card parent neck soon skill broom grab'
+  SECRET_WORDS: rice result card portion rent card parent neck soon skill broom grab
 
 jobs:
   test_on_mac:
