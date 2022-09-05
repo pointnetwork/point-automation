@@ -1,36 +1,40 @@
 name: Automated Tests
 on:
-  push:
-    branches:
-      - 'main'
+  workflow_dispatch:
+    inputs:
+      testsBranch:
+        description: Automated Tests branch to use
+        required: true
+        default: main
 jobs:
-  mac-os-test:
+  build-and-test:
     runs-on: macos-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          ref: '${{ github.event.inputs.testsBranch || ''main'' }}'
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install dependencies
+      - name: Install
         run: npm install
-      - name: Download App
-        uses: dsaltares/fetch-gh-release-asset@master
+      - uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: 'pointnetwork/pointnetwork-dashboard/releases'
           file: 'point-v0.2.69-MacOS-app.zip'
-      - name: Unzip File
+      - name: Unzip file
         run: unzip point-v0.2.69-MacOS-app.zip
       - name: Run Tests
         run: |
-          echo "Running Tests"
-          npm run simple-test
+          echo "Running tests"
+          sudo npm run simple-test
         env:
-          SECRET_WORDS: ALEXIS
+          SECRET_WORDS: 1
       - name: Display Files
         if: always()
         run: ls
-      - name: Upload HTML Report
+      - uses: actions/upload-artifact@v1
         if: always()
         with:
           name: report
