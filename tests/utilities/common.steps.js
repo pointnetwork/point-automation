@@ -16,10 +16,8 @@ module.exports = {
         await LoginPage.clickOnYesIHaveIt();
         await LoginExistingAccountPage.fillSecretWords(process.env.SECRET_WORDS.split(' '))
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
-        if(browser.config.os === "Linux") {
-            await BashProcesses.killPoint();
-            await browser.reloadSession();
-        }
+        await BashProcesses.killPoint();
+        await browser.reloadSession();
     },
     async openPointInNewFirefox() {
         await browser.firefoxBrowser.url("https://point")
