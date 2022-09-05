@@ -36,8 +36,10 @@ describe('Open/Close Browser', () => {
             await DashboardPage.clickOnLogout()
             await DashboardPage.confirmLogout();
             await browser.pause(5000);
+            await BashProcesses.killPoint();
+            await browser.pause(5000);
             await browser.reloadSession();
-            await LoginPage.waitForPageToBeLoaded();
+            await browser.pause(5000);
             attempts -= 1;
         }
     });
