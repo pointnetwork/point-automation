@@ -38,6 +38,7 @@ jobs:
         if: always()
         run: ls
       - name: Upload HTML Report
+        uses: actions/upload-artifact@v1
         if: always()
         with:
           name: report
