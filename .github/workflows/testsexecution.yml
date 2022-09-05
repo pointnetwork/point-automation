@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: macos-latest
     env:
-      SECRET_WORDS: hello
+      SECRET_WORDS: 'ALEXIS'
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
