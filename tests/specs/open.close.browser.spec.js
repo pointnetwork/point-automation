@@ -35,6 +35,8 @@ describe('Open/Close Browser', () => {
             expect((await DashboardPage.launchPointBrowserButton).chromeBrowser).toBeDisplayed();
             await DashboardPage.clickOnLogout()
             await DashboardPage.confirmLogout();
+            await browser.pause(5000);
+            await browser.reloadSession();
             await LoginPage.waitForPageToBeLoaded();
             attempts -= 1;
         }
