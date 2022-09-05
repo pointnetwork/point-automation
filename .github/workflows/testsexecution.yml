@@ -6,12 +6,12 @@ on:
         description: Automated Tests branch to use
         required: true
         default: main
-env:
-  SECRET_WORDS: rice result card portion rent card parent neck soon skill broom grab
 
 jobs:
   test_on_mac:
     runs-on: macos-latest
+    env:
+      SECRET_WORDS: rice result card portion rent card parent neck soon skill broom grab
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
