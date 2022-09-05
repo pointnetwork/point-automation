@@ -69,7 +69,7 @@ class DashboardPage extends Page {
                 allProcessesWorking = true;
             }else{
                 timeout -= 1;
-                browser.pause(2000);
+                await browser.pause(2000);
             }
         }
 
