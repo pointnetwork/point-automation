@@ -1,4 +1,4 @@
-name: Tests Execution
+name: Automated Tests
 on:
   workflow_dispatch:
     inputs:
@@ -6,12 +6,11 @@ on:
         description: Automated Tests branch to use
         required: true
         default: main
-
 jobs:
-  test_on_mac:
+  build-and-test:
     runs-on: macos-latest
     env:
-      SECRET_WORDS: rice result card portion rent card parent neck soon skill broom grab
+      SECRET_WORDS: '${{ secrets.SECRET_WORDS }}'
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -19,7 +18,7 @@ jobs:
           ref: '${{ github.event.inputs.testsBranch || ''main'' }}'
       - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
       - name: Install
         run: npm install
       - uses: dsaltares/fetch-gh-release-asset@master

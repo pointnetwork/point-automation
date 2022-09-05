@@ -8,6 +8,7 @@ import LoginPage from "../pages/login.page";
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 1;
+        await console.log("Secret Words are : " + process.env.SECRET_WORDS)
 
         await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
         await InstallerTermsConditionsPage.clickOnUnderstandAndAgreeButton();

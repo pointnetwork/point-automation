@@ -14,7 +14,6 @@ module.exports = {
         await console.log("Logging in user...")
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
-        await console.log("Secret Words are : " + process.env.SECRET_WORDS)
         await LoginExistingAccountPage.fillSecretWords(process.env.SECRET_WORDS.split(' '))
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
         if(browser.config.os === "Linux") {
