@@ -132,6 +132,7 @@ exports.config = {
     // =====
     onPrepare (config, capabilities) {
         console.log('**** Starting test... ****')
+        console.log("Browser version : " + browser.capabilities['browserVersion'])
         const screenshotsFolder = './tests/reports/screenshots'
         const pathForLog = './tests/reports/logs'
 
