@@ -33,9 +33,9 @@ describe('Open/Close Browser', () => {
             await BashProcesses.killFirefox();
             await (await DashboardPage.launchPointBrowserButton).chromeBrowser.waitForDisplayed();
             expect((await DashboardPage.launchPointBrowserButton).chromeBrowser).toBeDisplayed();
-            // await browser.pause(5000);
-            // await browser.chromeBrowser.reloadSession();
-            // await browser.pause(5000);
+            await browser.pause(5000);
+            await browser.chromeBrowser.reloadSession();
+            await browser.pause(5000);
             attempts -= 1;
         }
     });
