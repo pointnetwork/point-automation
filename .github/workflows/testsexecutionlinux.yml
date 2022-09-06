@@ -32,6 +32,7 @@ jobs:
       - name: Display point
         run: whereis point
       - name: Run Tests
+        uses: GabrielBB/xvfb-action@v1.6
         run: |
           echo "Running Tests"
           npm run simple-test-linux
