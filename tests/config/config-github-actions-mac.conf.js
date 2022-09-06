@@ -1,4 +1,4 @@
-const { config } = require('./config');
+const { config } = require('./config.conf');
 
 config.capabilities =
     {
@@ -6,8 +6,8 @@ config.capabilities =
             capabilities: {
                 browserName: 'chrome',
                 'goog:chromeOptions': {
-                    binary: '/Applications/point.app/Contents/MacOS/point',
-                    args: ["app='/Applications/point.app/Contents/MacOS/point'"]
+                    binary: '/usr/bin/point',
+                    args: ["app='/usr/bin/point'"]
                 }
             }
         }
