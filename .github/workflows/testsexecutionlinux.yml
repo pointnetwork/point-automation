@@ -34,6 +34,8 @@ jobs:
       - name: Run Tests
         uses: GabrielBB/xvfb-action@v1.6
         with:
+          env:
+            SECRET_WORDS: '${{ secrets.SECRET_WORDS }}'
           run: |
             echo "Running Tests"
             npm run simple-test-linux
