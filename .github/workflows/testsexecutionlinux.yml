@@ -33,9 +33,10 @@ jobs:
         run: whereis point
       - name: Run Tests
         uses: GabrielBB/xvfb-action@v1.6
-        run: |
-          echo "Running Tests"
-          npm run simple-test-linux
+        with:
+          run: |
+            echo "Running Tests"
+            npm run simple-test-linux
       - name: Display Files
         if: always()
         run: ls
