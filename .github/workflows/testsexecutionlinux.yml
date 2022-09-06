@@ -33,9 +33,9 @@ jobs:
         run: whereis point
       - name: Run Tests
         uses: GabrielBB/xvfb-action@v1.6
+        env:
+          SECRET_WORDS: '${{ secrets.SECRET_WORDS }}'
         with:
-          env:
-            SECRET_WORDS: '${{ secrets.SECRET_WORDS }}'
           run: |
             echo "Running Tests"
             npm run simple-test-linux
