@@ -33,8 +33,6 @@ jobs:
         run: whereis point
       - name: Run Tests
         uses: GabrielBB/xvfb-action@v1.6
-        env:
-          SECRET_WORDS: '${{ secrets.SECRET_WORDS }}'
         with:
           run: |
             echo "Running Tests"
