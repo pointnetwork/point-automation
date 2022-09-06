@@ -132,7 +132,6 @@ exports.config = {
     // =====
     onPrepare (config, capabilities) {
         console.log('**** Starting test... ****')
-        console.log("Browser version : " + browser.capabilities['browserVersion'])
         const screenshotsFolder = './tests/reports/screenshots'
         const pathForLog = './tests/reports/logs'
 
@@ -183,6 +182,7 @@ exports.config = {
         const chai = require('chai');
         global.assert = chai.assert;
         global.should = chai.should();
+        console.log("Browser version : " + browser.capabilities['browserVersion'])
     },
     afterTest (test) {
         try {
