@@ -78,12 +78,12 @@ exports.config = {
     // By default WebdriverIO commands are executed in a synchronous way using
     // the wdio-sync package. If you still want to run your tests in an async way
     // e.g. using promises you can set the sync option to false.
-    logLevel: 'trace', // Level of logging verbosity: silent | verbose | command | data | result | error
+    logLevel: 'error', // Level of logging verbosity: silent | verbose | command | data | result | error
     logLevels: {
-        webdriver: 'trace',
-        '@wdio/cli:Launcher': 'trace',
-        '@wdio/local-runner': 'trace',
-        '@wdio/utils:initialiseServices': 'trace',
+        webdriver: 'error',
+        '@wdio/cli:Launcher': 'error',
+        '@wdio/local-runner': 'error',
+        '@wdio/utils:initialiseServices': 'error',
     },
     // Warns when a deprecated command is used
     deprecationWarnings: true,
