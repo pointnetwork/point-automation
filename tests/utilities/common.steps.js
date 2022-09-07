@@ -17,7 +17,7 @@ module.exports = {
         await LoginPage.clickOnYesIHaveIt();
         const credentials = Credentials.secretWords
         console.log("Credentials :" + credentials)
-        const credentialsSplit = Credentials.split(' ')
+        const credentialsSplit = credentials.split(' ')
         console.log("Credentials Split:" + credentialsSplit)
         await LoginExistingAccountPage.fillSecretWords(credentialsSplit)
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
