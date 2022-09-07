@@ -6,8 +6,6 @@ on:
         description: Automated Tests branch to use
         required: true
         default: main
-env:
-  SECRET_WORDS: ${{ secrets.SECRET_WORDS }}
 
 jobs:
   linux-os-test:
@@ -30,15 +28,12 @@ jobs:
         run: gunzip -c point-v0.2.69-Linux-Debian-Ubuntu.tar.gz | tar xopf -
       - name: Install Point
         run: sudo dpkg -i point.deb
-      - name: Display point
-        run: whereis point
       - name: Run Tests
         uses: GabrielBB/xvfb-action@v1.6
+        env:
+          SECRET_WORDS: ${{ secrets.LOGIN_SECRETS }}
         with:
           run: npm run simple-test-linux
-      - name: Display Files
-        if: always()
-        run: ls
       - name: Upload HTML Report
         uses: actions/upload-artifact@v1
         if: always()
