@@ -9,8 +9,9 @@ on:
 jobs:
   linux-os-test:
     runs-on: ubuntu-latest
+    environment: test
     env:
-      SECRET_WORDS: '${{secrets.SECRET_WORDS}}'
+      SECRET_WORDS: '${{ secrets.SECRET_WORDS }}'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -33,6 +34,8 @@ jobs:
         run: whereis point
       - name: Run Tests
         uses: GabrielBB/xvfb-action@v1.6
+        env:
+          SECRET_WORDS: '${{ secrets.SECRET_WORDS }}'
         with:
           run: |
             echo "Running Tests"
