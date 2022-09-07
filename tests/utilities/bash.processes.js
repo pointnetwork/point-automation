@@ -139,6 +139,7 @@ module.exports = {
                 idProcess = stdout.toLowerCase().split("\n")[2]
                 idProcess = idProcess.split("   ")
                 idProcess = idProcess[1]
+                console.log("Process identified : " + idProcess)
                 let splitNumber = idProcess.split("  ")
                 splitNumber = splitNumber[0]
                 const splitNumberToReturn = splitNumber.split(" ")
