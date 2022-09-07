@@ -15,7 +15,11 @@ module.exports = {
         await console.log("Logging in user...")
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
-        await LoginExistingAccountPage.fillSecretWords(Credentials.secretWords.split(' '))
+        const credentials = Credentials.secretWords
+        console.log("Credentials :" + credentials)
+        const credentialsSplit = Credentials.split(' ')
+        console.log("Credentials Split:" + credentialsSplit)
+        await LoginExistingAccountPage.fillSecretWords(credentialsSplit)
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
         await BashProcesses.killPoint();
         await browser.pause(5000);
