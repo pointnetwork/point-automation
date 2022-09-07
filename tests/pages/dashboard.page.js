@@ -53,7 +53,7 @@ class DashboardPage extends Page {
         await super.clickElement(this.launchPointBrowserButton);
     }
 
-    async waitForProcessesRunning() {
+    async waitForProcessesRunning(processes=3) {
         try {
             await (await this.loadingMessage).chromeBrowser.waitForDisplayed({timeout: 5000});
             await (await this.loadingMessage).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
@@ -66,7 +66,7 @@ class DashboardPage extends Page {
         let timeout = 30;
 
         while(!allProcessesWorking && timeout > 0) {
-            if(await this.processesSuccessStatus.length === 3) {
+            if(await this.processesSuccessStatus.length === processes) {
                 allProcessesWorking = true;
             }else{
                 timeout -= 1;
