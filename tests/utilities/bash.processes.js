@@ -133,8 +133,10 @@ module.exports = {
             case "linux":
                 idProcess = stdout.toLowerCase().split("\n")[2]
                 idProcess = idProcess.split("   ")
-                const splitNumber = idProcess[1].split("  ")
-                const splitNumberToReturn = splitNumber[0].split(" ")
+                idProcess = idProcess[1]
+                let splitNumber = idProcess.split("  ")
+                splitNumber = splitNumber[0]
+                const splitNumberToReturn = splitNumber.split(" ")
                 return splitNumberToReturn[0]
             default:
                 return ""
