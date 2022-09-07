@@ -36,6 +36,7 @@ describe('Open/Close Browser', () => {
             await DashboardPage.confirmLogout();
             await browser.pause(5000);
             attempts -= 1;
+            await console.log("Times to run : " + attempts);
         }
     });
 });

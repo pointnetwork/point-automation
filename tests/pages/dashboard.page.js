@@ -57,6 +57,7 @@ class DashboardPage extends Page {
         try {
             await (await this.loadingMessage).chromeBrowser.waitForDisplayed({timeout: 5000});
             await (await this.loadingMessage).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
+            await console.log("Processes running successfully");
         }catch(exception){
             await console.log("Loading message is not displayed");
         }
@@ -83,6 +84,7 @@ class DashboardPage extends Page {
 
     async confirmLogout() {
         await super.clickElement((await this.confirmLogoutButton).chromeBrowser);
+        await console.log("User is logged out");
     }
 
     async clickOnSettingsButton() {

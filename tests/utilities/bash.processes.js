@@ -4,10 +4,12 @@ module.exports = {
     async getFirefoxProcess() {
         let found = false;
         let timeout = 15;
+        await console.log("Getting firefox process");
 
         while(!found && timeout > 0) {
             if(await this.isProcessRunning(await this.getFirefoxProcessName(), "firefox")){
                 found = true;
+                await console.log("Firefox is running");
             }else {
                 timeout -= 1;
                 await browser.pause(2000);
@@ -24,9 +26,11 @@ module.exports = {
         }
     },
     async killFirefox() {
+        await console.log("Killing Firefox process...");
         const processId = await this.getProcessId(await this.getFirefoxProcessName())
         return new Promise((resolve) => {
             childProcess.exec("kill -9 " + processId, (err, stdout, stderr) => {
+                console.log("Firefox was killed");
                 resolve(stdout)
             })
         })
