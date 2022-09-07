@@ -47,6 +47,7 @@ module.exports = {
     async getProcessId(processName){
         const cmd = await this.getCommandToRun(processName);
         return new Promise((resolve) => {
+            console.log("Running command : " + cmd)
             childProcess.exec(cmd, (err, stdout, stderr) => {
                 resolve(this.getProcessIdFromCommandLine(stdout))
             })
