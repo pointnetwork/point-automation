@@ -1,6 +1,7 @@
 import LoginPage from "../pages/login.page";
 import LoginExistingAccountPage from "../pages/login.existing.account.page"
 import BashProcesses from "./bash.processes";
+import Credentials from "../resources/decryptedcredentials.json"
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
@@ -14,7 +15,7 @@ module.exports = {
         await console.log("Logging in user...")
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
-        await LoginExistingAccountPage.fillSecretWords(process.env.SECRET_WORDS.split(' '))
+        await LoginExistingAccountPage.fillSecretWords(Credentials.secretWords.split(' '))
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
         await BashProcesses.killPoint();
         await browser.pause(5000);
