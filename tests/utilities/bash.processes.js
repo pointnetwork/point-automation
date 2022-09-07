@@ -136,6 +136,7 @@ module.exports = {
                 idProcess = stdout.toLowerCase().split("??")[0]
                 return idProcess.replace(/\s+/g, "");
             case "linux":
+                console.log("Processes : " + stdout.toLowerCase().split("\n"))
                 idProcess = stdout.toLowerCase().split("\n")[2]
                 idProcess = idProcess.split("   ")
                 idProcess = idProcess[1]

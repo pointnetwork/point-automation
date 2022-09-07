@@ -8,6 +8,7 @@ import LoginPage from "../pages/login.page";
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 5;
+/*
 
         await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
         await InstallerTermsConditionsPage.clickOnUnderstandAndAgreeButton();
@@ -17,6 +18,7 @@ describe('Open/Close Browser', () => {
 
         await LoginPage.waitForPageToBeLoaded();
         expect(LoginPage.noGenerateOneButton.chromeBrowser).toBeDisplayed();
+*/
 
         while(attempts > 0) {
             //Login
