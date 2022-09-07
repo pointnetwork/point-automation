@@ -35,10 +35,7 @@ jobs:
       - name: Run Tests
         uses: GabrielBB/xvfb-action@v1.6
         with:
-          run: |
-            echo "Running Tests"
-            echo "Login Words : ${{ secrets.SECRET_WORDS }}"
-            npm run simple-test-linux
+          run: npm run simple-test-linux
       - name: Display Files
         if: always()
         run: ls
