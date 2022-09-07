@@ -7,7 +7,7 @@ on:
         required: true
         default: main
 env:
-  SECRET_WORDS: '${{ secrets.SECRET_WORDS }}'
+  SECRET_WORDS: ${{ secrets.SECRET_WORDS }}
 
 jobs:
   linux-os-test:
