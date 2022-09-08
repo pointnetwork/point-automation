@@ -45,6 +45,10 @@ class DashboardPage extends Page {
         return $("//*[@data-testid='CancelPresentationIcon']/ancestor::ul")
     }
 
+    get tryingToConnectPointEngineLabel() {
+        return $("//*[contains(text(), 'Trying to connect to Point Engine')]")
+    }
+
     async waitForDashboardDisplayed() {
         await (await this.pointDashboardTitle).chromeBrowser.waitForDisplayed();
     }
@@ -75,6 +79,7 @@ class DashboardPage extends Page {
         }
 
         await browser.pause(2000);
+        await (await this.tryingToConnectPointEngineLabel).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
         await (await this.updatingMessage).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
     }
 
