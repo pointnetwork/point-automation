@@ -23,8 +23,7 @@ class InstallerWelcomePage extends Page {
         await console.log("Clicked on 'Start Installation' button")
     }
 
-    async waitForInstallationCompleted() {
-        await (await this.installingTitle).chromeBrowser.waitForDisplayed()
+    async waitForInstaller() {
         await console.log("Installation in progress...");
         let timeout = 40
         let finished = false
@@ -46,10 +45,17 @@ class InstallerWelcomePage extends Page {
                 await browser.pause(5000);
             }
         }
+    }
+
+    async waitForInstallationCompleted() {
+        await (await this.installingTitle).chromeBrowser.waitForDisplayed()
+        await this.waitForInstaller();
+
         try {
             if (await this.retryInstallationButton.isDisplayed()) {
                 await console.log("Installation has failed. Retrying")
                 await super.clickElement(this.retryInstallationButton)
+                await this.waitForInstaller();
             }
         }catch(exception) {
             await console.log("Installation completed!")
