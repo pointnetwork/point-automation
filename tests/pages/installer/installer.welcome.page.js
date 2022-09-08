@@ -10,6 +10,10 @@ class InstallerWelcomePage extends Page {
         return $("//*[text() = 'Installing']")
     }
 
+    get retryInstallationButton() {
+        return $("button[id='installer:app:restartInstallationButton']")
+    }
+
     async waitForInstallerToBeDisplayed() {
         await (await this.startInstallationButton).chromeBrowser.waitForDisplayed()
     }
@@ -43,6 +47,10 @@ class InstallerWelcomePage extends Page {
             }
         }
         await console.log("Installation completed!")
+        if (await this.retryInstallationButton.isDisplayed()) {
+            await super.clickElement(this.retryInstallationButton)
+            await this.waitForInstallationCompleted()
+        }
     }
 }
 
