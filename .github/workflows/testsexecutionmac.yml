@@ -9,8 +9,6 @@ on:
 jobs:
   mac-os-test:
     runs-on: macos-latest
-    env:
-      SECRET_WORDS: '${{ secrets.SECRET_WORDS }}'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -27,6 +25,10 @@ jobs:
           file: 'point-v0.2.69-MacOS-app.zip'
       - name: Unzip File
         run: unzip point-v0.2.69-MacOS-app.zip
+      - name: Decrypt credentials
+        env:
+          PASS_ENCRYPT_AUTOMATION: ${{ secrets.DECRYPT_CREDENTIALS_PASS }}
+        run: npm run decrypt-credentials
       - name: Run Tests
         run: |
           echo "Running Tests"
