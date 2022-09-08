@@ -39,6 +39,10 @@ describe('Open/Close Browser', () => {
             await browser.pause(5000);
             attempts -= 1;
             await console.log("Times to run : " + attempts);
+            await BashProcesses.killPoint();
+            await browser.pause(5000);
+            await browser.reloadSession();
+            await browser.pause(5000);
         }
     });
 });
