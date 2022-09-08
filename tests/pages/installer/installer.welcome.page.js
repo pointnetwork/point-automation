@@ -46,9 +46,13 @@ class InstallerWelcomePage extends Page {
                 await browser.pause(5000);
             }
         }
-        await console.log("Installation completed!")
-        if (await this.retryInstallationButton.isDisplayed()) {
-            await super.clickElement(this.retryInstallationButton)
+        try {
+            if (await this.retryInstallationButton.isDisplayed()) {
+                await console.log("Installation has failed. Retrying")
+                await super.clickElement(this.retryInstallationButton)
+            }
+        }catch(exception) {
+            await console.log("Installation completed!")
         }
     }
 }
