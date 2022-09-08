@@ -35,7 +35,7 @@ jobs:
       - name: Run Tests
         uses: GabrielBB/xvfb-action@v1.6
         with:
-          run: npm run simple-test-linux
+          run: sudo npm run simple-test-linux
       - name: Upload HTML Report
         uses: actions/upload-artifact@v1
         if: always()
