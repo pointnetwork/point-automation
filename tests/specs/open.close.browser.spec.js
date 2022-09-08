@@ -7,7 +7,7 @@ import LoginPage from "../pages/login.page";
 
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
-        let attempts = 5;
+        let attempts = 1;
 
         await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
         await InstallerTermsConditionsPage.clickOnUnderstandAndAgreeButton();
@@ -30,7 +30,6 @@ describe('Open/Close Browser', () => {
             expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
 
             //Kill firefox and check process is stopped
-            await DashboardPage.waitForProcessesRunning();
             await BashProcesses.killFirefox();
             await DashboardPage.waitForProcessesRunning(2);
             await (await DashboardPage.launchPointBrowserButton).chromeBrowser.waitForDisplayed();

@@ -47,7 +47,6 @@ module.exports = {
     async getProcessId(processName){
         const cmd = await this.getCommandToRun(processName);
         return new Promise((resolve) => {
-            console.log("Running command : " + cmd)
             childProcess.exec(cmd, (err, stdout, stderr) => {
                 resolve(this.getProcessIdFromCommandLine(stdout))
             })
@@ -136,11 +135,9 @@ module.exports = {
                 idProcess = stdout.toLowerCase().split("??")[0]
                 return idProcess.replace(/\s+/g, "");
             case "linux":
-                console.log("Processes : " + stdout.toLowerCase().split("\n"))
                 idProcess = stdout.toLowerCase().split("\n")[2]
                 idProcess = idProcess.split("   ")
                 idProcess = idProcess[1]
-                console.log("Process identified : " + idProcess)
                 let splitNumber = idProcess.split("  ")
                 splitNumber = splitNumber[0]
                 const splitNumberToReturn = splitNumber.split(" ")
