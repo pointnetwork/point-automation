@@ -49,7 +49,6 @@ class InstallerWelcomePage extends Page {
         await console.log("Installation completed!")
         if (await this.retryInstallationButton.isDisplayed()) {
             await super.clickElement(this.retryInstallationButton)
-            await this.waitForInstallationCompleted()
         }
     }
 }
