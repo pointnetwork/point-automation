@@ -8,15 +8,15 @@ import LoginPage from "../pages/login.page";
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 5;
-        //
-        // await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
-        // await InstallerTermsConditionsPage.clickOnUnderstandAndAgreeButton();
-        // await InstallerWelcomePage.waitForInstallerToBeDisplayed();
-        // await InstallerWelcomePage.clickOnStartInstallationButton();
-        // await InstallerWelcomePage.waitForInstallationCompleted();
-        //
-        // await LoginPage.waitForPageToBeLoaded();
-        // expect(LoginPage.noGenerateOneButton.chromeBrowser).toBeDisplayed();
+
+        await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
+        await InstallerTermsConditionsPage.clickOnUnderstandAndAgreeButton();
+        await InstallerWelcomePage.waitForInstallerToBeDisplayed();
+        await InstallerWelcomePage.clickOnStartInstallationButton();
+        await InstallerWelcomePage.waitForInstallationCompleted();
+
+        await LoginPage.waitForPageToBeLoaded();
+        expect(LoginPage.noGenerateOneButton.chromeBrowser).toBeDisplayed();
 
         while(attempts > 0) {
             //Login
