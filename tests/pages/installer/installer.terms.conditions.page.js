@@ -22,6 +22,17 @@ class InstallerTermsConditionsPage extends Page {
         await super.clickElement((await this.understandAndAgreeToContinueButton).chromeBrowser)
         await console.log("I Understand button was clicked")
     }
+
+    async isInstallerDisplayed() {
+        try {
+            await (await this.understandAndAgreeToContinueButton).chromeBrowser.waitForDisplayed({timeout: 5000})
+            await console.log("Installer is displayed")
+            return true;
+        }catch(exception){
+            await console.log("Installer is not displayed. App is installed already.")
+            return false;
+        }
+    }
 }
 
 export default new InstallerTermsConditionsPage()

@@ -2,6 +2,8 @@ import LoginPage from "../pages/login.page";
 import LoginExistingAccountPage from "../pages/login.existing.account.page"
 import BashProcesses from "./bash.processes";
 import Credentials from "../resources/decryptedcredentials.json"
+import InstallerTermsConditionsPage from "../pages/installer/installer.terms.conditions.page";
+import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
@@ -12,6 +14,7 @@ module.exports = {
         }
     },
     async loginUser() {
+        await this.installAppIfIsRequired()
         await console.log("Logging in user...")
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
@@ -24,5 +27,15 @@ module.exports = {
     },
     async openPointInNewFirefox() {
         await browser.firefoxBrowser.url("https://point")
+    },
+    async installAppIfIsRequired() {
+        if(await InstallerTermsConditionsPage.isInstallerDisplayed()){
+            await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
+            await InstallerTermsConditionsPage.clickOnUnderstandAndAgreeButton();
+            await InstallerWelcomePage.waitForInstallerToBeDisplayed();
+            await InstallerWelcomePage.clickOnStartInstallationButton();
+            await InstallerWelcomePage.waitForInstallationCompleted();
+            await LoginPage.waitForPageToBeLoaded();
+        }
     }
 }
