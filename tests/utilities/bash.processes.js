@@ -92,7 +92,7 @@ module.exports = {
         while(!finished) {
             const size = await this.getPointLinuxProcessesSize()
             if(size > 2) {
-                await this.killPoint()
+                await this.killPointMacOS()
             }else {
                 finished = true
             }
@@ -141,7 +141,7 @@ module.exports = {
                 let splitNumber = idProcess.split("  ")
                 splitNumber = splitNumber[0]
                 const splitNumberToReturn = splitNumber.split(" ")
-                return splitNumberToReturn[0]
+                return splitNumberToReturn[1]
             default:
                 return ""
         }

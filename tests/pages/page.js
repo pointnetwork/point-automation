@@ -1,3 +1,5 @@
+import BashProcesses from "../utilities/bash.processes";
+
 export default class Page {
 
   /** Method to open the page
@@ -176,8 +178,11 @@ export default class Page {
       await browser.pause(4000);
 
       try {
-        const windows = await browser.getWindowHandles()
-        const activeWindow = windows[0][0]
+        const windows = await browser.chromeBrowser.getWindowHandles()
+        let activeWindow = windows[0]
+        if (activeWindow.constructor === Array) {
+            activeWindow = activeWindow[0]
+        }
         await browser.switchToWindow(activeWindow)
         windowFound = true
       }catch(exception) {
