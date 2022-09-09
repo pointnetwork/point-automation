@@ -33,16 +33,16 @@ class InstallerWelcomePage extends Page {
             try {
                 const element = await browser.chromeBrowser.$("//*[text() = 'Installing']");
                 await element.waitForDisplayed({timeout:6000})
+                if (await (await this.retryInstallationButton).chromeBrowser.isDisplayed()) {
+                    await console.log("Installation has failed. Retrying")
+                    await super.clickElement((await this.retryInstallationButton).chromeBrowser)
+                }
                 timeout -= 1;
                 await browser.pause(10000);
                 await console.log("Still Installing...")
             }catch(exception) {
-                await console.log("Killing Point process and reloading session")
+                await console.log("Installation completed. Switching Window")
                 finished = true
-                await BashProcesses.killPoint();
-                await browser.pause(5000);
-                await browser.reloadSession();
-                await browser.pause(5000);
             }
         }
     }
@@ -50,16 +50,7 @@ class InstallerWelcomePage extends Page {
     async waitForInstallationCompleted() {
         await (await this.installingTitle).chromeBrowser.waitForDisplayed()
         await this.waitForInstaller();
-
-        try {
-            if (await this.retryInstallationButton.isDisplayed()) {
-                await console.log("Installation has failed. Retrying")
-                await super.clickElement(this.retryInstallationButton)
-                await this.waitForInstaller();
-            }
-        }catch(exception) {
-            await console.log("Installation completed!")
-        }
+        await super.changeToActiveWindow()
     }
 }
 

@@ -90,6 +90,7 @@ class DashboardPage extends Page {
     async confirmLogout() {
         await super.clickElement((await this.confirmLogoutButton).chromeBrowser);
         await console.log("User is logged out");
+        await super.changeToActiveWindow();
     }
 
     async clickOnSettingsButton() {

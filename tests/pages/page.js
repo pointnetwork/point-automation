@@ -164,7 +164,27 @@ export default class Page {
     }
   }
 
-  sendTabKey() {
-    browser.keys('Tab');
+  async sendTabKey() {
+    await browser.keys('Tab');
+  }
+
+  async changeToActiveWindow() {
+    let windowFound = false;
+    let retries = 20
+
+    while(!windowFound && retries > 0){
+      await browser.pause(4000);
+
+      try {
+        const windows = await browser.getWindowHandles()
+        const activeWindow = windows[0][0]
+        await browser.switchToWindow(activeWindow)
+        windowFound = true
+      }catch(exception) {
+        await browser.pause(3000);
+        await console.log("Window not found. Retrying...")
+        retries -= 1;
+      }
+    }
   }
 }

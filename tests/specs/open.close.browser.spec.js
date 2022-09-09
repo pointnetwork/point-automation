@@ -18,10 +18,10 @@ describe('Open/Close Browser', () => {
         await LoginPage.waitForPageToBeLoaded();
         expect(LoginPage.noGenerateOneButton.chromeBrowser).toBeDisplayed();
 
-
         while(attempts > 0) {
             //Login
             await CommonSteps.loginUser();
+
             //Open dashboard and browser
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning();
@@ -31,18 +31,14 @@ describe('Open/Close Browser', () => {
 
             //Kill firefox and check process is stopped
             await BashProcesses.killFirefox();
-            await DashboardPage.waitForProcessesRunning(2);
+            await DashboardPage.waitForProcessesRunning(1);
             await (await DashboardPage.launchPointBrowserButton).chromeBrowser.waitForDisplayed();
             expect((await DashboardPage.launchPointBrowserButton).chromeBrowser).toBeDisplayed();
             await DashboardPage.clickOnLogout()
             await DashboardPage.confirmLogout();
-            await browser.pause(5000);
             attempts -= 1;
             await console.log("Times to run : " + attempts);
-            await BashProcesses.killPoint();
-            await browser.pause(5000);
-            await browser.reloadSession();
-            await browser.pause(5000);
         }
     });
 });
+

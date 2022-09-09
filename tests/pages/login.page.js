@@ -2,7 +2,7 @@ import Page from './page'
 
 class LoginPage extends Page {
     get noGenerateOneButton() {
-        return $('svg[data-testid=\'KeyIcon\']')
+        return $('#root svg[data-testid=\'KeyIcon\']')
     }
 
     get yesIHaveItButton() {

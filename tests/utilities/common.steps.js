@@ -19,10 +19,8 @@ module.exports = {
         const credentialsSplit = credentials.split(' ')
         await LoginExistingAccountPage.fillSecretWords(credentialsSplit)
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
-        await BashProcesses.killPoint();
-        await browser.pause(5000);
-        await browser.reloadSession();
-        await browser.pause(5000);
+        await browser.pause(5000)
+        await LoginPage.changeToActiveWindow();
     },
     async openPointInNewFirefox() {
         await browser.firefoxBrowser.url("https://point")
