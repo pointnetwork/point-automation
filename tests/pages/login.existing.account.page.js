@@ -22,7 +22,7 @@ class LoginExistingAccountPage extends Page {
             await super.sendTabKey();
             counter += 1
         }
-        console.log('Secret words on metamask were added')
+        console.log('Secret words were added')
     }
 
     async clickOnConfirmAndLoginButton() {
