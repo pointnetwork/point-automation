@@ -4,6 +4,7 @@ const wdioHtmlReporter = require('@rpii/wdio-html-reporter')
 const log4j = require('log4js')
 const path = require('path')
 const fs = require('fs')
+const CommonSteps = require("../utilities/utils");
 const drivers = {
     chrome: { version: '98.0.4758.102' },
     firefox: { version: '0.31.0' },
@@ -134,6 +135,18 @@ exports.config = {
         console.log('**** Starting test... ****')
         const screenshotsFolder = './tests/reports/screenshots'
         const pathForLog = './tests/reports/logs'
+
+        if(process.platform === "linux") {
+            console.log("Removing Point lock file...")
+            CommonSteps.rmFile("~/.point/point.lock")
+            console.log("Point lock file removed. Files : ")
+
+            fs.readdir("~/.point", (err, files) => {
+                files.forEach(file => {
+                    console.log(file);
+                });
+            });
+        }
 
         if (!fs.existsSync(screenshotsFolder)) {
             // if it doesn't exist, create it

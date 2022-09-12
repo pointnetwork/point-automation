@@ -16,9 +16,6 @@ module.exports = {
     },
     async loginUser() {
         await this.installAppIfIsRequired()
-        if(process.platform === "linux") {
-            await CommonSteps.rmFile("~/.point/point.lock")
-        }
         await console.log("Logging in user...")
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
