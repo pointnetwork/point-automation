@@ -6,6 +6,7 @@ import InstallerTermsConditionsPage from "../pages/installer/installer.terms.con
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 import CommonSteps from "./utils";
 const fs = require('fs')
+const childProcess = require('child_process')
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
@@ -21,15 +22,24 @@ module.exports = {
 
         if(process.platform === "linux") {
             console.log("Removing Point lock file. Files : ")
-            fs.readdirSync("~/.point/").forEach(file => {
-                console.log(file);
-            });
-            console.log("Other Files : ")
-            fs.readdirSync(".point/").forEach(file => {
-                console.log(file);
-            });
-            CommonSteps.rmFile("~/.point/point.lock")
-            console.log("Point lock file removed. Files : ")
+            const cmd = "find ~ -type d -name \".point\""
+
+            return new Promise((resolve) => {
+                childProcess.exec(cmd, (err, stdout, stderr) => {
+                    console.log(stdout)
+                    resolve()
+                })
+            })
+            //
+            // fs.readdirSync("~/.point/").forEach(file => {
+            //     console.log(file);
+            // });
+            // console.log("Other Files : ")
+            // fs.readdirSync(".point/").forEach(file => {
+            //     console.log(file);
+            // });
+            // CommonSteps.rmFile("~/.point/point.lock")
+            // console.log("Point lock file removed. Files : ")
         }
 
         await LoginPage.waitForLoginPage();
