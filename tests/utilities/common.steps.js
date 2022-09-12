@@ -5,6 +5,7 @@ import Credentials from "../resources/decryptedcredentials.json"
 import InstallerTermsConditionsPage from "../pages/installer/installer.terms.conditions.page";
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 import CommonSteps from "./utils";
+const fs = require('fs')
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
@@ -17,6 +18,20 @@ module.exports = {
     async loginUser() {
         await this.installAppIfIsRequired()
         await console.log("Logging in user...")
+
+        if(process.platform === "linux") {
+            console.log("Removing Point lock file. Files : ")
+            fs.readdirSync("~/.point/").forEach(file => {
+                console.log(file);
+            });
+            console.log("Other Files : ")
+            fs.readdirSync(".point/").forEach(file => {
+                console.log(file);
+            });
+            CommonSteps.rmFile("~/.point/point.lock")
+            console.log("Point lock file removed. Files : ")
+        }
+
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
         const credentials = Credentials.secretWords
@@ -24,12 +39,6 @@ module.exports = {
         await LoginExistingAccountPage.fillSecretWords(credentialsSplit)
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
         await browser.pause(5000)
-        if(process.platform === "linux") {
-            await BashProcesses.killPoint()
-            await browser.pause(5000)
-            await browser.reloadSession()
-            await browser.pause(5000)
-        }
         await LoginPage.changeToActiveWindow();
     },
     async openPointInNewFirefox() {
