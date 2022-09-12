@@ -32,7 +32,7 @@ jobs:
       - name: Run Tests
         run: |
           echo "Running Tests"
-          npm run simple-test
+          npm run full-tests-ga
       - name: Display Files
         if: always()
         run: ls
