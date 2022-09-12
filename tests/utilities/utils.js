@@ -34,5 +34,13 @@ module.exports = {
     if (fs.existsSync(dir)) {
       this.rmdir(dir);
     }
+  },
+  rmFile(pathFile) {
+    try {
+      fs.unlinkSync(pathFile);
+      // file removed
+    } catch (err) {
+      console.error(err);
+    }
   }
 };

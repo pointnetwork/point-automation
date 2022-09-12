@@ -4,6 +4,7 @@ import BashProcesses from "./bash.processes";
 import Credentials from "../resources/decryptedcredentials.json"
 import InstallerTermsConditionsPage from "../pages/installer/installer.terms.conditions.page";
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
+import CommonSteps from "./utils";
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
@@ -15,6 +16,9 @@ module.exports = {
     },
     async loginUser() {
         await this.installAppIfIsRequired()
+        if(process.platform === "linux") {
+            await CommonSteps.rmFile("~/.point/point.lock")
+        }
         await console.log("Logging in user...")
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
