@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const BashProcesses = require("./bash.processes");
 
 module.exports = {
   getRandomString() {
@@ -41,5 +42,15 @@ module.exports = {
         console.error(err)
       }
     })
+  },
+  async reloadSessionLinux() {
+    if(process.platform === "linux") {
+      await console.log("Reloading Session in Linux...")
+      await BashProcesses.killPoint();
+      await browser.pause(5000);
+      await browser.reloadSession();
+      await browser.pause(5000);
+      await console.log("Session reloaded!")
+    }
   }
 };

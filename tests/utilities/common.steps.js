@@ -4,7 +4,8 @@ import Credentials from "../resources/decryptedcredentials.json"
 import InstallerTermsConditionsPage from "../pages/installer/installer.terms.conditions.page";
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 import CommonSteps from "./utils";
-const fs = require('fs')
+import Utils from "./utils";
+const BashProcesses = require('./bash.processes')
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
@@ -19,10 +20,10 @@ module.exports = {
         await console.log("Logging in user...")
 
         if(process.platform === "linux") {
-            await console.log("Removing Point lock file. Files : ")
+            await console.log("Removing Point lock file")
             CommonSteps.rmdir("/home/runner/.point/point_dashboard.lock")
-            await console.log("Point lockfile was removed. Files : ")
-
+            await console.log("Point lockfile was removed")
+            await Utils.reloadSessionLinux()
         }
 
         await LoginPage.waitForLoginPage();
@@ -32,6 +33,7 @@ module.exports = {
         await LoginExistingAccountPage.fillSecretWords(credentialsSplit)
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
         await browser.pause(5000)
+        await Utils.reloadSessionLinux()
         await LoginPage.changeToActiveWindow();
     },
     async openPointInNewFirefox() {
