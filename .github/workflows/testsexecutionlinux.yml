@@ -32,6 +32,8 @@ jobs:
         run: gunzip -c point-v0.2.69-Linux-Debian-Ubuntu.tar.gz | tar xopf -
       - name: Install Point
         run: sudo dpkg -i point.deb
+      - name: Get .point folder
+        run: find ~ -type d -name ".point"
       - name: Run Tests
         uses: GabrielBB/xvfb-action@v1.6
         with:
