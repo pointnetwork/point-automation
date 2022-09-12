@@ -20,17 +20,9 @@ module.exports = {
 
         if(process.platform === "linux") {
             await console.log("Removing Point lock file. Files : ")
-
-            await fs.readdirSync("/home/runner/.point").forEach(file => {
-                console.log(file);
-            });
-
             CommonSteps.rmdir("/home/runner/.point/point_dashboard.lock")
             await console.log("Point lockfile was removed. Files : ")
 
-            await fs.readdirSync("/home/runner/.point").forEach(file => {
-                console.log(file);
-            });
         }
 
         await LoginPage.waitForLoginPage();

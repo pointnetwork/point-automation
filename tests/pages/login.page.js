@@ -15,6 +15,7 @@ class LoginPage extends Page {
     }
 
     async waitForLoginPage() {
+        await console.log("Checking login page...")
         await (await this.noGenerateOneButton).chromeBrowser.waitForDisplayed({timeout: 7000});
     }
 
