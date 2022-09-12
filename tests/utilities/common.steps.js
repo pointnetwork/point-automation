@@ -22,12 +22,8 @@ module.exports = {
 
         if(process.platform === "linux") {
             console.log("Removing Point lock file. Files : ")
-
-            fs.readdirSync("/home/runner/.point").forEach(file => {
-                console.log(file);
-            });
-
-            CommonSteps.rmFile("/home/runner/.point")
+            CommonSteps.rmFile("/home/runner/.point/point_dashboard.lock")
+            console.log("Point lockfile was removed.")
         }
 
         await LoginPage.waitForLoginPage();
