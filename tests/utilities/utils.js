@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const BashProcesses = require("./bash.processes");
+const CommonSteps = require("./utils");
 
 module.exports = {
   getRandomString() {
@@ -35,12 +37,24 @@ module.exports = {
       this.rmdir(dir);
     }
   },
-  rmFile(pathFile) {
-    try {
-      fs.unlinkSync(pathFile);
-      // file removed
-    } catch (err) {
-      console.error(err);
+  async rmFile(pathFile) {
+    await fs.unlink(pathFile, (err) => {
+      if (err) {
+        console.error(err)
+      }
+    })
+  },
+  async reloadSessionLinux() {
+    if(process.platform === "linux") {
+      await console.log("Reloading Session in Linux...")
+      await BashProcesses.killPoint();
+      await console.log("Removing Point lock file")
+      this.rmdir("/home/runner/.point/point_dashboard.lock")
+      await console.log("Point lockfile was removed")
+      await browser.pause(5000);
+      await browser.reloadSession();
+      await browser.pause(5000);
+      await console.log("Session reloaded!")
     }
   }
 };

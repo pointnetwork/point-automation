@@ -17,6 +17,7 @@ describe('Open/Close Browser', () => {
 
             attempts -= 1;
             await browser.chromeBrowser.reloadSession();
+            await console.log("Times to run : " + attempts);
         }
     });
 });

@@ -59,6 +59,7 @@ class LoginExistingAccountPage extends Page {
 
     async clickOnConfirmAndLoginButton() {
         await super.clickElement((await this.confirmAndLoginButton).chromeBrowser);
+        await browser.pause(5000)
     }
 }
 

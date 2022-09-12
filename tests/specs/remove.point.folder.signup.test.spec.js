@@ -8,14 +8,14 @@ import InstallerWelcomePage from '../pages/installer/installer.welcome.page'
 
 
 describe('Open/Close Browser', () => {
-    before(function () {
-        Utils.rmDirIfExists(require('os').homedir() + "/.point");
-        browser.chromeBrowser.reloadSession();
-    });
     it('Remove .point folder, cancel terms and conditions, accept terms and conditions and signup', async () => {
-        let attempts = 1;
+        let attempts = 3;
 
         while(attempts > 0) {
+            await BashProcesses.killPoint();
+            Utils.rmDirIfExists(require('os').homedir() + "/.point");
+            await browser.reloadSession();
+
             //Open dashboard and browser
             await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
             await InstallerTermsConditionsPage.clickOnCancelButton();
@@ -37,6 +37,7 @@ describe('Open/Close Browser', () => {
             await LoginNewAccountPage.clickOnContinue();
             await LoginNewAccountPage.enterThreeFirstWords(words[0], words[2], words[11]);
             await LoginNewAccountPage.clickOnConfirmAndLoginButton();
+            await DashboardPage.changeToActiveWindow();
 
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning();
@@ -44,6 +45,7 @@ describe('Open/Close Browser', () => {
             //Kill firefox and check process is stopped
             expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
             attempts -= 1;
+            await console.log("Times to run : " + attempts);
         }
     });
 });

@@ -7,11 +7,12 @@ import CommonSteps from "../utilities/common.steps";
 describe('Open/Close Browser', () => {
     it('Open dashboard, Logout, generate a new key and close browser 3 times.', async () => {
         let attempts = 3;
-        await CommonSteps.loginIfUserIsLoggedOut();
-        await DashboardPage.waitForDashboardDisplayed();
-        await DashboardPage.waitForProcessesRunning();
 
         while(attempts > 0) {
+            await CommonSteps.loginIfUserIsLoggedOut();
+            await DashboardPage.waitForDashboardDisplayed();
+            await DashboardPage.waitForProcessesRunning();
+
             //Logout
             await DashboardPage.clickOnLogout();
             await DashboardPage.confirmLogout();
@@ -25,6 +26,7 @@ describe('Open/Close Browser', () => {
             await LoginNewAccountPage.clickOnContinue();
             await LoginNewAccountPage.enterThreeFirstWords(words[0], words[2], words[11]);
             await LoginNewAccountPage.clickOnConfirmAndLoginButton();
+            await DashboardPage.changeToActiveWindow();
 
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning();
@@ -35,6 +37,8 @@ describe('Open/Close Browser', () => {
             await DashboardPage.launchPointBrowserButton.waitForDisplayed();
             expect(DashboardPage.launchPointBrowserButton).toBeDisplayed();
             attempts -= 1;
+
+            await console.log("Times to run : " + attempts);
         }
     });
 });

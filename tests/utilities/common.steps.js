@@ -1,10 +1,11 @@
 import LoginPage from "../pages/login.page";
 import LoginExistingAccountPage from "../pages/login.existing.account.page"
-import BashProcesses from "./bash.processes";
 import Credentials from "../resources/decryptedcredentials.json"
 import InstallerTermsConditionsPage from "../pages/installer/installer.terms.conditions.page";
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 import CommonSteps from "./utils";
+import Utils from "./utils";
+const BashProcesses = require('./bash.processes')
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
@@ -17,6 +18,8 @@ module.exports = {
     async loginUser() {
         await this.installAppIfIsRequired()
         await console.log("Logging in user...")
+        await Utils.reloadSessionLinux()
+
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
         const credentials = Credentials.secretWords
