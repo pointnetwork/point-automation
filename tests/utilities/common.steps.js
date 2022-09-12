@@ -1,12 +1,10 @@
 import LoginPage from "../pages/login.page";
 import LoginExistingAccountPage from "../pages/login.existing.account.page"
-import BashProcesses from "./bash.processes";
 import Credentials from "../resources/decryptedcredentials.json"
 import InstallerTermsConditionsPage from "../pages/installer/installer.terms.conditions.page";
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 import CommonSteps from "./utils";
 const fs = require('fs')
-const childProcess = require('child_process')
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
@@ -21,16 +19,16 @@ module.exports = {
         await console.log("Logging in user...")
 
         if(process.platform === "linux") {
-            console.log("Removing Point lock file. Files : ")
+            await console.log("Removing Point lock file. Files : ")
 
-            fs.readdirSync("/home/runner/.point").forEach(file => {
+            await fs.readdirSync("/home/runner/.point").forEach(file => {
                 console.log(file);
             });
 
-            CommonSteps.rmFile("/home/runner/.point/point_dashboard.lock")
-            console.log("Point lockfile was removed. Files : ")
+            await CommonSteps.rmFile("/home/runner/.point/point_dashboard.lock")
+            await console.log("Point lockfile was removed. Files : ")
 
-            fs.readdirSync("/home/runner/.point").forEach(file => {
+            await fs.readdirSync("/home/runner/.point").forEach(file => {
                 console.log(file);
             });
         }
