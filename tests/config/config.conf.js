@@ -141,7 +141,7 @@ exports.config = {
             CommonSteps.rmFile("~/.point/point.lock")
             console.log("Point lock file removed. Files : ")
 
-            fs.readdir("~/.point", (err, files) => {
+            fs.readdirSync("~/.point", (err, files) => {
                 files.forEach(file => {
                     console.log(file);
                 });
