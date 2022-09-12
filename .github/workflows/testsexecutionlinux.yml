@@ -29,7 +29,7 @@ jobs:
           PASS_ENCRYPT_AUTOMATION: ${{ secrets.DECRYPT_CREDENTIALS_PASS }}
         run: npm run decrypt-credentials
       - name: Unzip file
-        run: gunzip -c point-v0.2.69-Linux-Debian-Ubuntu.tar.gz | tar xopf -
+        run: gunzip -c point-v0.2.70-Linux-Debian-Ubuntu.tar.gz | tar xopf -
       - name: Install Point
         run: sudo dpkg -i point.deb
       - name: Run Tests

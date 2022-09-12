@@ -24,7 +24,7 @@ jobs:
           repo: 'pointnetwork/pointnetwork-dashboard/releases'
           file: 'point-v0.2.70-MacOS-app.zip'
       - name: Unzip File
-        run: unzip point-v0.2.69-MacOS-app.zip
+        run: unzip point-v0.2.70-MacOS-app.zip
       - name: Decrypt credentials
         env:
           PASS_ENCRYPT_AUTOMATION: ${{ secrets.DECRYPT_CREDENTIALS_PASS }}
