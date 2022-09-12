@@ -25,7 +25,7 @@ module.exports = {
                 console.log(file);
             });
 
-            await CommonSteps.rmFile("/home/runner/.point/point_dashboard.lock")
+            await CommonSteps.rmdir("/home/runner/.point/point_dashboard.lock")
             await console.log("Point lockfile was removed. Files : ")
 
             await fs.readdirSync("/home/runner/.point").forEach(file => {
