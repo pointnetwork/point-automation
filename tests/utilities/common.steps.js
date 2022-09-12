@@ -22,24 +22,12 @@ module.exports = {
 
         if(process.platform === "linux") {
             console.log("Removing Point lock file. Files : ")
-            const cmd = "find ~ -type d -name \".point\""
 
-            return new Promise((resolve) => {
-                childProcess.exec(cmd, (err, stdout, stderr) => {
-                    console.log(stdout)
-                    resolve()
-                })
-            })
-            //
-            // fs.readdirSync("~/.point/").forEach(file => {
-            //     console.log(file);
-            // });
-            // console.log("Other Files : ")
-            // fs.readdirSync(".point/").forEach(file => {
-            //     console.log(file);
-            // });
-            // CommonSteps.rmFile("~/.point/point.lock")
-            // console.log("Point lock file removed. Files : ")
+            fs.readdirSync("/home/runner/.point").forEach(file => {
+                console.log(file);
+            });
+
+            CommonSteps.rmFile("/home/runner/.point")
         }
 
         await LoginPage.waitForLoginPage();
