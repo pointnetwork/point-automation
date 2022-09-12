@@ -35,12 +35,11 @@ module.exports = {
       this.rmdir(dir);
     }
   },
-  rmFile(pathFile) {
-    try {
-      fs.unlinkSync(pathFile);
-      // file removed
-    } catch (err) {
-      console.error(err);
-    }
+  async rmFile(pathFile) {
+    await fs.unlink(pathFile, (err) => {
+      if (err) {
+        console.error(err)
+      }
+    })
   }
 };
