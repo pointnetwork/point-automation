@@ -18,13 +18,7 @@ module.exports = {
     async loginUser() {
         await this.installAppIfIsRequired()
         await console.log("Logging in user...")
-
-        if(process.platform === "linux") {
-            await console.log("Removing Point lock file")
-            CommonSteps.rmdir("/home/runner/.point/point_dashboard.lock")
-            await console.log("Point lockfile was removed")
-            await Utils.reloadSessionLinux()
-        }
+        await Utils.reloadSessionLinux()
 
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
