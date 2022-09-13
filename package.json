@@ -7,7 +7,7 @@
     "encrypt-credentials": "node tests/config/encryption-script.js",
     "decrypt-credentials": "node tests/config/decryption-script.js",
     "simple-test": "node_modules/.bin/wdio tests/config/config-github-actions-mac.conf.js --spec tests/specs/open.close.browser.spec.js",
-    "full-tests-ga": "node_modules/.bin/wdio tests/config/config-github-actions-mac.conf.js --suite ",
+    "full-tests-ga": "node_modules/.bin/wdio tests/config/config-github-actions-mac.conf.js --suite github_actions",
     "test": "node_modules/.bin/wdio tests/config/config.conf.js --spec tests/specs/*.spec.js",
     "simple-test-linux": "node_modules/.bin/wdio tests/config/config-github-actions-linux.conf.js --spec tests/specs/open.close.browser.spec.js"
   },

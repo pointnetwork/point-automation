@@ -30,6 +30,7 @@ describe('Open/Close Browser', () => {
 
         //Open firefox and create new identity
         await DashboardPage.waitForDashboardDisplayed();
+        await DashboardPage.changeToActiveWindow();
         await DashboardPage.waitForProcessesRunning();
         await CommonSteps.openPointInNewFirefox();
         await BrowserFinalStepSignupPage.waitForPageToBeLoaded();
