@@ -230,8 +230,8 @@ exports.config = {
     suites: {
         github_actions: [
             './tests/specs/open.close.browser.spec.js',
+            './tests/specs/logout.existing.key.spec.js',
         ],
-        // './tests/specs/logout.existing.key.spec.js',
         // './tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
         // './tests/specs/logout.generate.new.key.spec.js',
         // './tests/specs/open.close.dashboard.spec.js',
