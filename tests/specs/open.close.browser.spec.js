@@ -8,13 +8,6 @@ describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 5;
 
-        return new Promise((resolve) => {
-            childProcess.exec("find / -name .point -type d", (err, stdout, stderr) => {
-                console.log(stdout)
-                resolve()
-            })
-        })
-
         while(attempts > 0) {
             //Login
             await CommonSteps.loginUser();
