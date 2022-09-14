@@ -34,6 +34,7 @@ jobs:
           echo "Running Tests"
           npm run full-tests-ga
       - name: Get .point folder
+        if: always()
         run: find ~ -type d -name ".point"
       - name: Upload HTML Report
         uses: actions/upload-artifact@v1
