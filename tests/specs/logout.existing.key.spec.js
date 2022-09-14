@@ -8,7 +8,6 @@ import Utils from "../utilities/utils";
 describe('Open/Close Browser', () => {
     it('Open dashboard, Logout, import existing key and close browser 3 times.', async () => {
         let attempts = 3;
-        Utils.rmDirIfExists(require('os').homedir() + "/.point");
 
         while(attempts > 0) {
             await CommonSteps.loginIfUserIsLoggedOut();

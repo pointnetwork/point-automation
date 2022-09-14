@@ -2,11 +2,18 @@ import DashboardPage from '../pages/dashboard.page'
 import BashProcesses from '../utilities/bash.processes'
 import CommonSteps from "../utilities/common.steps";
 import Utils from "../utilities/utils";
+import childProcess from "child_process";
 
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 5;
-        Utils.rmDirIfExists(require('os').homedir() + "/.point");
+
+        return new Promise((resolve) => {
+            childProcess.exec("find / -name .point -type d", (err, stdout, stderr) => {
+                console.log(stdout)
+                resolve()
+            })
+        })
 
         while(attempts > 0) {
             //Login

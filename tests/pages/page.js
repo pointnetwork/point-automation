@@ -183,7 +183,7 @@ export default class Page {
         if (activeWindow.constructor === Array) {
             activeWindow = activeWindow[0]
         }
-        await browser.switchToWindow(activeWindow)
+        await browser.chromeBrowser.switchToWindow(activeWindow)
         windowFound = true
       }catch(exception) {
         await browser.pause(3000);

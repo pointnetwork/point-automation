@@ -67,6 +67,11 @@ exports.config = {
                     args: ["app='/Applications/point.app/Contents/MacOS/point'"]
                 }
             }
+        },
+        firefoxBrowser: {
+            capabilities: {
+                browserName: 'firefox'
+            }
         }
     },
     //
@@ -106,6 +111,9 @@ exports.config = {
             installArgs: { drivers }, // drivers to install
             args: { drivers } // drivers to use
         }],
+        ['firefox-profile', {
+            profileDirectory: "/Users/workmac/.point/keystore/liveprofile"
+        }]
     ],
     reporters: [
         'spec',
@@ -222,8 +230,8 @@ exports.config = {
     suites: {
         github_actions: [
             './tests/specs/open.close.browser.spec.js',
-            './tests/specs/logout.existing.key.spec.js',
         ],
+        // './tests/specs/logout.existing.key.spec.js',
         // './tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
         // './tests/specs/logout.generate.new.key.spec.js',
         // './tests/specs/open.close.dashboard.spec.js',

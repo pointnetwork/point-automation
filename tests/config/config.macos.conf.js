@@ -1,4 +1,8 @@
 const { config } = require('./config.conf');
+const drivers = {
+    chrome: { version: '98.0.4758.102' },
+    firefox: { version: '0.31.0' },
+}
 
 config.capabilities =
     {
@@ -10,7 +14,23 @@ config.capabilities =
                     args: ["app='/Applications/point.app/Contents/MacOS/point'"]
                 }
             }
+        },
+        firefoxBrowser: {
+            capabilities: {
+                browserName: 'firefox'
+            }
         }
     }
+
+config.services = [
+    ['selenium-standalone', {
+        logPath: 'logs',
+        installArgs: { drivers }, // drivers to install
+        args: { drivers } // drivers to use
+    }],
+    ['firefox-profile', {
+        profileDirectory: "/Users/workmac/.point/keystore/liveprofile"
+    }]
+];
 
 exports.config = config;
