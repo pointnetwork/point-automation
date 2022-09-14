@@ -27,6 +27,7 @@ describe('Open/Close Browser', () => {
         await LoginNewAccountPage.clickOnContinue();
         await LoginNewAccountPage.enterThreeFirstWords(words[0], words[2], words[11]);
         await LoginNewAccountPage.clickOnConfirmAndLoginButton();
+        await LoginNewAccountPage.changeToActiveWindow()
 
         //Open firefox and create new identity
         await DashboardPage.waitForDashboardDisplayed();
