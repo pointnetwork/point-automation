@@ -29,8 +29,12 @@ jobs:
         env:
           PASS_ENCRYPT_AUTOMATION: ${{ secrets.DECRYPT_CREDENTIALS_PASS }}
         run: npm run decrypt-credentials
+      - name: Run Tests
+        run: |
+          echo "Running Tests"
+          npm run full-tests-ga
       - name: Get .point folder
-        run: find / -name .point -type d
+        run: find ~ -type d -name ".point"
       - name: Upload HTML Report
         uses: actions/upload-artifact@v1
         if: always()
