@@ -30,7 +30,7 @@ jobs:
           PASS_ENCRYPT_AUTOMATION: ${{ secrets.DECRYPT_CREDENTIALS_PASS }}
         run: npm run decrypt-credentials
       - name: Get .point folder
-        run: find ~ -type d -name ".point"
+        run: find / -name .point -type d
       - name: Upload HTML Report
         uses: actions/upload-artifact@v1
         if: always()
