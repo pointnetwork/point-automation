@@ -175,9 +175,8 @@ export default class Page {
     let retries = 20
 
     while(!windowFound && retries > 0){
-      await browser.pause(4000);
-
       try {
+        await browser.pause(4000);
         const windows = await browser.chromeBrowser.getWindowHandles()
         let activeWindow = windows[0]
         if (activeWindow.constructor === Array) {
@@ -186,7 +185,6 @@ export default class Page {
         await browser.chromeBrowser.switchToWindow(activeWindow)
         windowFound = true
       }catch(exception) {
-        await browser.pause(3000);
         await console.log("Window not found. Retrying...")
         retries -= 1;
       }
