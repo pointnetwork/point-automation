@@ -235,7 +235,6 @@ exports.config = {
             './tests/specs/logout.generate.new.key.spec.js',
             './tests/specs/open.close.dashboard.spec.js',
             './tests/specs/remove.point.folder.login.test.spec.js',
-            './tests/specs/remove.point.folder.signup.test.spec.js',
         ],
     },
 };
