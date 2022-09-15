@@ -7,11 +7,12 @@ import CommonSteps from "../utilities/common.steps";
 describe('Open/Close Browser', () => {
     it('Open dashboard, Logout, generate a new key and close browser 3 times.', async () => {
         let attempts = 3;
+        let processesToWait = 3;
 
         while(attempts > 0) {
             await CommonSteps.loginIfUserIsLoggedOut();
             await DashboardPage.waitForDashboardDisplayed();
-            await DashboardPage.waitForProcessesRunning();
+            await DashboardPage.waitForProcessesRunning(processesToWait);
 
             //Logout
             await DashboardPage.clickOnLogout();
@@ -34,10 +35,12 @@ describe('Open/Close Browser', () => {
             //Kill firefox and check process is stopped
             expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
             await BashProcesses.killFirefox();
-            await DashboardPage.launchPointBrowserButton.waitForDisplayed();
-            expect(DashboardPage.launchPointBrowserButton).toBeDisplayed();
+            await DashboardPage.waitForProcessesRunning(1);
+            await (await DashboardPage.launchPointBrowserButton).chromeBrowser.waitForDisplayed();
+            expect((await DashboardPage.launchPointBrowserButton).chromeBrowser).toBeDisplayed();
             attempts -= 1;
-
+            processesToWait = 1;
+            
             await console.log("Times to run : " + attempts);
         }
     });

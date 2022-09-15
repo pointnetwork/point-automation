@@ -15,7 +15,7 @@ module.exports = {
             await console.log("User is logged in")
         }
     },
-    async loginUser() {
+    async loginUser(processes=3) {
         await this.installAppIfIsRequired()
         await console.log("Logging in user...")
         await Utils.reloadSessionLinux()

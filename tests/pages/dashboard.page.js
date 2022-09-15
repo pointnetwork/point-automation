@@ -70,7 +70,9 @@ class DashboardPage extends Page {
         let timeout = 30;
 
         while(!allProcessesWorking && timeout > 0) {
-            if(await this.processesSuccessStatus.length === processes) {
+            const processesLength = await this.processesSuccessStatus.length;
+
+            if(processesLength === processes) {
                 allProcessesWorking = true;
             }else{
                 timeout -= 1;
