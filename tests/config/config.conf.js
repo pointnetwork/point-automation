@@ -214,10 +214,14 @@ exports.config = {
         }
         try {
             console.log("Test case finished. Killing point...")
-            BashProcesses.killPoint().then(result => {
+            BashProcesses.killPointMacOS().then(result => {
                 console.log("Point Killed correctly.")
             });
-            browser.pause(5000);
+            browser.pause(2000);
+            BashProcesses.killSeleniumMacOs().then(result => {
+                console.log("Selenium Killed correctly.")
+            });
+            browser.pause(2000);
         } catch (exception) {
             console.log("Error killing point when test case is finished.")
         }
