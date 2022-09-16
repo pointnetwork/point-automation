@@ -79,9 +79,11 @@ module.exports = {
         }
     },
     async killPointMacOS() {
+        await console.log("Killing point in MacOS")
         const processId = await this.getProcessId(await this.getProcessToKillPoint())
         return new Promise((resolve) => {
             childProcess.exec("kill -9 " + processId, (err, stdout, stderr) => {
+                console.log("Point killed in MacOS")
                 resolve(stdout)
             })
         })
@@ -90,11 +92,13 @@ module.exports = {
         let finished = false
 
         while(!finished) {
+            await console.log("Killing point in Linux")
             const size = await this.getPointLinuxProcessesSize()
             if(size > 2) {
                 await this.killPointMacOS()
             }else {
                 finished = true
+                console.log("Point killed in Linux")
             }
         }
     },

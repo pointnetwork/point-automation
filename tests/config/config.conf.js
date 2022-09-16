@@ -214,7 +214,10 @@ exports.config = {
         }
         try {
             console.log("Test case finished. Killing point...")
-            BashProcesses.killPoint();
+            BashProcesses.killPoint().then(result => {
+                console.log("Point Killed correctly." + result)
+            });
+            browser.pause(5000);
         } catch (exception) {
             console.log("Error killing point when test case is finished.")
         }
