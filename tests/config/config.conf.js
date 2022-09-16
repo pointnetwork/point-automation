@@ -215,7 +215,7 @@ exports.config = {
         try {
             console.log("Test case finished. Killing point...")
             BashProcesses.killPoint().then(result => {
-                console.log("Point Killed correctly." + result)
+                console.log("Point Killed correctly.")
             });
             browser.pause(5000);
         } catch (exception) {
@@ -242,8 +242,8 @@ exports.config = {
             './tests/specs/open.close.browser.spec.js',
             './tests/specs/logout.existing.key.spec.js',
             './tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
-            // './tests/specs/logout.generate.new.key.spec.js',
-            // './tests/specs/open.close.dashboard.spec.js',
+            './tests/specs/logout.generate.new.key.spec.js',
+            './tests/specs/open.close.dashboard.spec.js',
             // './tests/specs/remove.point.folder.login.test.spec.js',
             // './tests/specs/remove.point.folder.signup.test.spec.js',
         ],
