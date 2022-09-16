@@ -4,6 +4,7 @@ const wdioHtmlReporter = require('@rpii/wdio-html-reporter')
 const log4j = require('log4js')
 const path = require('path')
 const fs = require('fs')
+const BashProcesses = require("../utilities/bash.processes");
 const drivers = {
     chrome: { version: '98.0.4758.102' },
     firefox: { version: '0.31.0' },
@@ -210,6 +211,12 @@ exports.config = {
             process.emit('test:screenshot', filepath)
         } catch (exception) {
             console.log('It was not possible to take screenshot after test. Error : ' + exception)
+        }
+        try {
+            console.log("Test case finished. Killing point...")
+            BashProcesses.killPoint();
+        } catch (exception) {
+            console.log("Error killing point when test case is finished.")
         }
     },
     /**
