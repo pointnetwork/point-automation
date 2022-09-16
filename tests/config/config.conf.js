@@ -222,6 +222,10 @@ exports.config = {
                 console.log("Selenium Killed correctly.")
             });
             browser.pause(2000);
+            BashProcesses.killFirefoxMacOs().then(result => {
+                console.log("Firefox Killed correctly.")
+            });
+            browser.pause(2000);
         } catch (exception) {
             console.log("Error killing point when test case is finished.")
         }
