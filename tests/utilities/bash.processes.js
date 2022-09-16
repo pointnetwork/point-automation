@@ -149,5 +149,23 @@ module.exports = {
             default:
                 return ""
         }
-    }
+    },
+    async killAllPointMacOS() {
+        await console.log("Killing all point processes in MacOS")
+        return new Promise((resolve) => {
+            childProcess.exec("pkill -a point" , (err, stdout, stderr) => {
+                console.log("Point definitely killed in MacOS")
+                resolve(stdout)
+            })
+        })
+    },
+    async killSeleniumMacOs() {
+        await console.log("Killing Selenium in MacOS")
+        return new Promise((resolve) => {
+            childProcess.exec("pkill -a selenium-standalone" , (err, stdout, stderr) => {
+                console.log("Selenium definitely killed in MacOS")
+                resolve(stdout)
+            })
+        })
+    },
 };
