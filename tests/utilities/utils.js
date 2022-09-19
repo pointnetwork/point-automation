@@ -27,7 +27,7 @@ module.exports = {
           fs.unlinkSync(filename);
         }
       }
-      fs.rmdirSync(dir);
+      fs.rmdirSync(dir,  { recursive: true, force: true });
     } catch(exception) {
       console.log("It was not possible to remove directory. Exception : " + exception)
     }
