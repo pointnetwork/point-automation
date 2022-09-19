@@ -214,7 +214,7 @@ exports.config = {
         }
         try {
             console.log("Test case finished. Killing point...")
-            BashProcesses.killPointMacOS().then(result => {
+            BashProcesses.killAllPointMacOS().then(result => {
                 console.log("Point Killed correctly.")
             });
             browser.pause(2000);
