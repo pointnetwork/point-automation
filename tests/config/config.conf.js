@@ -4,7 +4,6 @@ const wdioHtmlReporter = require('@rpii/wdio-html-reporter')
 const log4j = require('log4js')
 const path = require('path')
 const fs = require('fs')
-const BashProcesses = require("../utilities/bash.processes");
 const drivers = {
     chrome: { version: '98.0.4758.102' },
     firefox: { version: '0.31.0' },
@@ -94,10 +93,10 @@ exports.config = {
     // Warns when a deprecated command is used
     deprecationWarnings: true,
     waitforTimeout: 90000, // Default timeout for all waitFor* commands.
-    connectionRetryTimeout: 90000, // Default timeout in milliseconds for request if Selenium Grid doesn't send response
+    connectionRetryTimeout: 30000, // Default timeout in milliseconds for request if Selenium Grid doesn't send response
     connectionRetryCount: 3, // Default request retries count
     specFileRetries: 1,
-    specFileRetriesDelay: 0,
+    specFileRetriesDelay: 10,
     specFileRetriesDeferred: false,
     framework: 'mocha',
     mochaOpts: {
