@@ -212,23 +212,6 @@ exports.config = {
         } catch (exception) {
             console.log('It was not possible to take screenshot after test. Error : ' + exception)
         }
-        try {
-            console.log("Test case finished. Killing point...")
-            BashProcesses.killAllPointMacOS().then(result => {
-                console.log("Point Killed correctly.")
-            });
-            browser.pause(2000);
-            BashProcesses.killSeleniumMacOs().then(result => {
-                console.log("Selenium Killed correctly.")
-            });
-            browser.pause(2000);
-            BashProcesses.killFirefoxMacOs().then(result => {
-                console.log("Firefox Killed correctly.")
-            });
-            browser.pause(2000);
-        } catch (exception) {
-            console.log("Error killing point when test case is finished.")
-        }
     },
     /**
      * Gets executed after all workers got shut down and the process is about to exit. It is not
