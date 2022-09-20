@@ -28,8 +28,8 @@ config.services = [
         installArgs: { drivers }, // drivers to install
         args: { drivers } // drivers to use
     }],
-    // ['firefox-profile', {
-    //     profileDirectory: "/Users/runner/.point/keystore/liveprofile"
-    // }]
+    ['firefox-profile', {
+        profileDirectory: "/Users/runner/.point/keystore/liveprofile"
+    }]
 ];
 exports.config = config;
