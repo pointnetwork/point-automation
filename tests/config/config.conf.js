@@ -210,7 +210,7 @@ exports.config = {
                 `${timestamp}`
             )
             const filepathChrome = filepath+"chrome.png"
-            browser.chromeBrowser.saveScreenshot(filepathChrome)
+            browser.firefoxBrowser.saveScreenshot(filepathChrome)
             process.emit('test:screenshot', filepathChrome)
 
             const filePathFirefox = filepath+"firefox.png"
