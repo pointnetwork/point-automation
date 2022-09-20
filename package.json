@@ -24,8 +24,6 @@
     "@wdio/spec-reporter": "^7.24.0",
     "@wdio/sync": "^7.24.0",
     "webdriverio": "^7.24.0",
-    "wdio-geckodriver-service": "^3.0.5",
-    "geckodriver": "^3.0.2",
     "@wdio/firefox-profile-service": "^7.24.0",
     "@faker-js/faker": "^7.4.0",
     "@rpii/wdio-html-reporter": "6.1.1",
