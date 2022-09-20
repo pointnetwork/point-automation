@@ -14,11 +14,11 @@ config.capabilities =
           args: ["app='/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point'"]
         }
       }
-    // },
-    //   firefoxBrowser: {
-    //       capabilities: {
-    //           browserName: 'firefox'
-    //       }
+    },
+      firefoxBrowser: {
+          capabilities: {
+              browserName: 'firefox'
+          }
       }
   }
 
