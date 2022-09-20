@@ -3,12 +3,12 @@ import LoginExistingAccountPage from "../pages/login.existing.account.page"
 import Credentials from "../resources/decryptedcredentials.json"
 import InstallerTermsConditionsPage from "../pages/installer/installer.terms.conditions.page";
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
-import CommonSteps from "./utils";
 import Utils from "./utils";
 const BashProcesses = require('./bash.processes')
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
+        await browser.firefoxBrowser.reloadSession();
         try {
             await this.loginUser()
         }catch(exception){
