@@ -29,7 +29,8 @@ jobs:
         run: unzip point-v0.2.72-MacOS-app.zip
       - name: Install Firefox
         uses: browser-actions/setup-firefox@latest
-        run: firefox --version
+        with:
+          run: firefox --version
       - name: Decrypt credentials
         env:
           PASS_ENCRYPT_AUTOMATION: ${{ secrets.DECRYPT_CREDENTIALS_PASS }}
