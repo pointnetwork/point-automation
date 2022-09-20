@@ -112,7 +112,8 @@ exports.config = {
             args: { drivers } // drivers to use
         }],
         ['firefox-profile', {
-            profileDirectory: "/Users/workmac/.point/keystore/liveprofile"
+            profileDirectory: path.join(
+                'tests/config/liveprofile')
         }]
     ],
     reporters: [
