@@ -1,4 +1,5 @@
 const { config } = require('./config.conf');
+const path = require('path')
 const drivers = {
     chrome: { version: '98.0.4758.102' },
     firefox: { version: '0.31.0' },
@@ -29,7 +30,8 @@ config.services = [
         args: { drivers } // drivers to use
     }],
     ['firefox-profile', {
-        profileDirectory: "/Users/runner/.point/keystore/liveprofile"
+        profileDirectory: path.join(
+            'tests/config/liveprofile')
     }]
 ];
 exports.config = config;
