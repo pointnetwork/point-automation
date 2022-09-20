@@ -8,6 +8,8 @@ const drivers = {
     chrome: { version: '98.0.4758.102' },
     firefox: { version: '0.31.0' },
 }
+const BashProcesses = require('../utilities/bash.processes')
+
 
 function rmdir (dir) {
     try {
@@ -211,6 +213,16 @@ exports.config = {
             process.emit('test:screenshot', filepath)
         } catch (exception) {
             console.log('It was not possible to take screenshot after test. Error : ' + exception)
+        }
+
+        try {
+            console.log("Test case finished. Killing Firefox instances...")
+            BashProcesses.killFirefoxMacOs().then(result => {
+                console.log("Firefox Killed correctly.")
+            });
+            browser.pause(5000);
+        } catch (exception) {
+            console.log("Error killing point when test case is finished.")
         }
     },
     /**

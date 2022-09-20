@@ -1,27 +1,28 @@
 const { config } = require('./config.conf');
 const path = require('path')
+
 const drivers = {
     chrome: { version: '98.0.4758.102' },
     firefox: { version: '0.31.0' },
 }
 
 config.capabilities =
-  {
-    chromeBrowser: {
-      capabilities: {
-        browserName: 'chrome',
-        'goog:chromeOptions': {
-          binary: '/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point',
-          args: ["app='/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point'"]
+    {
+        chromeBrowser: {
+            capabilities: {
+                browserName: 'chrome',
+                'goog:chromeOptions': {
+                    binary: '/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point',
+                    args: ["app='/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point'"]
+                }
+            }
+        },
+        firefoxBrowser: {
+            capabilities: {
+                browserName: 'firefox'
+            }
         }
-      }
-    },
-      firefoxBrowser: {
-          capabilities: {
-              browserName: 'firefox'
-          }
-      }
-  }
+    }
 
 config.services = [
     ['selenium-standalone', {
@@ -34,4 +35,5 @@ config.services = [
             'tests/config/liveprofile')
     }]
 ];
+
 exports.config = config;
