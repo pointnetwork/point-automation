@@ -1,37 +1,41 @@
 import Page from '../page'
 
-class BrowserFinalStepSignupPage extends Page {
+export default class BrowserFinalStepSignupPage extends Page {
+    constructor(firefox) {
+        super();
+        this.driver = firefox
+    }
+
     get identityInput() {
-        return $('//input[@name=\'handle\']')
+        return this.driver.$('//input[@name=\'handle\']')
     }
 
     get registerButton() {
-        return $("//button[contains(text(), 'Register')]")
+        return this.driver.$("//button[contains(text(), 'Register')]")
     }
 
     get sendTheTweetButton() {
-        return $("//span[text() = 'Send the Tweet']/ancestor::button")
+        return this.driver.$("//span[text() = 'Send the Tweet']/ancestor::button")
     }
 
     get sureButton() {
-        return $("//button[contains(text(), 'Sure!')]")
+        return this.driver.$("//button[contains(text(), 'Sure!')]")
     }
 
     async waitForPageToBeLoaded() {
-        await (await this.identityInput).firefoxBrowser.waitForDisplayed({timeout: 120000});
+        await this.identityInput.waitForDisplayed({timeout: 120000});
     }
 
     async clickOnRegisterButton() {
-        await super.clickElement((await this.registerButton).firefoxBrowser);
+        await super.clickElement(this.registerButton);
     }
 
     async clickOnSureButton() {
-        await super.clickElement((await this.sureButton).firefoxBrowser);
+        await super.clickElement(this.sureButton);
     }
 
     async enterUsername(username) {
-        await super.setValueInElement((await this.identityInput).firefoxBrowser, username);
+        await super.setValueInElement(this.identityInput, username);
     }
 }
 
-export default new BrowserFinalStepSignupPage()

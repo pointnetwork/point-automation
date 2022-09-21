@@ -10,6 +10,7 @@ import CommonValidations from "../utilities/common.validations";
 
 describe('Open/Close Browser', () => {
     it('Create new identity', async () => {
+        const firefoxaa = await CommonSteps.createFirefoxInstance()
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();
@@ -33,12 +34,15 @@ describe('Open/Close Browser', () => {
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.changeToActiveWindow();
         await DashboardPage.waitForProcessesRunning();
-        await CommonSteps.openPointInNewFirefox();
-        await BrowserFinalStepSignupPage.waitForPageToBeLoaded();
-        await BrowserFinalStepSignupPage.enterUsername(Utils.getRandomString() + Utils.getRandomNumber())
-        await BrowserFinalStepSignupPage.clickOnRegisterButton();
-        await BrowserFinalStepSignupPage.clickOnSureButton();
-        await BrowserHomePage.waitForPageToBeLoaded();
-        await CommonValidations.isFirefoxPageDisplayed();
+        const firefox = await CommonSteps.createFirefoxInstance()
+        await CommonSteps.openPointInNewFirefox(firefox);
+        const browserFinalStepPage = await new BrowserFinalStepSignupPage(firefox)
+        await browserFinalStepPage.waitForPageToBeLoaded();
+        await browserFinalStepPage.enterUsername(Utils.getRandomString() + Utils.getRandomNumber())
+        await browserFinalStepPage.clickOnRegisterButton();
+        await browserFinalStepPage.clickOnSureButton();
+        const browserHome = await new BrowserHomePage(firefox)
+        await browserHome.waitForPageToBeLoaded();
+        await CommonValidations.isFirefoxPageDisplayed(browserHome);
     });
 });

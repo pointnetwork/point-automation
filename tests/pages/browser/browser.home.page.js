@@ -1,47 +1,50 @@
 import Page from '../page'
 
-class BrowserHomePage extends Page {
+export default class BrowserHomePage extends Page {
+    constructor(firefox) {
+        super();
+        this.driver = firefox
+    }
+
     get titleLabel() {
-        return $('h1')
+        return this.driver.$('h1')
     }
 
     get walletButton() {
-        return $('a[href=\'https://point/wallet\']')
+        return this.driver.$('a[href=\'https://point/wallet\']')
     }
 
     get blogButton() {
-        return $('a[href=\'https://blog.point\']')
+        return this.driver.$('a[href=\'https://blog.point\']')
     }
 
     get pointSocialButton() {
-        return $('a[href=\'https://social.point\']')
+        return this.driver.$('a[href=\'https://social.point\']')
     }
 
     get emailButton() {
-        return $('a[href=\'https://email.point\']')
+        return this.driver.$('a[href=\'https://email.point\']')
     }
 
     async waitForPageToBeLoaded() {
-        await (await this.titleLabel).firefoxBrowser.waitForDisplayed();
+        await this.titleLabel.waitForDisplayed();
         //toDo: Disabled for now. It's taking too much time to load
         //await (await this.walletButton).firefoxBrowser.waitForDisplayed({timeout: 120000});
     }
 
     async clickOnWallet() {
-        await super.clickElement((await this.walletButton).firefoxBrowser);
+        await super.clickElement(this.walletButton);
     }
 
     async clickOnBlog() {
-        await super.clickElement((await this.blogButton).firefoxBrowser);
+        await super.clickElement(this.blogButton);
     }
 
     async clickOnSocial() {
-        await super.clickElement((await this.pointSocialButton).firefoxBrowser);
+        await super.clickElement(this.pointSocialButton);
     }
 
     async clickOnEmail() {
-        await super.clickElement((await this.emailButton).firefoxBrowser);
+        await super.clickElement(this.emailButton);
     }
 }
-
-export default new BrowserHomePage()

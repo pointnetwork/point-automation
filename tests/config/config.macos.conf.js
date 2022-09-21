@@ -16,11 +16,6 @@ config.capabilities =
                     args: ["app='/Applications/point.app/Contents/MacOS/point'"]
                 }
             }
-        },
-        firefoxBrowser: {
-            capabilities: {
-                browserName: 'firefox'
-            }
         }
     }
 
@@ -31,8 +26,7 @@ config.services = [
         args: { drivers } // drivers to use
     }],
     ['firefox-profile', {
-        profileDirectory: path.join(
-            'tests/config/liveprofile')
+        profileDirectory: '/Users/workmac/point-automation/tests/config/liveprofile'
     }]
 ];
 

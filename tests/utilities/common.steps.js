@@ -4,11 +4,12 @@ import Credentials from "../resources/decryptedcredentials.json"
 import InstallerTermsConditionsPage from "../pages/installer/installer.terms.conditions.page";
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 import Utils from "./utils";
+import {remote} from "webdriverio";
 const BashProcesses = require('./bash.processes')
+const path = require('path')
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
-        await browser.firefoxBrowser.reloadSession();
         try {
             await this.loginUser()
         }catch(exception){
@@ -35,9 +36,9 @@ module.exports = {
         }
         await LoginPage.changeToActiveWindow();
     },
-    async openPointInNewFirefox() {
+    async openPointInNewFirefox(instance) {
         await console.log("Accessing Point Private URL")
-        await browser.firefoxBrowser.url("https://point/")
+        await instance.url("https://point/")
     },
     async installAppIfIsRequired() {
         if(await InstallerTermsConditionsPage.isInstallerDisplayed()){
@@ -48,5 +49,18 @@ module.exports = {
             await InstallerWelcomePage.waitForInstallationCompleted();
             await LoginPage.waitForPageToBeLoaded();
         }
+    },
+    async createFirefoxInstance() {
+        return await remote({
+            logLevel: 'error',
+            path: '/', // remove `path` if you decided using something different from driver binaries.
+            capabilities: {
+                browserName: 'firefox',
+                acceptInsecureCerts: true,
+                'moz:firefoxOptions': {
+                    args: ['-profile', "/Users/runner/.point/keystore/liveprofile"]
+                }
+            },
+        })
     }
 }
