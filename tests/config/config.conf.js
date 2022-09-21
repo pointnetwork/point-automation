@@ -210,13 +210,8 @@ exports.config = {
                 'tests/reports/html-reports/screenshots/',
                 `${timestamp}`
             )
-            const filepathChrome = filepath+"chrome.png"
-            browser.firefoxBrowser.saveScreenshot(filepathChrome)
-            process.emit('test:screenshot', filepathChrome)
-
-            const filePathFirefox = filepath+"firefox.png"
-            browser.firefoxBrowser.saveScreenshot(filePathFirefox)
-            process.emit('test:screenshot', filePathFirefox)
+            browser.saveScreenshot(filepath)
+            process.emit('test:screenshot', filepath)
         } catch (exception) {
             console.log('It was not possible to take screenshot after test. Error : ' + exception)
         }

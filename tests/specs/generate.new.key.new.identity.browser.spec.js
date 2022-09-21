@@ -10,7 +10,6 @@ import CommonValidations from "../utilities/common.validations";
 
 describe('Open/Close Browser', () => {
     it('Create new identity', async () => {
-        const firefoxaa = await CommonSteps.createFirefoxInstance()
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();
