@@ -62,10 +62,10 @@ module.exports = {
                     path: '/', // remove `path` if you decided using something different from driver binaries.
                     capabilities: {
                         browserName: 'firefox',
-                        acceptInsecureCerts: true,
-                        'moz:firefoxOptions': {
-                            args: ['-profile', "/Users/runner/.point/keystore/liveprofile"]
-                        }
+                        // acceptInsecureCerts: true,
+                        // 'moz:firefoxOptions': {
+                        //     args: ['-profile', "/Users/runner/.point/keystore/liveprofile"]
+                        // }
                     },
                 })
             } catch (exception) {
