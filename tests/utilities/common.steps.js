@@ -51,16 +51,29 @@ module.exports = {
         }
     },
     async createFirefoxInstance() {
-        return await remote({
-            logLevel: 'error',
-            path: '/', // remove `path` if you decided using something different from driver binaries.
-            capabilities: {
-                browserName: 'firefox',
-                acceptInsecureCerts: true,
-                'moz:firefoxOptions': {
-                    args: ['-profile', "/Users/runner/.point/keystore/liveprofile"]
-                }
-            },
-        })
+        let created = false
+        let retries = 3
+        let firefoxInstance
+
+        while(!created && retries > 0) {
+            try {
+                firefoxInstance = await remote({
+                    logLevel: 'error',
+                    path: '/', // remove `path` if you decided using something different from driver binaries.
+                    capabilities: {
+                        browserName: 'firefox',
+                        acceptInsecureCerts: true,
+                        'moz:firefoxOptions': {
+                            args: ['-profile', "/Users/runner/.point/keystore/liveprofile"]
+                        }
+                    },
+                })
+            } catch (exception) {
+                console.log("There was an issue creating the Firefox instance. Retrying..")
+                retries-=1
+            }
+        }
+
+        return firefoxInstance
     }
 }
