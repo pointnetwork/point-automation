@@ -36,12 +36,7 @@ module.exports = {
         await LoginPage.changeToActiveWindow();
     },
     async openPointInNewFirefox() {
-        await console.log("Accessing Google")
-        await browser.firefoxBrowser.url("http://www.google.com/")
-        await browser.pause(5000)
-        await console.log("Accessing Point Public")
-        await browser.firefoxBrowser.url("http://point/")
-        await console.log("Accessing Point Private")
+        await console.log("Accessing Point Private URL")
         await browser.firefoxBrowser.url("https://point/")
     },
     async installAppIfIsRequired() {

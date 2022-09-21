@@ -19,7 +19,8 @@ config.capabilities =
         },
         firefoxBrowser: {
             capabilities: {
-                browserName: 'firefox'
+                browserName: 'firefox',
+                acceptInsecureCerts: true
             }
         }
     }

@@ -72,7 +72,8 @@ exports.config = {
         },
         firefoxBrowser: {
             capabilities: {
-                browserName: 'firefox'
+                browserName: 'firefox',
+                acceptInsecureCerts: true
             }
         }
     },
