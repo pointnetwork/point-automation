@@ -51,6 +51,7 @@ module.exports = {
         }
     },
     async createFirefoxInstance() {
+        await console.log("Creating Firefox instance...")
         return await remote({
                     logLevel: "error",
                     path: '/', // remove `path` if you decided using something different from driver binaries.
