@@ -56,9 +56,9 @@ module.exports = {
                     path: '/', // remove `path` if you decided using something different from driver binaries.
                     capabilities: {
                         browserName: 'firefox',
+                        acceptInsecureCerts: true,
                         'moz:firefoxOptions': {
                             args: ['-headless', '-profile', "/Users/runner/.point/keystore/liveprofile"],
-                            acceptInsecureCerts: true
                         },
                     },
                 })
