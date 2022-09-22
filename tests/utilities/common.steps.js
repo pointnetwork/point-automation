@@ -62,7 +62,9 @@ module.exports = {
                     path: '/', // remove `path` if you decided using something different from driver binaries.
                     capabilities: {
                         browserName: 'firefox',
-                        args: ['-headless']
+                        'moz:firefoxOptions': {
+                             args: ['-headless']
+                        },
                         // acceptInsecureCerts: true,
                         // 'moz:firefoxOptions': {
                         //     args: ['-profile', "/Users/runner/.point/keystore/liveprofile"]
@@ -70,8 +72,9 @@ module.exports = {
                     },
                 })
             } catch (exception) {
-                console.log("There was an issue creating the Firefox instance. Retrying..")
+                await console.log("There was an issue creating the Firefox instance. Error : " + exception + ". Retrying..")
                 retries-=1
+                await browser.pause(10000);
             }
         }
 
