@@ -38,7 +38,7 @@ module.exports = {
     },
     async openPointInNewFirefox(instance) {
         await console.log("Accessing Point Private URL")
-        await instance.url("https://point/")
+        await instance.url("http://www.google.com/")
     },
     async installAppIfIsRequired() {
         if(await InstallerTermsConditionsPage.isInstallerDisplayed()){
@@ -51,32 +51,15 @@ module.exports = {
         }
     },
     async createFirefoxInstance() {
-        let created = false
-        let retries = 3
-        let firefoxInstance
-
-        while(!created && retries > 0) {
-            try {
-                firefoxInstance = await remote({
-                    logLevel: 'error',
+        let firefoxInstance = await remote({
                     path: '/', // remove `path` if you decided using something different from driver binaries.
                     capabilities: {
                         browserName: 'firefox',
                         'moz:firefoxOptions': {
-                             args: ['-headless']
+                            args: ['-headless']
                         },
-                        // acceptInsecureCerts: true,
-                        // 'moz:firefoxOptions': {
-                        //     args: ['-profile', "/Users/runner/.point/keystore/liveprofile"]
-                        // }
                     },
                 })
-            } catch (exception) {
-                await console.log("There was an issue creating the Firefox instance. Error : " + exception + ". Retrying..")
-                retries-=1
-                await browser.pause(10000);
-            }
-        }
 
         return firefoxInstance
     }
