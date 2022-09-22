@@ -38,7 +38,7 @@ module.exports = {
     },
     async openPointInNewFirefox(instance) {
         await console.log("Accessing Point Private URL")
-        await instance.url("http://www.google.com/")
+        await instance.url("https://point/")
     },
     async installAppIfIsRequired() {
         if(await InstallerTermsConditionsPage.isInstallerDisplayed()){
@@ -51,16 +51,16 @@ module.exports = {
         }
     },
     async createFirefoxInstance() {
-        let firefoxInstance = await remote({
+        return await remote({
+                    logLevel: "error",
                     path: '/', // remove `path` if you decided using something different from driver binaries.
                     capabilities: {
                         browserName: 'firefox',
                         'moz:firefoxOptions': {
-                            args: ['-headless']
+                            args: ['-headless', '-profile', "/Users/runner/.point/keystore/liveprofile"],
+                            acceptInsecureCerts: true
                         },
                     },
                 })
-
-        return firefoxInstance
     }
 }
