@@ -23,7 +23,13 @@ export default class BrowserFinalStepSignupPage extends Page {
     }
 
     async waitForPageToBeLoaded() {
-        await this.identityInput.waitForDisplayed({timeout: 120000});
+        try {
+            await this.identityInput.waitForDisplayed({timeout: 120000});
+        }catch(exception){
+            await console.log("Refreshing page...")
+            await browser.refresh()
+            await this.identityInput.waitForDisplayed({timeout: 60000});
+        }
     }
 
     async clickOnRegisterButton() {
