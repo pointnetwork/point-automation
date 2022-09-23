@@ -12,8 +12,17 @@ describe('Open/Close Browser', () => {
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();
         expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
-        await CommonSteps.openPointInNewFirefox();
-        await BrowserHomePage.waitForPageToBeLoaded();
-        await CommonValidations.isFirefoxPageDisplayed();
+        await DashboardPage.waitForProcessesRunning();
+        await BashProcesses.killFirefox();
+        await DashboardPage.waitForProcessesRunning(1);
+        await browser.pause(10000)
+        await (await DashboardPage.launchPointBrowserButton).chromeBrowser.waitForDisplayed();
+        expect((await DashboardPage.launchPointBrowserButton).chromeBrowser).toBeDisplayed();
+
+        const firefox = await CommonSteps.createFirefoxInstance()
+        await CommonSteps.openPointInNewFirefox(firefox);
+        const browserHome = await new BrowserHomePage(firefox)
+        await browserHome.waitForPageToBeLoaded();
+        await CommonValidations.isFirefoxPageDisplayed(browserHome);
     });
 });
