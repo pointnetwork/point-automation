@@ -13,7 +13,7 @@ describe('Open/Close Browser', () => {
 
         while(attempts > 0) {
             await BashProcesses.killPoint();
-            Utils.rmDirIfExists(require('os').homedir() + "/.point");
+            Utils.rmDirIfExists(await Utils.getPointFolderPath());
             await browser.reloadSession();
 
             //Open dashboard and browser
