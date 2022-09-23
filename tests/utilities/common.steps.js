@@ -21,7 +21,7 @@ module.exports = {
         await console.log("Logging in user...")
         await Utils.reloadSessionLinux()
 
-        await LoginPage.waitForPageToBeLoaded();
+        await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
         const credentials = Credentials.secretWords
         const credentialsSplit = credentials.split(' ')

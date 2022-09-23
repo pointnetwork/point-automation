@@ -33,7 +33,7 @@ module.exports = {
   },
   rmDirIfExists(dir) {
     if (fs.existsSync(dir)) {
-      this.rmdir(dir);
+      fs.rmdirSync(dir,  { recursive: true, force: true });
     }
   },
   async rmFile(pathFile) {

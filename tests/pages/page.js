@@ -183,6 +183,7 @@ export default class Page {
             activeWindow = activeWindow[0]
         }
         await browser.chromeBrowser.switchToWindow(activeWindow)
+        await browser.pause(2000);
         windowFound = true
       }catch(exception) {
         await console.log("Window not found. Retrying...")
