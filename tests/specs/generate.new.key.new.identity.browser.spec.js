@@ -7,6 +7,7 @@ import Utils from '../utilities/utils';
 
 import CommonSteps from "../utilities/common.steps";
 import CommonValidations from "../utilities/common.validations";
+import BashProcesses from "../utilities/bash.processes";
 
 describe('Open/Close Browser', () => {
     it('Create new identity', async () => {
@@ -33,6 +34,12 @@ describe('Open/Close Browser', () => {
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.changeToActiveWindow();
         await DashboardPage.waitForProcessesRunning();
+        await BashProcesses.killFirefox();
+        await DashboardPage.waitForProcessesRunning(1);
+        await browser.pause(10000)
+        await (await DashboardPage.launchPointBrowserButton).chromeBrowser.waitForDisplayed();
+        expect((await DashboardPage.launchPointBrowserButton).chromeBrowser).toBeDisplayed();
+
         const firefox = await CommonSteps.createFirefoxInstance()
         await CommonSteps.openPointInNewFirefox(firefox);
         const browserFinalStepPage = await new BrowserFinalStepSignupPage(firefox)
