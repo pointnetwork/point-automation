@@ -18,7 +18,6 @@ describe('Open/Close Browser', () => {
             //Open dashboard and browser
             await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
             await InstallerTermsConditionsPage.clickOnCancelButton();
-            expect(await BashProcesses.getPointProcessClosed()).toEqual(true);
             await browser.chromeBrowser.reloadSession();
             await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
             await InstallerTermsConditionsPage.clickOnUnderstandAndAgreeButton();
