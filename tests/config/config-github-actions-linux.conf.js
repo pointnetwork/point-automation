@@ -23,5 +23,7 @@ config.services = [
         args: { drivers } // drivers to use
     }]
 ];
+config.pipeline = true
+config.pipelineType = "Linux"
 
 exports.config = config;

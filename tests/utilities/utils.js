@@ -59,7 +59,7 @@ module.exports = {
   async getPointFolderPath() {
     if(browser.config.pipeline) {
       if(browser.config.pipelineType === "macOs"){
-        return "/Users/runner/.point/"
+        return "/Users/runner/.point"
       }else{
         return ""
       }
