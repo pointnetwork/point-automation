@@ -53,8 +53,6 @@ module.exports = {
     },
     async createFirefoxInstance() {
         await console.log("Creating Firefox instance...")
-        //const pathFF = path.resolve("tests/utilities/liveprofile")
-        //await console.log("Profile path : " + pathFF)
         const firefoxInstance = await remote({
                     logLevel: "error",
                     path: '/', // remove `path` if you decided using something different from driver binaries.
@@ -62,7 +60,7 @@ module.exports = {
                         browserName: 'firefox',
                         acceptInsecureCerts: true,
                         'moz:firefoxOptions': {
-                            args: ['-headless', '-profile', "/Users/runner/.point/keystore/liveprofile"]
+                            args: ['-headless', '-profile', await Utils.getPointFolderPath() + "/keystore/liveprofile"]
                         },
                     },
                 })

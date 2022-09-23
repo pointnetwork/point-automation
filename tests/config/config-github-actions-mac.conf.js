@@ -1,5 +1,4 @@
 const { config } = require('./config.conf');
-const path = require('path')
 
 const drivers = {
     chrome: { version: '98.0.4758.102' },
@@ -26,5 +25,8 @@ config.services = [
         args: { drivers } // drivers to use
     }]
 ];
+
+config.pipeline = true
+config.pipelineType = "macOs"
 
 exports.config = config;

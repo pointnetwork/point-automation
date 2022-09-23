@@ -14,21 +14,13 @@ config.capabilities =
             args: ["app='/usr/bin/point'", '--disable-dev-shm-usage'],
         }
       }
-    },
-      firefoxBrowser: {
-          capabilities: {
-              browserName: 'firefox'
-          }
-      }
+    }
   }
 config.services = [
     ['selenium-standalone', {
         logPath: 'logs',
         installArgs: { drivers }, // drivers to install
         args: { drivers } // drivers to use
-    }],
-    ['firefox-profile', {
-        profileDirectory: "/home/runner/.point/keystore/liveprofile"
     }]
 ];
 

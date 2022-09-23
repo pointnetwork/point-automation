@@ -1,5 +1,4 @@
 const { config } = require('./config.conf');
-const path = require('path')
 
 const drivers = {
     chrome: { version: '98.0.4758.102' },
@@ -24,9 +23,6 @@ config.services = [
         logPath: 'logs',
         installArgs: { drivers }, // drivers to install
         args: { drivers } // drivers to use
-    }],
-    ['firefox-profile', {
-        profileDirectory: '/Users/workmac/point-automation/tests/config/liveprofile'
     }]
 ];
 

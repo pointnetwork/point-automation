@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const BashProcesses = require("./bash.processes");
-const CommonSteps = require("./utils");
 
 module.exports = {
   getRandomString() {
@@ -55,6 +54,19 @@ module.exports = {
       await browser.reloadSession();
       await browser.pause(5000);
       await console.log("Session reloaded!")
+    }
+  },
+  async getPointFolderPath() {
+    if(browser.config.pipeline) {
+      if(browser.config.pipelineType === "macOs"){
+        return "/Users/runner/.point/"
+      }else{
+        return ""
+      }
+    }else{
+      if(process.platform === "darwin") {
+        return require('os').homedir() + "/.point"
+      }
     }
   }
 };

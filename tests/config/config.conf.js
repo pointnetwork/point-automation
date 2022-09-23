@@ -69,12 +69,6 @@ exports.config = {
                     args: ["app='/Applications/point.app/Contents/MacOS/point'"]
                 }
             }
-        },
-        firefoxBrowser: {
-            capabilities: {
-                browserName: 'firefox',
-                acceptInsecureCerts: true
-            }
         }
     },
     //
@@ -113,10 +107,6 @@ exports.config = {
             logPath: 'logs',
             installArgs: { drivers }, // drivers to install
             args: { drivers } // drivers to use
-        }],
-        ['firefox-profile', {
-            profileDirectory: path.join(
-                'tests/config/liveprofile')
         }]
     ],
     reporters: [
