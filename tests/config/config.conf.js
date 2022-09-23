@@ -250,7 +250,8 @@ exports.config = {
             // './tests/specs/open.close.dashboard.spec.js',
             // './tests/specs/remove.point.folder.login.test.spec.js',
             // './tests/specs/remove.point.folder.signup.test.spec.js',
-            './tests/specs/generate.new.key.new.identity.browser.spec.js'
+            './tests/specs/generate.new.key.new.identity.browser.spec.js',
+            './tests/specs/verify.browser.page.spec.js',
         ],
     },
 };
