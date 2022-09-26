@@ -199,7 +199,7 @@ exports.config = {
             const timestamp = moment().format('YYYYMMDD-HHmmss.SSS')
             const filepath = path.join(
                 'tests/reports/html-reports/screenshots/',
-                `${timestamp}`
+                `${timestamp}.png`
             )
             browser.saveScreenshot(filepath)
             process.emit('test:screenshot', filepath)
