@@ -1,4 +1,4 @@
-name: Automated Tests Linux
+name: Automated Tests (Linux)
 on:
   workflow_dispatch:
     inputs:
@@ -31,7 +31,7 @@ jobs:
       - name: Unzip file
         run: gunzip -c point-v0.2.72-Linux-Debian-Ubuntu.tar.gz | tar xopf -
       - name: Install Point
-        run: sudo dpkg -i point.deb
+        run: dpkg -i point.deb
       - name: Run Tests
         uses: GabrielBB/xvfb-action@v1.6
         with:
