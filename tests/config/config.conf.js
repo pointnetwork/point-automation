@@ -246,8 +246,8 @@ exports.config = {
         ],
         github_actions_linux: [
             './tests/specs/open.close.browser.spec.js',
-            './tests/specs/remove.point.folder.login.test.spec.js',
-            './tests/specs/remove.point.folder.signup.test.spec.js',
+            //'./tests/specs/remove.point.folder.login.test.spec.js',
+            //'./tests/specs/remove.point.folder.signup.test.spec.js',
         ]
     },
 };
