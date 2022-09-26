@@ -46,7 +46,7 @@ module.exports = {
   async reloadSessionLinux() {
     if(process.platform === "linux") {
       await console.log("Reloading Session in Linux...")
-      await BashProcesses.killPoint();
+      await BashProcesses.killAllPointProcesses();
       await console.log("Removing Point lock file")
       this.rmdir("/home/runner/.point/point_dashboard.lock")
       await console.log("Point lockfile was removed")
