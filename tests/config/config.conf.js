@@ -93,7 +93,7 @@ exports.config = {
     waitforTimeout: 90000, // Default timeout for all waitFor* commands.
     connectionRetryTimeout: 30000, // Default timeout in milliseconds for request if Selenium Grid doesn't send response
     connectionRetryCount: 3, // Default request retries count
-    specFileRetries: 1,
+    specFileRetries: 0,
     specFileRetriesDelay: 10,
     specFileRetriesDeferred: false,
     framework: 'mocha',
