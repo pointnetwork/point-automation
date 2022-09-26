@@ -26,7 +26,9 @@ class LoginExistingAccountPage extends Page {
     }
 
     async clickOnConfirmAndLoginButton() {
+        await console.log("Clicking on Confirm and Login button..")
         await super.clickElement((await this.confirmAndLoginButton).chromeBrowser);
+        await console.log("Button clicked!")
     }
 }
 

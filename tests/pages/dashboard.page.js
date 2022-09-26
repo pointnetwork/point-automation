@@ -60,7 +60,7 @@ class DashboardPage extends Page {
     async waitForProcessesRunning(processes=3) {
         try {
             await (await this.loadingMessage).chromeBrowser.waitForDisplayed({timeout: 5000});
-            await (await this.loadingMessage).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
+            await (await this.loadingMessage).chromeBrowser.waitForDisplayed({reverse:true, timeout: 60000})
             await console.log("Processes running successfully");
         }catch(exception){
             await console.log("Loading message is not displayed");

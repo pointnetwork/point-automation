@@ -150,10 +150,11 @@ module.exports = {
                 return ""
         }
     },
-    async killAllPointMacOS() {
+    async killAllPointProcesses() {
         await console.log("Killing all point processes in MacOS")
+        const commandToRun = this.getKillCommandByOs()
         return new Promise((resolve) => {
-            childProcess.exec("pkill -a point" , (err, stdout, stderr) => {
+            childProcess.exec(commandToRun + " point" , (err, stdout, stderr) => {
                 console.log("Point definitely killed in MacOS")
                 resolve(stdout)
             })
@@ -170,11 +171,7 @@ module.exports = {
     },
     async killAllFirefoxProcesses() {
         await console.log("Killing all Firefox Processes...")
-        let commandToRun = "pkill"
-
-        if(process.platform === "darwin") {
-            commandToRun = commandToRun + " -a"
-        }
+        const commandToRun = this.getKillCommandByOs()
 
         return new Promise((resolve) => {
             childProcess.exec(commandToRun + " firefox" , (err, stdout, stderr) => {
@@ -183,4 +180,13 @@ module.exports = {
             })
         })
     },
+    async getKillCommandByOs() {
+        let commandToRun = "pkill"
+
+        if(process.platform === "darwin") {
+            return commandToRun + " -a"
+        }
+
+        return commandToRun
+    }
 };

@@ -11,7 +11,7 @@ describe('Open/Close Browser', () => {
         let attempts = 3;
 
         while(attempts > 0) {
-            await BashProcesses.killPoint();
+            await BashProcesses.killAllPointProcesses();
             Utils.rmDirIfExists(await Utils.getPointFolderPath());
             await browser.reloadSession();
 
