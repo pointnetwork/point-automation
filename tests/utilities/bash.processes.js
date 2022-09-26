@@ -168,10 +168,16 @@ module.exports = {
             })
         })
     },
-    async killFirefoxMacOs() {
-        await console.log("Killing Firefox in MacOS")
+    async killAllFirefoxProcesses() {
+        await console.log("Killing all Firefox Processes...")
+        let commandToRun = "pkill"
+
+        if(process.platform === "darwin") {
+            commandToRun = commandToRun + " -a"
+        }
+
         return new Promise((resolve) => {
-            childProcess.exec("pkill -a firefox" , (err, stdout, stderr) => {
+            childProcess.exec(commandToRun + " firefox" , (err, stdout, stderr) => {
                 console.log("Firefox definitely killed in MacOS")
                 resolve(stdout)
             })

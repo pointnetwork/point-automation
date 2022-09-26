@@ -209,7 +209,7 @@ exports.config = {
 
         try {
             console.log("Test case finished. Killing Firefox instances...")
-            BashProcesses.killFirefoxMacOs().then(result => {
+            BashProcesses.killAllFirefoxProcesses().then(result => {
                 console.log("Firefox Killed correctly.")
             });
             browser.pause(5000);
