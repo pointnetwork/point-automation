@@ -155,7 +155,7 @@ module.exports = {
         const commandToRun = this.getKillCommandByOs()
         return new Promise((resolve) => {
             childProcess.exec(commandToRun + " point" , (err, stdout, stderr) => {
-                console.log("Point definitely killed in MacOS")
+                console.log("Point definitely killed")
                 resolve(stdout)
             })
         })
