@@ -36,7 +36,7 @@ describe('Open/Close Browser', () => {
 
             //Kill firefox and check process is stopped
             expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
-            await BashProcesses.killFirefox();
+            await BashProcesses.killAllFirefoxProcesses();
             await (await DashboardPage.launchPointBrowserButton).chromeBrowser.waitForDisplayed();
             expect(DashboardPage.launchPointBrowserButton.chromeBrowser).toBeDisplayed();
             attempts -= 1;
