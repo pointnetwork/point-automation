@@ -11,7 +11,7 @@ config.capabilities =
         browserName: 'chrome',
         'goog:chromeOptions': {
             binary: '/usr/bin/point',
-            args: ["app='/usr/bin/point'", '--disable-dev-shm-usage'],
+            args: ["app='/usr/bin/point'"],
         }
       }
     }
