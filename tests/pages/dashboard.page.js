@@ -81,10 +81,10 @@ class DashboardPage extends Page {
         }
 
         await browser.pause(2000);
-        await (await this.tryingToConnectPointEngineLabel).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
-        await console.log("Checking updating message...")
-        await (await this.updatingMessage).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
-        await console.log("Updating message is not displayed")
+        // await (await this.tryingToConnectPointEngineLabel).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
+        // await console.log("Checking updating message...")
+        // await (await this.updatingMessage).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
+        // await console.log("Updating message is not displayed")
     }
 
     async clickOnLogout() {
