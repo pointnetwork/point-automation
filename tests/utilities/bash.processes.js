@@ -175,7 +175,7 @@ module.exports = {
 
         return new Promise((resolve) => {
             childProcess.exec(commandToRun + " firefox" , (err, stdout, stderr) => {
-                console.log("Firefox definitely killed in MacOS")
+                console.log("Firefox definitely killed")
                 resolve(stdout)
             })
         })

@@ -20,7 +20,11 @@ module.exports = {
         await this.installAppIfIsRequired()
         await console.log("Logging in user...")
         //await Utils.reloadSessionLinux()
-
+        if(process.platform === "linux") {
+            await browser.pause(5000)
+            await browser.reloadSession()
+            await browser.pause(5000)
+        }
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
         const credentials = Credentials.secretWords
