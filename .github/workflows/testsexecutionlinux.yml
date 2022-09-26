@@ -1,4 +1,4 @@
-name: Automated Tests (Linux)
+name: Automated Tests Linux
 on:
   workflow_dispatch:
     inputs:
@@ -10,6 +10,8 @@ on:
 jobs:
   linux-os-test:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.PERSONAL_ACCESS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
