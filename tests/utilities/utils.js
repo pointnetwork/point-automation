@@ -61,7 +61,7 @@ module.exports = {
       if(browser.config.pipelineType === "macOs"){
         return "/Users/runner/.point"
       }else{
-        return ""
+        return require('os').homedir() + "/.point"
       }
     }else{
       if(process.platform === "darwin") {
