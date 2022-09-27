@@ -35,7 +35,9 @@ jobs:
       - name: Install Point
         run: sudo dpkg -i point.deb && sudo apt-get install -f
       - name: Run Tests
-        run: npm run simple-test-linux
+        uses: GabrielBB/xvfb-action@v1.6
+        with:
+          run: npm run simple-test-linux
       - name: Upload HTML Report
         uses: actions/upload-artifact@v1
         if: always()
