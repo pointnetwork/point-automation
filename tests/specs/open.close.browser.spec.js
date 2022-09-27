@@ -4,7 +4,7 @@ import CommonSteps from "../utilities/common.steps";
 
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
-        let attempts = 1;
+        let attempts = 3;
 
         while(attempts > 0) {
             //Login
