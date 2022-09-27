@@ -201,7 +201,7 @@ exports.config = {
                 'tests/reports/html-reports/screenshots/',
                 `${timestamp}.png`
             )
-            browser.chromeBrowser.saveScreenshot(filepath)
+            browser.saveScreenshot(filepath)
             process.emit('test:screenshot', filepath)
         } catch (exception) {
             console.log('It was not possible to take screenshot after test. Error : ' + exception)
