@@ -177,12 +177,12 @@ export default class Page {
     while(!windowFound && retries > 0){
       try {
         await browser.pause(4000);
-        const windows = await browser.chromeBrowser.getWindowHandles()
+        const windows = await browser.getWindowHandles()
         let activeWindow = windows[0]
         if (activeWindow.constructor === Array) {
             activeWindow = activeWindow[0]
         }
-        await browser.chromeBrowser.switchToWindow(activeWindow)
+        await browser.switchToWindow(activeWindow)
         await browser.pause(2000);
         windowFound = true
       }catch(exception) {
