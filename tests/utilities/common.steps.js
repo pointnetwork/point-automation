@@ -19,7 +19,7 @@ module.exports = {
     async loginUser(processes=3) {
         await this.installAppIfIsRequired()
         await console.log("Logging in user...")
-        await Utils.reloadSessionLinux()
+        //await Utils.reloadSessionLinux()
         if(process.platform === "linux") {
             //await BashProcesses.killAllPointProcesses();
             await browser.pause(5000)

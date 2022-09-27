@@ -151,7 +151,7 @@ module.exports = {
         }
     },
     async killAllPointProcesses() {
-        await console.log("Killing all point processes in MacOS")
+        await console.log("Killing all point processes")
         const commandToRun = this.getKillCommandByOs()
         return new Promise((resolve) => {
             childProcess.exec(commandToRun + " point" , (err, stdout, stderr) => {
