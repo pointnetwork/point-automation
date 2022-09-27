@@ -124,7 +124,7 @@ exports.config = {
                 showInBrowser: false,
 
                 // to turn on screenshots after every test
-                useOnAfterCommandForScreenshot: true,
+                useOnAfterCommandForScreenshot: false,
                 LOG: log4j.getLogger('default')
             }
         ]
@@ -193,9 +193,9 @@ exports.config = {
             const moment = require('moment')
 
             // if test passed, ignore, else take and save screenshot.
-            // if (test.passed) {
-            //     return
-            // }
+            if (test.passed) {
+                return
+            }
             const timestamp = moment().format('YYYYMMDD-HHmmss.SSS')
             const filepath = path.join(
                 'tests/reports/html-reports/screenshots/',
