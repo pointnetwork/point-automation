@@ -193,9 +193,9 @@ exports.config = {
             const moment = require('moment')
 
             // if test passed, ignore, else take and save screenshot.
-            if (test.passed) {
-                return
-            }
+            // if (test.passed) {
+            //     return
+            // }
             const timestamp = moment().format('YYYYMMDD-HHmmss.SSS')
             const filepath = path.join(
                 'tests/reports/html-reports/screenshots/',
