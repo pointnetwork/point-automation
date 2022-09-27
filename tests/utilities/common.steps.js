@@ -21,7 +21,7 @@ module.exports = {
         await console.log("Logging in user...")
         //await Utils.reloadSessionLinux()
         if(process.platform === "linux") {
-            await BashProcesses.killAllPointProcesses();
+            //await BashProcesses.killAllPointProcesses();
             await browser.pause(5000)
             await browser.reloadSession()
             await browser.pause(5000)
