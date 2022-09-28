@@ -171,11 +171,8 @@ export default class Page {
   }
 
   async changeToActiveWindow() {
-    let windowFound = false;
-    let retries = 20
-
-    while(!windowFound && retries > 0){
-      try {
+    await console.log("Switching to active window..")
+    try {
         await browser.pause(4000);
         const windows = await browser.getWindowHandles()
         let activeWindow = windows[0]
@@ -184,11 +181,9 @@ export default class Page {
         }
         await browser.switchToWindow(activeWindow)
         await browser.pause(2000);
-        windowFound = true
-      }catch(exception) {
-        await console.log("Window not found. Retrying...")
-        retries -= 1;
-      }
+        await console.log("Window was changed!")
+    }catch(exception) {
+        await console.log("Window not found")
     }
   }
 }

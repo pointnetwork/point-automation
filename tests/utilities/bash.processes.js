@@ -152,7 +152,7 @@ module.exports = {
     },
     async killAllPointProcesses() {
         await console.log("Killing all point processes")
-        const commandToRun = this.getKillCommandByOs()
+        const commandToRun = await this.getKillCommandByOs()
         return new Promise((resolve) => {
             childProcess.exec(commandToRun + " point" , (err, stdout, stderr) => {
                 console.log("Point definitely killed")
@@ -171,7 +171,7 @@ module.exports = {
     },
     async killAllFirefoxProcesses() {
         await console.log("Killing all Firefox Processes...")
-        const commandToRun = this.getKillCommandByOs()
+        const commandToRun = await this.getKillCommandByOs()
 
         return new Promise((resolve) => {
             childProcess.exec(commandToRun + " firefox" , (err, stdout, stderr) => {
