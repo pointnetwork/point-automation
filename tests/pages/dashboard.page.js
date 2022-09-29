@@ -99,6 +99,7 @@ class DashboardPage extends Page {
 
         if(process.platform === "linux") {
             try {
+                await browser.pause(7000)
                 await this.confirmLogoutButton.waitForExist({reverse:true})
                 await console.log("Error closing session. Retrying")
                 await this.clickOnLogout()
