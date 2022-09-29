@@ -94,9 +94,10 @@ class DashboardPage extends Page {
     }
 
     async confirmLogout() {
+        await browser.pause(2000);
         await super.clickElement((await this.confirmLogoutButton).chromeBrowser);
         await console.log("User is logged out");
-        await browser.pause(5000);
+        await browser.pause(7000);
         if(process.platform === "linux") {
             await Utils.reloadSessionLinux()
         }
