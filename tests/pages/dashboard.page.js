@@ -90,6 +90,7 @@ class DashboardPage extends Page {
     }
 
     async clickOnLogout() {
+        await browser.pause(2000);
         await super.clickElement((await this.logoutIcon).chromeBrowser);
     }
 
