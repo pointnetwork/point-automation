@@ -1,5 +1,6 @@
 import Page from './page'
 import BashProcesses from "../utilities/bash.processes";
+import Utils from "../utilities/utils";
 
 class DashboardPage extends Page {
     get pointDashboardTitle() {
@@ -96,6 +97,9 @@ class DashboardPage extends Page {
         await super.clickElement((await this.confirmLogoutButton).chromeBrowser);
         await console.log("User is logged out");
         await browser.pause(5000);
+        if(process.platform === "linux") {
+            await Utils.reloadSessionLinux()
+        }
         await super.changeToActiveWindow();
     }
 
