@@ -97,22 +97,9 @@ class DashboardPage extends Page {
     async confirmLogout() {
         await browser.pause(2000);
         await super.clickElement((await this.confirmLogoutButton).chromeBrowser);
-
-        if(process.platform === "linux") {
-            try {
-                await browser.pause(7000)
-                await this.confirmLogoutButton.waitForExist({reverse:true})
-                await console.log("Error closing session. Retrying")
-                await this.clickOnLogout()
-                await browser.pause(2000);
-                await super.clickElement((await this.confirmLogoutButton).chromeBrowser);
-            }catch(exception) {
-                await Utils.reloadSessionLinux()
-            }
-        }
-
         await console.log("User is logged out");
-        await browser.pause(5000);
+        await browser.pause(10000);
+        await Utils.reloadSessionLinux()
         await super.changeToActiveWindow();
     }
 
