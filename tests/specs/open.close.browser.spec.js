@@ -6,10 +6,9 @@ describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 5;
 
-        //Login
-        await CommonSteps.loginIfUserIsLoggedOut();
-
         while(attempts > 0) {
+            await CommonSteps.loginIfUserIsLoggedOut()
+
             //Open dashboard and browser
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning();
@@ -25,7 +24,6 @@ describe('Open/Close Browser', () => {
             await DashboardPage.clickOnLogout()
             await DashboardPage.confirmLogout();
 
-            await CommonSteps.loginUser()
             attempts -= 1;
             await console.log("Times to run : " + attempts);
         }
