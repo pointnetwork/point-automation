@@ -45,6 +45,7 @@ module.exports = {
   },
   async reloadSessionLinux() {
     if(process.platform === "linux") {
+      await browser.pause(10000);
       await console.log("Reloading Session in Linux...")
       await BashProcesses.killAllPointProcesses();
       await console.log("Removing Point lock file")
