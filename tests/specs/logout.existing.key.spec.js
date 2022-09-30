@@ -9,9 +9,9 @@ describe('Open/Close Browser', () => {
     it('Open dashboard, Logout, import existing key and close browser 3 times.', async () => {
         let attempts = 3;
         let processesToWait = 3;
+        await CommonSteps.loginIfUserIsLoggedOut();
 
         while(attempts > 0) {
-            await CommonSteps.loginIfUserIsLoggedOut();
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning(processesToWait);
 

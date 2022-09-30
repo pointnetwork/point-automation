@@ -245,12 +245,12 @@ exports.config = {
             './tests/specs/verify.browser.page.spec.js',
         ],
         github_actions_linux: [
-            './tests/specs/open.close.browser.spec.js',
-            './tests/specs/remove.point.folder.login.test.spec.js',
-            './tests/specs/remove.point.folder.signup.test.spec.js',
+            // './tests/specs/open.close.browser.spec.js',
+            // './tests/specs/remove.point.folder.login.test.spec.js',
+            // './tests/specs/remove.point.folder.signup.test.spec.js',
             './tests/specs/logout.existing.key.spec.js',
-            './tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
-            './tests/specs/logout.generate.new.key.spec.js',
+            // './tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
+            // './tests/specs/logout.generate.new.key.spec.js',
         ]
     },
 };
