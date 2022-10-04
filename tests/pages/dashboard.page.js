@@ -98,6 +98,11 @@ class DashboardPage extends Page {
         await browser.pause(2000);
         await super.clickElement((await this.confirmLogoutButton).chromeBrowser);
         await console.log("User is logged out");
+        try {
+            await this.confirmLogoutButton.waitForDisplayed({reverse:true, timeout:60000})
+        }catch(exception) {
+            await console.log("User is still logged in. Error : "+ exception)
+        }
         await Utils.reloadSessionLinux()
         await super.changeToActiveWindow();
     }

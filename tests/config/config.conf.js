@@ -9,7 +9,6 @@ const drivers = {
     firefox: { version: '0.31.0' },
 }
 const BashProcesses = require('../utilities/bash.processes')
-const video = require('wdio-video-reporter');
 
 function rmdir (dir) {
     try {
@@ -81,7 +80,7 @@ exports.config = {
     // By default WebdriverIO commands are executed in a synchronous way using
     // the wdio-sync package. If you still want to run your tests in an async way
     // e.g. using promises you can set the sync option to false.
-    logLevel: 'error', // Level of logging verbosity: silent | verbose | command | data | result | error
+    logLevel: 'trace', // Level of logging verbosity: silent | verbose | command | data | result | error
     logLevels: {
         webdriver: 'error',
         '@wdio/cli:Launcher': 'error',
@@ -127,12 +126,7 @@ exports.config = {
                 useOnAfterCommandForScreenshot: false,
                 LOG: log4j.getLogger('default')
             }
-        ],
-        [video, {
-            saveAllVideos: true,       // If true, also saves videos for successful test cases
-            videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
-            outputDir: "./tests/reports/html-reports/"
-        }],
+        ]
     ],
     //
     // =====
