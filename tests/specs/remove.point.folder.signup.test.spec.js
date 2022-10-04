@@ -19,7 +19,7 @@ describe('Open/Close Browser', () => {
             //Open dashboard and browser
             await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
             await InstallerTermsConditionsPage.clickOnCancelButton();
-            await browser.chromeBrowser.reloadSession();
+            await browser.reloadSession();
             await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
             await InstallerTermsConditionsPage.clickOnUnderstandAndAgreeButton();
             await InstallerWelcomePage.waitForInstallerToBeDisplayed();
@@ -27,7 +27,7 @@ describe('Open/Close Browser', () => {
             await InstallerWelcomePage.waitForInstallationCompleted();
 
             await LoginPage.waitForPageToBeLoaded();
-            expect(LoginPage.noGenerateOneButton.chromeBrowser).toBeDisplayed();
+            expect(await LoginPage.noGenerateOneButton).toBeDisplayed();
 
             //Generate new keys
             await LoginPage.clickOnNoGenerateOne();

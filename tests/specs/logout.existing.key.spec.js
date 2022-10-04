@@ -19,7 +19,7 @@ describe('Open/Close Browser', () => {
             await DashboardPage.clickOnLogout();
             await DashboardPage.confirmLogout();
             await LoginPage.waitForPageToBeLoaded();
-            expect(LoginPage.noGenerateOneButton.chromeBrowser).toBeDisplayed();
+            expect(await LoginPage.noGenerateOneButton).toBeDisplayed();
 
             //Login
             await CommonSteps.loginUser();
@@ -31,8 +31,8 @@ describe('Open/Close Browser', () => {
             expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
             await BashProcesses.killAllFirefoxProcesses();
             await DashboardPage.waitForProcessesRunning(1);
-            await (await DashboardPage.launchPointBrowserButton).chromeBrowser.waitForDisplayed();
-            expect(DashboardPage.launchPointBrowserButton.chromeBrowser).toBeDisplayed();
+            await DashboardPage.launchPointBrowserButton.waitForDisplayed();
+            expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
             attempts -= 1;
             processesToWait = 1;
             await console.log("Times to run : " + attempts);

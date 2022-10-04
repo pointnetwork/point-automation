@@ -11,14 +11,14 @@ class LoginPage extends Page {
     }
 
     async waitForPageToBeLoaded() {
-        await (await this.noGenerateOneButton).chromeBrowser.waitForDisplayed();
+        await this.noGenerateOneButton.waitForDisplayed();
         await console.log("Login page is displayed")
     }
 
     async waitForLoginPage() {
         await console.log("Checking login page...")
         try {
-            await (await this.noGenerateOneButton).chromeBrowser.waitForDisplayed({timeout: 7000});
+            await this.noGenerateOneButton.waitForDisplayed({timeout: 7000});
         }catch(exception) {
             await console.log("User is still logged in. Logging out now...")
             await DashboardPage.clickOnLogout()
@@ -27,11 +27,11 @@ class LoginPage extends Page {
     }
 
     async clickOnNoGenerateOne() {
-        await super.clickElement((await this.noGenerateOneButton).chromeBrowser);
+        await super.clickElement(await this.noGenerateOneButton);
     }
 
     async clickOnYesIHaveIt() {
-        await super.clickElement((await this.yesIHaveItButton).chromeBrowser);
+        await super.clickElement(await this.yesIHaveItButton);
     }
 }
 

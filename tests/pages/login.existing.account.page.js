@@ -10,13 +10,13 @@ class LoginExistingAccountPage extends Page {
     }
 
     async waitForPageToBeLoaded() {
-        await (await this.confirmAndLoginButton).chromeBrowser.waitForDisplayed();
+        await this.confirmAndLoginButton.waitForDisplayed();
     }
 
     async fillSecretWords(secretWords) {
         let counter = 0
         while (counter < 12) {
-            const secretField = (await this.getSecretField(counter)).chromeBrowser
+            const secretField = (await this.getSecretField(counter))
             await super.clickElement(secretField);
             await secretField.setValue(secretWords[counter]);
             await super.sendTabKey();
@@ -27,7 +27,7 @@ class LoginExistingAccountPage extends Page {
 
     async clickOnConfirmAndLoginButton() {
         await console.log("Clicking on Confirm and Login button..")
-        await super.clickElement((await this.confirmAndLoginButton).chromeBrowser);
+        await super.clickElement(await this.confirmAndLoginButton);
         await console.log("Button clicked!")
     }
 }

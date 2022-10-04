@@ -19,7 +19,7 @@ describe('Open/Close Browser', () => {
         await DashboardPage.clickOnLogout();
         await DashboardPage.confirmLogout();
         await LoginPage.waitForPageToBeLoaded();
-        expect(LoginPage.noGenerateOneButton.browserChrome).toBeDisplayed();
+        expect(await LoginPage.noGenerateOneButton).toBeDisplayed();
 
         //Generate new keys
         await LoginPage.clickOnNoGenerateOne();
@@ -37,8 +37,8 @@ describe('Open/Close Browser', () => {
         await BashProcesses.killFirefox();
         await DashboardPage.waitForProcessesRunning(1);
         await browser.pause(10000)
-        await (await DashboardPage.launchPointBrowserButton).chromeBrowser.waitForDisplayed();
-        expect((await DashboardPage.launchPointBrowserButton).chromeBrowser).toBeDisplayed();
+        await DashboardPage.launchPointBrowserButton.waitForDisplayed();
+        expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
 
         const firefox = await CommonSteps.createFirefoxInstance()
         await CommonSteps.openPointInNewFirefox(firefox);

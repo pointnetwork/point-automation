@@ -52,7 +52,7 @@ class DashboardPage extends Page {
     }
 
     async waitForDashboardDisplayed() {
-        await (await this.pointDashboardTitle).chromeBrowser.waitForDisplayed();
+        await this.pointDashboardTitle.waitForDisplayed();
     }
 
     async clickOnLaunchPointBrowser() {
@@ -61,8 +61,8 @@ class DashboardPage extends Page {
 
     async waitForProcessesRunning(processes=3) {
         try {
-            await (await this.loadingMessage).chromeBrowser.waitForDisplayed({timeout: 5000});
-            await (await this.loadingMessage).chromeBrowser.waitForDisplayed({reverse:true, timeout: 5000})
+            await this.loadingMessage.waitForDisplayed({timeout: 5000});
+            await this.loadingMessage.waitForDisplayed({reverse:true, timeout: 5000})
             await console.log("Processes running successfully");
         }catch(exception){
             await console.log("Loading message is not displayed");
@@ -85,18 +85,18 @@ class DashboardPage extends Page {
         await browser.pause(2000);
         // await (await this.tryingToConnectPointEngineLabel).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
         await console.log("Checking updating message...")
-        await (await this.updatingMessage).chromeBrowser.waitForDisplayed({reverse:true, timeout: 240000})
+        await this.updatingMessage.waitForDisplayed({reverse:true, timeout: 240000})
         await console.log("Updating message is not displayed")
     }
 
     async clickOnLogout() {
         await browser.pause(2000);
-        await super.clickElement((await this.logoutIcon).chromeBrowser);
+        await super.clickElement(await this.logoutIcon);
     }
 
     async confirmLogout() {
         await browser.pause(2000);
-        await super.clickElement((await this.confirmLogoutButton).chromeBrowser);
+        await super.clickElement(await this.confirmLogoutButton);
         await console.log("User is logged out");
         try {
             await this.confirmLogoutButton.waitForDisplayed({reverse:true, timeout:60000})
@@ -108,11 +108,11 @@ class DashboardPage extends Page {
     }
 
     async clickOnSettingsButton() {
-        await super.clickElement((await this.settingsButton).chromeBrowser);
+        await super.clickElement(await this.settingsButton);
     }
 
     async clickOnUninstallButton() {
-        await super.clickElement((await this.uninstallButton).chromeBrowser);
+        await super.clickElement(await this.uninstallButton);
     }
 }
 

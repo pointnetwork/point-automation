@@ -16,8 +16,8 @@ describe('Open/Close Browser', () => {
         await BashProcesses.killFirefox();
         await DashboardPage.waitForProcessesRunning(1);
         await browser.pause(10000)
-        await (await DashboardPage.launchPointBrowserButton).chromeBrowser.waitForDisplayed();
-        expect((await DashboardPage.launchPointBrowserButton).chromeBrowser).toBeDisplayed();
+        await DashboardPage.launchPointBrowserButton.waitForDisplayed();
+        expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
 
         const firefox = await CommonSteps.createFirefoxInstance()
         await CommonSteps.openPointInNewFirefox(firefox);

@@ -5,18 +5,15 @@ const drivers = {
     firefox: { version: '0.31.0' },
 }
 
-config.capabilities =
+config.capabilities = [
     {
-        chromeBrowser: {
-            capabilities: {
-                browserName: 'chrome',
-                'goog:chromeOptions': {
-                    binary: '/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point',
-                    args: ["app='/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point'"]
-                }
-            }
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+            binary: '/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point',
+            args: ["app='/Users/runner/work/point-automation/point-automation/point.app/Contents/MacOS/point'"]
         }
     }
+]
 
 config.services = [
     ['selenium-standalone', {

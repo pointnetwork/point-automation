@@ -3,18 +3,16 @@ const drivers = {
     chrome: { version: '98.0.4758.102' },
 }
 
-config.capabilities =
-  {
-    chromeBrowser: {
-      capabilities: {
+config.capabilities = [
+    {
         browserName: 'chrome',
         'goog:chromeOptions': {
             binary: '/usr/bin/point',
             args: ["app='/usr/bin/point'"],
         }
-      }
     }
-  }
+]
+
 config.services = [
     ['selenium-standalone', {
         logPath: 'logs',
