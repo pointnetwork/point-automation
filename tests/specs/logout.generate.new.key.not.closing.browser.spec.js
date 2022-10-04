@@ -12,6 +12,9 @@ describe('Open/Close Browser', () => {
 
         while(attempts > 0) {
             //Logout
+            await DashboardPage.waitForDashboardDisplayed();
+            await DashboardPage.waitForProcessesRunning();
+            
             await DashboardPage.clickOnLogout();
             await DashboardPage.confirmLogout();
             await LoginPage.waitForPageToBeLoaded();
