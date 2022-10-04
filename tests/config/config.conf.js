@@ -9,6 +9,7 @@ const drivers = {
     firefox: { version: '0.31.0' },
 }
 const BashProcesses = require('../utilities/bash.processes')
+//const video = require('wdio-video-reporter');
 
 function rmdir (dir) {
     try {
@@ -126,7 +127,11 @@ exports.config = {
                 useOnAfterCommandForScreenshot: false,
                 LOG: log4j.getLogger('default')
             }
-        ]
+        ],
+        // [video, {
+        //     saveAllVideos: true,       // If true, also saves videos for successful test cases
+        //     videoSlowdownMultiplier: 1, // Higher to get slower videos, lower for faster videos [Value 1-100]
+        // }],
     ],
     //
     // =====
