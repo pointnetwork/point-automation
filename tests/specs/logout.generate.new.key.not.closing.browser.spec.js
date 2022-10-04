@@ -7,18 +7,20 @@ import CommonSteps from "../utilities/common.steps";
 describe('Open/Close Browser', () => {
     it('Open dashboard, Logout, generate a new key not closing browser 3 times.', async () => {
         let attempts = 3;
-        let processesToWait = 3;
         await CommonSteps.loginIfUserIsLoggedOut();
 
         while(attempts > 0) {
             //Logout
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning();
-            
+            expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
+            expect(DashboardPage.pointDashboardTitle).toHaveText('Point Dashboard');
+            expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
+
             await DashboardPage.clickOnLogout();
             await DashboardPage.confirmLogout();
             await LoginPage.waitForPageToBeLoaded();
-            expect(await LoginPage.noGenerateOneButton.browserChrome).toBeDisplayed();
+            expect(LoginPage.noGenerateOneButton).toBeDisplayed();
 
             //Generate new keys
             await LoginPage.clickOnNoGenerateOne();
