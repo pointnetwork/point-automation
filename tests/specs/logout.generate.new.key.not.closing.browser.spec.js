@@ -5,15 +5,12 @@ import LoginNewAccountPage from '../pages/login.new.account.page';
 import CommonSteps from "../utilities/common.steps";
 
 describe('Open/Close Browser', () => {
-    it('Open dashboard, Logout, generate a new key and close browser 3 times.', async () => {
+    it('Open dashboard, Logout, generate a new key not closing browser 3 times.', async () => {
         let attempts = 3;
         let processesToWait = 3;
         await CommonSteps.loginIfUserIsLoggedOut();
 
         while(attempts > 0) {
-            await DashboardPage.waitForDashboardDisplayed();
-            await DashboardPage.waitForProcessesRunning(processesToWait);
-
             //Logout
             await DashboardPage.clickOnLogout();
             await DashboardPage.confirmLogout();
@@ -35,7 +32,6 @@ describe('Open/Close Browser', () => {
             //Kill firefox and check process is stopped
             expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
             attempts -= 1;
-            processesToWait = 1
             await console.log("Times to run : " + attempts);
         }
     });
