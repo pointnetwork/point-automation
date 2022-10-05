@@ -15,11 +15,11 @@ class InstallerWelcomePage extends Page {
     }
 
     async waitForInstallerToBeDisplayed() {
-        await (await this.startInstallationButton).chromeBrowser.waitForDisplayed()
+        await this.startInstallationButton.waitForDisplayed()
     }
 
     async clickOnStartInstallationButton() {
-        await super.clickElement((await this.startInstallationButton).chromeBrowser)
+        await super.clickElement(await this.startInstallationButton)
         await console.log("Clicked on 'Start Installation' button")
     }
 
@@ -31,11 +31,11 @@ class InstallerWelcomePage extends Page {
         while(!finished && timeout > 0) {
             await console.log("Checking Installation...")
             try {
-                const element = await browser.chromeBrowser.$("//*[text() = 'Installing']");
+                const element = await browser.$("//*[text() = 'Installing']");
                 await element.waitForDisplayed({timeout:6000})
-                if (await (await this.retryInstallationButton).chromeBrowser.isDisplayed()) {
+                if (await this.retryInstallationButton.isDisplayed()) {
                     await console.log("Installation has failed. Retrying")
-                    await super.clickElement((await this.retryInstallationButton).chromeBrowser)
+                    await super.clickElement(await this.retryInstallationButton)
                 }
                 timeout -= 1;
                 await browser.pause(10000);
@@ -48,7 +48,7 @@ class InstallerWelcomePage extends Page {
     }
 
     async waitForInstallationCompleted() {
-        await (await this.installingTitle).chromeBrowser.waitForDisplayed()
+        await this.installingTitle.waitForDisplayed()
         await this.waitForInstaller();
         await super.changeToActiveWindow()
     }

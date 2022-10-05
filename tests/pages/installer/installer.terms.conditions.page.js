@@ -10,22 +10,22 @@ class InstallerTermsConditionsPage extends Page {
     }
 
     async waitForInstallerToBeDisplayed() {
-        await (await this.understandAndAgreeToContinueButton).chromeBrowser.waitForDisplayed()
+        await this.understandAndAgreeToContinueButton.waitForDisplayed()
         await console.log("Installer is displayed")
     }
 
     async clickOnCancelButton() {
-        await super.clickElement((await this.cancelButton).chromeBrowser)
+        await super.clickElement(await this.cancelButton)
     }
 
     async clickOnUnderstandAndAgreeButton() {
-        await super.clickElement((await this.understandAndAgreeToContinueButton).chromeBrowser)
+        await super.clickElement(await this.understandAndAgreeToContinueButton)
         await console.log("I Understand button was clicked")
     }
 
     async isInstallerDisplayed() {
         try {
-            await (await this.understandAndAgreeToContinueButton).chromeBrowser.waitForDisplayed({timeout: 5000})
+            await this.understandAndAgreeToContinueButton.waitForDisplayed({timeout: 5000})
             await console.log("Installer is displayed")
             return true;
         }catch(exception){
