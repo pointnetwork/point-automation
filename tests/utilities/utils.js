@@ -48,9 +48,9 @@ module.exports = {
       await browser.pause(60000);
       await console.log("Reloading Session in Linux...")
       await BashProcesses.killAllPointProcesses();
-      //await console.log("Removing Point lock file")
-      //this.rmdir(require('os').homedir() + "/.point/point_dashboard.lock")
-      //await console.log("Point lockfile was removed")
+      await console.log("Removing Point lock file")
+      this.rmdir(require('os').homedir() + "/.point/point_dashboard.lock")
+      await console.log("Point lockfile was removed")
       await browser.pause(5000);
       await browser.reloadSession();
       await browser.pause(5000);
