@@ -63,16 +63,17 @@ class DashboardPage extends Page {
         try {
             await this.loadingMessage.waitForDisplayed({timeout: 5000});
             await this.loadingMessage.waitForDisplayed({reverse:true, timeout: 5000})
-            await console.log("Processes running successfully");
+            await console.log("App loaded successfully");
         }catch(exception){
             await console.log("Loading message is not displayed");
         }
 
         let allProcessesWorking = false;
         let timeout = 10;
+        let processesLength;
 
         while(!allProcessesWorking && timeout > 0) {
-            const processesLength = await this.processesSuccessStatus.length;
+            processesLength = await this.processesSuccessStatus.length;
 
             if(processesLength === processes) {
                 allProcessesWorking = true;
@@ -81,10 +82,12 @@ class DashboardPage extends Page {
                 await browser.pause(2000);
             }
         }
+        await console.log("Processes running : " + processesLength)
 
         await browser.pause(2000);
-        // await (await this.tryingToConnectPointEngineLabel).chromeBrowser.waitForDisplayed({reverse:true, timeout: 120000})
-        await console.log("Checking updating message...")
+        await console.log("Checking Trying to connect to Point engine message...")
+        await this.tryingToConnectPointEngineLabel.waitForDisplayed({reverse:true, timeout: 120000})
+        await console.log("Trying to connect to point engine message is not displayed")
         await this.updatingMessage.waitForDisplayed({reverse:true, timeout: 240000})
         await console.log("Updating message is not displayed")
     }

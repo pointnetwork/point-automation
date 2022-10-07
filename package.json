@@ -8,8 +8,10 @@
     "decrypt-credentials": "node tests/config/decryption-script.js",
     "simple-test": "node_modules/.bin/wdio tests/config/config-github-actions-mac.conf.js --spec tests/specs/open.close.browser.spec.js",
     "full-tests-ga": "node_modules/.bin/wdio tests/config/config-github-actions-mac.conf.js --suite github_actions",
-    "test": "node_modules/.bin/wdio tests/config/config.conf.js --spec tests/specs/*.spec.js",
-    "simple-test-linux": "node_modules/.bin/wdio tests/config/config-github-actions-linux.conf.js --suite github_actions_linux"
+    "test-macos": "node_modules/.bin/wdio tests/config/config.macos.conf.js --spec tests/specs/*.spec.js",
+    "test-linux": "node_modules/.bin/wdio tests/config/config.linux.conf.js --spec tests/specs/*.spec.js",
+    "simple-test-linux": "node_modules/.bin/wdio tests/config/config.linux.conf.js --spec tests/specs/logout.existing.key.spec.js",
+    "simple-test-macos": "node_modules/.bin/wdio tests/config/config.macos.conf.js --spec tests/specs/logout.existing.key.spec.js"
   },
   "keywords": [],
   "author": "",
