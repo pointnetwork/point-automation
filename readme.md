@@ -24,10 +24,10 @@ Check this video with a demo of how to install and run the test cases : [Here](i
 1. Download this project
 2. Run command "npm install" in the root of this project
 3. Run any of the following commands according to the test cases that you want to execute : 
-   "SECRET_WORDS=word1 word2 word3 npm run test-macos" => Run all the tests (MacOS)
-   "SECRET_WORDS=word1 word2 word3 npm run test-linux" => Run all the tests (MacOS)
-   "SECRET_WORDS=word1 word2 word3 npm run simple-test-linux" => Just one test (MacOS)
-   "SECRET_WORDS=word1 word2 word3 npm run simple-test-macos" => Just one test (MacOS)
+   * "SECRET_WORDS=word1 word2 word3 npm run test-macos" => Run all the tests (MacOS)
+   * "SECRET_WORDS=word1 word2 word3 npm run test-linux" => Run all the tests (MacOS)
+   * "SECRET_WORDS=word1 word2 word3 npm run simple-test-linux" => Just one test (MacOS)
+   * "SECRET_WORDS=word1 word2 word3 npm run simple-test-macos" => Just one test (MacOS)
 
 *SECRET_WORDS environment variable should contain the secret words to login with a specific user.
 
