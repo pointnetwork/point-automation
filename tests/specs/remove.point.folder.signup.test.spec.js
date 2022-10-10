@@ -9,7 +9,7 @@ import InstallerWelcomePage from '../pages/installer/installer.welcome.page'
 
 describe('Open/Close Browser', () => {
     it('Remove .point folder, cancel terms and conditions, accept terms and conditions and signup', async () => {
-        let attempts = 3;
+        let attempts = 1;
 
         while(attempts > 0) {
             await BashProcesses.killAllPointProcesses();

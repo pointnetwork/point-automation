@@ -45,7 +45,7 @@ module.exports = {
   },
   async reloadSessionLinux() {
     if(process.platform === "linux") {
-      await browser.pause(60000);
+      //await browser.pause(60000);
       await console.log("Reloading Session in Linux...")
       await BashProcesses.killAllPointProcesses();
       await console.log("Removing Point lock file")
@@ -69,5 +69,12 @@ module.exports = {
         return require('os').homedir() + "/.point"
       }
     }
-  }
+  },
+  async reloadSessionMac() {
+    if(process.platform === "darwin") {
+      await browser.reloadSession();
+      await browser.pause(5000);
+      await console.log("Session reloaded!")
+    }
+  },
 };

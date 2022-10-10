@@ -39,6 +39,7 @@ class LoginExistingAccountPage extends Page {
             word += 1;
         }
 
+        await browser.pause(2000)
         return secretWords;
     }
 
