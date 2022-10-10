@@ -15,13 +15,25 @@ export default class Page {
    * @param element element to click
    */
   async clickElement(element) {
-    try {
-      await element.waitForExist()
-      await element.waitForDisplayed()
-      await element.waitForClickable()
-      await element.click()
-    } catch (err) {
-      this.jsClick(element)
+    let retries = 3
+    let clicked = false;
+
+    while(retries > 0 && !clicked) {
+      try {
+        await element.waitForExist()
+        await element.waitForDisplayed()
+        await element.waitForClickable()
+        await element.click()
+        clicked = true
+      } catch (err) {
+        retries-=1;
+        await browser.pause(2000);
+      }
+    }
+
+    if(!clicked) {
+      console.log("Error clicking with WebDriverIO method. Clicking with JS now..")
+      await this.jsClick(element)
     }
   }
 
