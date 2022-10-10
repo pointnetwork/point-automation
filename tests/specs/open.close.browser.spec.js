@@ -5,9 +5,9 @@ import CommonSteps from "../utilities/common.steps";
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 5;
+        await CommonSteps.loginIfUserIsLoggedOut()
 
         while(attempts > 0) {
-            await CommonSteps.loginIfUserIsLoggedOut()
 
             //Open dashboard and browser
             await DashboardPage.waitForDashboardDisplayed();
@@ -23,6 +23,7 @@ describe('Open/Close Browser', () => {
             expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
             await DashboardPage.clickOnLogout()
             await DashboardPage.confirmLogout();
+            await CommonSteps.loginUser();
 
             attempts -= 1;
             await console.log("Times to run : " + attempts);

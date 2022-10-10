@@ -51,9 +51,8 @@ module.exports = {
       //await console.log("Removing Point lock file")
       //this.rmdir(require('os').homedir() + "/.point/point_dashboard.lock")
       //await console.log("Point lockfile was removed")
-      await browser.pause(5000);
+      await browser.pause(10000);
       await browser.reloadSession();
-      await browser.pause(5000);
       await console.log("Session reloaded!")
     }
   },
