@@ -10,7 +10,7 @@ class LoginPage extends Page {
         return $('svg[data-testid=\'DownloadIcon\']')
     }
 
-    async waitForLoginPage() {
+    async waitForPageToBeLoaded() {
         await console.log("Checking login page...")
         try {
             await this.noGenerateOneButton.waitForDisplayed({timeout: 7000});
