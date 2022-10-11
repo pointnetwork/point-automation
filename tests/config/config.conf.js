@@ -159,9 +159,9 @@ exports.config = {
             // templateFilename: path.resolve(__dirname, '../template/wdio-html-reporter-alt-template.hbs')
         })
 
-        BashProcesses.killAllPointProcesses().then(result => {
-            console.log("Point was Killed before starting the test....")
-        });
+        (async () => {
+            await BashProcesses.killAllPointProcesses()
+        })()
 
         // this.rmFile("~/.point/pointdashboard.log").then(result => {
         //     console.log("Log is clean")
