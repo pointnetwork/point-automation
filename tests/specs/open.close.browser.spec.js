@@ -1,6 +1,7 @@
 import DashboardPage from '../pages/dashboard.page'
 import BashProcesses from '../utilities/bash.processes'
 import CommonSteps from "../utilities/common.steps";
+import LoginPage from "../pages/login.page";
 
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
@@ -21,8 +22,13 @@ describe('Open/Close Browser', () => {
             await DashboardPage.waitForProcessesRunning(1);
             await DashboardPage.launchPointBrowserButton.waitForDisplayed();
             expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
+
             await DashboardPage.clickOnLogout()
             await DashboardPage.confirmLogout();
+
+            await LoginPage.waitForPageToBeLoaded();
+            expect(await LoginPage.noGenerateOneButton).toBeDisplayed();
+
             await CommonSteps.loginUser();
 
             attempts -= 1;
