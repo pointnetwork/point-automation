@@ -187,6 +187,9 @@ exports.config = {
         global.assert = chai.assert;
         global.should = chai.should();
         console.log("Browser version : " + browser.capabilities['browserVersion'])
+        BashProcesses.killAllPointProcesses().then(result => {
+            console.log("Point was Killed before starting the test....")
+        });
     },
     afterTest (test) {
         try {
