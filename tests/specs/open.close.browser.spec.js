@@ -5,7 +5,7 @@ import LoginPage from "../pages/login.page";
 
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
-        let attempts = 5;
+        let attempts = 1;
         await CommonSteps.loginIfUserIsLoggedOut()
 
         while(attempts > 0) {
