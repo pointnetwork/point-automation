@@ -49,11 +49,16 @@ module.exports = {
     async createFirefoxInstance() {
         await console.log("Creating Firefox instance...")
         const firefoxInstance = await remote({
-                    logLevel: "error",
-                    capabilities: {
-                        browserName: 'firefox',
-                    },
-                })
+            logLevel: "error",
+            path: '/', // remove `path` if you decided using something different from driver binaries.
+            capabilities: {
+                browserName: 'firefox',
+                acceptInsecureCerts: true,
+                'moz:firefoxOptions': {
+                    args: ['-headless', '-profile', await Utils.getPointFolderPath() + "/keystore/liveprofile"]
+                },
+            },
+        })
         await console.log("Firefox instance created!")
         return firefoxInstance
     }
