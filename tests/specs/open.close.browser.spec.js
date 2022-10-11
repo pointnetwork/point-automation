@@ -16,23 +16,23 @@ describe('Open/Close Browser', () => {
             expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
             expect(DashboardPage.pointDashboardTitle).toHaveText('Point Dashboard');
             expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
-
-            //Kill firefox and check process is stopped
-            await BashProcesses.killAllFirefoxProcesses();
-            await DashboardPage.waitForProcessesRunning(1);
-            await DashboardPage.launchPointBrowserButton.waitForDisplayed();
-            expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
-
-            await DashboardPage.clickOnLogout()
-            await DashboardPage.confirmLogout();
-
-            await LoginPage.waitForPageToBeLoaded();
-            expect(await LoginPage.noGenerateOneButton).toBeDisplayed();
-
-            await CommonSteps.loginUser();
-
+            //
+            // //Kill firefox and check process is stopped
+            // await BashProcesses.killAllFirefoxProcesses();
+            // await DashboardPage.waitForProcessesRunning(1);
+            // await DashboardPage.launchPointBrowserButton.waitForDisplayed();
+            // expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
+            //
+            // await DashboardPage.clickOnLogout()
+            // await DashboardPage.confirmLogout();
+            //
+            // await LoginPage.waitForPageToBeLoaded();
+            // expect(await LoginPage.noGenerateOneButton).toBeDisplayed();
+            //
+            // await CommonSteps.loginUser();
+            //
             attempts -= 1;
-            await console.log("Times to run : " + attempts);
+            // await console.log("Times to run : " + attempts);
         }
     });
 });
