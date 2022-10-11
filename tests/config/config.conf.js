@@ -190,6 +190,9 @@ exports.config = {
         BashProcesses.killAllPointProcesses().then(result => {
             console.log("Point was Killed before starting the test....")
         });
+        this.rmFile("~/.point/pointdashboard.log").then(result => {
+            console.log("Log is clean")
+        })
     },
     afterTest (test) {
         try {
