@@ -13,7 +13,7 @@ describe('Open/Close Browser', () => {
         await DashboardPage.waitForProcessesRunning();
         expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
         await DashboardPage.waitForProcessesRunning();
-        await BashProcesses.killFirefox();
+        await BashProcesses.killAllFirefoxProcesses();
         await DashboardPage.waitForProcessesRunning(1);
         await browser.pause(10000)
         await DashboardPage.launchPointBrowserButton.waitForDisplayed();
