@@ -159,14 +159,6 @@ exports.config = {
             // templateFilename: path.resolve(__dirname, '../template/wdio-html-reporter-alt-template.hbs')
         })
 
-        (async () => {
-            await BashProcesses.killAllPointProcesses()
-        })()
-
-        // this.rmFile("~/.point/pointdashboard.log").then(result => {
-        //     console.log("Log is clean")
-        // })
-
         reportAggregator.clean()
 
         global.reportAggregator = reportAggregator
