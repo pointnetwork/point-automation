@@ -159,6 +159,13 @@ exports.config = {
             // templateFilename: path.resolve(__dirname, '../template/wdio-html-reporter-alt-template.hbs')
         })
 
+        BashProcesses.killAllPointProcesses().then(result => {
+            console.log("Point was Killed before starting the test....")
+        });
+        this.rmFile("~/.point/pointdashboard.log").then(result => {
+            console.log("Log is clean")
+        })
+
         reportAggregator.clean()
 
         global.reportAggregator = reportAggregator
@@ -187,12 +194,6 @@ exports.config = {
         global.assert = chai.assert;
         global.should = chai.should();
         console.log("Browser version : " + browser.capabilities['browserVersion'])
-        BashProcesses.killAllPointProcesses().then(result => {
-            console.log("Point was Killed before starting the test....")
-        });
-        this.rmFile("~/.point/pointdashboard.log").then(result => {
-            console.log("Log is clean")
-        })
     },
     afterTest (test) {
         try {
