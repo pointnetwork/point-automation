@@ -188,5 +188,14 @@ module.exports = {
         }
 
         return commandToRun
+    },
+    async getPointProcesses() {
+        const cmd = "ps aux | grep point"
+        return new Promise((resolve) => {
+            childProcess.exec(cmd, (err, stdout, stderr) => {
+                console.log(stdout)
+                return resolve(stdout)
+            })
+        })
     }
 };
