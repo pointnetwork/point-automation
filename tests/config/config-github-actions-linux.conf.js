@@ -8,7 +8,7 @@ config.capabilities = [
         browserName: 'chrome',
         'goog:chromeOptions': {
             binary: '/usr/bin/point',
-            args: [],
+            args: ["app='/usr/bin/point'", "--headless", "--no-sandbox", "--disable-gpu"],
         }
     }
 ]
