@@ -7,7 +7,8 @@ config.capabilities = [
     {
         browserName: 'chrome',
         'goog:chromeOptions': {
-            binary: '/usr/bin/point'
+            binary: '/usr/bin/point',
+            args: [],
         }
     }
 ]
