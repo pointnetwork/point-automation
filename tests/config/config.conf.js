@@ -138,10 +138,6 @@ exports.config = {
         console.log('**** Starting test... ****')
         const screenshotsFolder = './tests/reports/screenshots'
         const pathForLog = './tests/reports/logs'
-        BashProcesses.killAllPointProcesses().then(result => {
-            console.log("Point Killed from beginning.")
-        });
-        rmdir(".point")
 
         if (!fs.existsSync(screenshotsFolder)) {
             // if it doesn't exist, create it
