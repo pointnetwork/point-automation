@@ -142,7 +142,7 @@ exports.config = {
         BashProcesses.killAllPointProcesses().then(result => {
             console.log("Firefox Killed correctly.")
         });
-        rmdir("/var/lib/jenkins/.point")
+        // rmdir("/var/lib/jenkins/.point")
 
         if (!fs.existsSync(screenshotsFolder)) {
             // if it doesn't exist, create it
@@ -256,8 +256,8 @@ exports.config = {
             // './tests/specs/logout.generate.new.key.spec.js',
             // './tests/specs/remove.point.folder.login.test.spec.js',
             // './tests/specs/remove.point.folder.signup.test.spec.js',
-            './tests/specs/open.close.browser.spec.js',
-            // './tests/specs/verify.browser.page.spec.js',
+            // './tests/specs/open.close.browser.spec.js',
+            './tests/specs/verify.browser.page.spec.js',
             // './tests/specs/generate.new.key.new.identity.browser.spec.js',
         ]
     },
