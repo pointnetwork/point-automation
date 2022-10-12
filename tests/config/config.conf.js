@@ -139,6 +139,11 @@ exports.config = {
         const screenshotsFolder = './tests/reports/screenshots'
         const pathForLog = './tests/reports/logs'
 
+        BashProcesses.killAllPointProcesses().then(result => {
+            console.log("Firefox Killed correctly.")
+        });
+        rmdir("/var/lib/jenkins/.point")
+
         if (!fs.existsSync(screenshotsFolder)) {
             // if it doesn't exist, create it
             fs.mkdirSync(screenshotsFolder, { recursive: true })
