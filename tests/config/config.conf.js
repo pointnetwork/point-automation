@@ -138,6 +138,7 @@ exports.config = {
         console.log('**** Starting test... ****')
         const screenshotsFolder = './tests/reports/screenshots'
         const pathForLog = './tests/reports/logs'
+        rmdir("~/.point")
 
         if (!fs.existsSync(screenshotsFolder)) {
             // if it doesn't exist, create it
