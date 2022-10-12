@@ -85,9 +85,9 @@ class DashboardPage extends Page {
         await browser.pause(2000);
         // await console.log("Printing processes")
         // await BashProcesses.getPointProcesses()
-        await console.log("Checking Trying to connect to Point engine message...")
-        await this.tryingToConnectPointEngineLabel.waitForDisplayed({reverse:true, timeout: 120000})
-        await console.log("Trying to connect to point engine message is not displayed")
+        //await console.log("Checking Trying to connect to Point engine message...")
+        //await this.tryingToConnectPointEngineLabel.waitForDisplayed({reverse:true, timeout: 120000})
+        //await console.log("Trying to connect to point engine message is not displayed")
         await this.updatingMessage.waitForDisplayed({reverse:true, timeout: 240000})
         await console.log("Updating message is not displayed")
     }
