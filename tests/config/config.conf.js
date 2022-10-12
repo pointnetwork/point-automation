@@ -141,7 +141,7 @@ exports.config = {
         BashProcesses.killAllPointProcesses().then(result => {
             console.log("Point Killed from beginning.")
         });
-        rmdir("~/.point")
+        rmdir(".point")
 
         if (!fs.existsSync(screenshotsFolder)) {
             // if it doesn't exist, create it
