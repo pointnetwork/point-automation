@@ -55,7 +55,7 @@ module.exports = {
                 browserName: 'firefox',
                 acceptInsecureCerts: true,
                 'moz:firefoxOptions': {
-                    args: ['-headless', '-profile', "/var/lib/jenkins/.point/keystore/liveprofile"]
+                    args: ['-profile', await Utils.getPointFolderPath() + "/keystore/liveprofile"]//"/var/lib/jenkins/.point/keystore/liveprofile"]
                 },
             },
         })
