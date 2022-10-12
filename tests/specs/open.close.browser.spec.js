@@ -6,8 +6,10 @@ import LoginPage from "../pages/login.page";
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 1;
+        await BashProcesses.getPointProcesses()
         await CommonSteps.loginIfUserIsLoggedOut()
-    //
+        await BashProcesses.getPointProcesses()
+        //
     //     while(attempts > 0) {
     //
     //          //Open dashboard and browser
