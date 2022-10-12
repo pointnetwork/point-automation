@@ -6,16 +6,18 @@ import LoginPage from "../pages/login.page";
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 1;
-        await CommonSteps.loginIfUserIsLoggedOut()
+        await console.log("Printing processes")
+        await BashProcesses.getPointProcesses()
+        //await CommonSteps.loginIfUserIsLoggedOut()
 
-        while(attempts > 0) {
-
-            //Open dashboard and browser
-            await DashboardPage.waitForDashboardDisplayed();
-            await DashboardPage.waitForProcessesRunning();
-            expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
-            expect(DashboardPage.pointDashboardTitle).toHaveText('Point Dashboard');
-            expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
+        // while(attempts > 0) {
+        //
+        //     //Open dashboard and browser
+        //     await DashboardPage.waitForDashboardDisplayed();
+        //     await DashboardPage.waitForProcessesRunning();
+        //     expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
+        //     expect(DashboardPage.pointDashboardTitle).toHaveText('Point Dashboard');
+        //     expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
             //
             // //Kill firefox and check process is stopped
             // await BashProcesses.killAllFirefoxProcesses();
@@ -33,7 +35,7 @@ describe('Open/Close Browser', () => {
             //
             attempts -= 1;
             // await console.log("Times to run : " + attempts);
-        }
+        //}
     });
 });
 
