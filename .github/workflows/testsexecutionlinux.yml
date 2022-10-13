@@ -38,6 +38,8 @@ jobs:
         run: sudo dpkg -i point.deb && sudo apt-get install -f
       - name: Install XVFB
         run: sudo apt-get install xvfb
+      - name: See procs
+        run: ps aux | grep -v grep | grep 'point'
       - name: Run Tests
         run: xvfb-run --auto-servernum npm run simple-test-linux
       - name: Upload Logs
@@ -46,3 +48,5 @@ jobs:
         with:
           name: report
           path: "$HOME/.point/*log"
+      - name: See procs2
+        run: ps aux | grep -v grep | grep 'point'
