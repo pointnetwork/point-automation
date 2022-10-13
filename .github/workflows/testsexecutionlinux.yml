@@ -40,9 +40,9 @@ jobs:
         run: sudo apt-get install xvfb
       - name: Run Tests
         run: xvfb-run --auto-servernum npm run simple-test-linux
-      - name: Upload HTML Report
+      - name: Upload Logs
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: report
-          path: "tests/reports/html-reports/"
+          path: "~/.point/*log"
