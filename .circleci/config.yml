@@ -35,11 +35,7 @@ jobs:
           name: Test
           command: npm run simple-test-linux
       - store_artifacts:
-          path: tests/reports/html-reports
-      - store_artifacts:
-          path: ~/.point/pointdashboard.log
-      - store_artifacts:
-          path: ~/.point/point.log
+          path: ~/.point/*.log
 
 
 workflows:

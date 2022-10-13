@@ -13,7 +13,8 @@ module.exports = {
         try {
             await this.loginUser()
         }catch(exception){
-            await console.log("User is logged in")
+            console.log("User is logged in")
+            console.log({exception})
         }
     },
     async loginUser(processes=3) {
@@ -37,13 +38,17 @@ module.exports = {
         await console.log("Point Private URL loaded!")
     },
     async installAppIfIsRequired() {
-        if(await InstallerTermsConditionsPage.isInstallerDisplayed()){
+        const c =await InstallerTermsConditionsPage.isInstallerDisplayed()
+        console.log({c})
+        if(c){
+            console.log('*1')
             await InstallerTermsConditionsPage.waitForInstallerToBeDisplayed();
             await InstallerTermsConditionsPage.clickOnUnderstandAndAgreeButton();
             await InstallerWelcomePage.waitForInstallerToBeDisplayed();
             await InstallerWelcomePage.clickOnStartInstallationButton();
             await InstallerWelcomePage.waitForInstallationCompleted();
             await LoginPage.waitForPageToBeLoaded();
+            console.log('*2')
         }
     },
     async createFirefoxInstance() {
