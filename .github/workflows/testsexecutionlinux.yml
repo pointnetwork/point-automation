@@ -40,6 +40,8 @@ jobs:
         run: sudo apt-get install xvfb
       - name: See procs
         run: sudo ps aux
+      - name: See point procs
+        run: sudo ps aux | grep point
       - name: Run Tests
         run: xvfb-run --auto-servernum npm run simple-test-linux
       - name: See cur dir
