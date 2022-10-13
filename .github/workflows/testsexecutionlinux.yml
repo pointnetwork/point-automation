@@ -44,6 +44,9 @@ jobs:
         run: sudo ps aux | grep point
       - name: Run Tests
         run: xvfb-run --auto-servernum npm run simple-test-linux
+      - name: Run node
+        if: always()
+        run: point
       - name: See cur dir
         if: always()
         run: pwd
