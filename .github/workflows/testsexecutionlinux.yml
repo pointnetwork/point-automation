@@ -63,4 +63,5 @@ jobs:
           name: report
           path: ".point/*log"
       - name: See procs2
-        run: sudo ps aux
+        if: always()
+        run: sudo ps aux  | grep point
