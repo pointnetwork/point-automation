@@ -32,8 +32,14 @@ jobs:
           name: Decrypt credentials
           command : npm run decrypt-credentials
       - run:
+          name: See point processes
+          command: ps aux | grep -v grep | grep 'point'
+      - run:
           name: Test
           command: npm run simple-test-linux
+      - run:
+          name: See point processes
+          command: ps aux | grep -v grep | grep 'point'
       - store_artifacts:
           path: ~/.point/*.log
 
