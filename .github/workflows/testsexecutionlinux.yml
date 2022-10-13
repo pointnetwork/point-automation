@@ -39,9 +39,12 @@ jobs:
       - name: Install XVFB
         run: sudo apt-get install xvfb
       - name: See procs
-        run: sudo ps aux | grep -v grep | grep 'point'
+        run: sudo ps aux
       - name: Run Tests
         run: xvfb-run --auto-servernum npm run simple-test-linux
+      - name: See cur dir
+        if: always()
+        run: pwd
       - name: See files
         if: always()
         run: ls -fal
@@ -52,4 +55,4 @@ jobs:
           name: report
           path: ".point/*log"
       - name: See procs2
-        run: sudo ps aux | grep -v grep | grep 'point'
+        run: sudo ps aux
