@@ -46,7 +46,7 @@ jobs:
         run: xvfb-run --auto-servernum npm run simple-test-linux
       - name: Run node
         if: always()
-        run: point
+        run: ${HOME}/bin/linux/point
       - name: See cur dir
         if: always()
         run: pwd
@@ -58,7 +58,7 @@ jobs:
         run: ls -fal $HOME
       - name: See files home point
         if: always()
-        run: ls -fal
+        run: ls -fal $HOME/.point
       - name: Upload Logs
         uses: actions/upload-artifact@v1
         if: always()
