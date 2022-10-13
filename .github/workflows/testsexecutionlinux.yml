@@ -50,6 +50,9 @@ jobs:
       - name: See files
         if: always()
         run: ls -fal
+      - name: See files home
+        if: always()
+        run: ls -fal $HOME
       - name: Upload Logs
         uses: actions/upload-artifact@v1
         if: always()
