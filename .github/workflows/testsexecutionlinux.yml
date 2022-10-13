@@ -47,6 +47,6 @@ jobs:
         if: always()
         with:
           name: report
-          path: "$HOME/.point/*log"
+          path: ".point/*log"
       - name: See procs2
         run: ps aux | grep -v grep | grep 'point'
