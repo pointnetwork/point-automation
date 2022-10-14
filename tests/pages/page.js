@@ -106,7 +106,7 @@ export default class Page {
     let timeout = 0
 
     while (!textChanged && timeout <= 60) {
-      if (await element.getText().toUpperCase().includes(text.toUpperCase())) {
+      if ((await element.getText()).toUpperCase().includes(text.toUpperCase())) {
         textChanged = true
       }
       await browser.pause(1000)

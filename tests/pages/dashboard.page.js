@@ -110,7 +110,7 @@ class DashboardPage extends Page {
         await super.clickElement(await this.confirmLogoutButton);
         await console.log("User is logged out");
         try {
-            await this.confirmLogoutButton.waitForDisplayed({reverse:true, timeout:60000})
+            await this.confirmLogoutButton.waitForDisplayed({reverse:true, timeout:10000})
         }catch(exception) {
             await console.log("User is still logged in. Error : "+ exception)
         }

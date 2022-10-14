@@ -14,7 +14,7 @@ import BrowserWalletPage from "../pages/browser/browser.wallet.page";
 import BrowserTransactionModalPage from "../pages/browser/browser.transaction.modal.page";
 
 describe('Open/Close Browser', () => {
-    it('Validate pagination on Identities tab', async () => {
+    it('Validate Wallet', async () => {
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();
@@ -93,9 +93,11 @@ describe('Open/Close Browser', () => {
         await browserWalletPage.clickOnOkSuccessMessageBrowser(firefox)
         await firefox.refresh()
         await browserWalletPage.waitForPageToBeLoaded()
-        const updatedAmount = parseFloat(await (await browserWalletPage.getBalanceOnWalletTableByIndex(0)).getText().split(" POINT")[0])
 
-        await browserWalletPage.waitForText(await browserWalletPage.getBalanceOnWalletTableByIndex(0), updatedAmount)
+        await (await browserWalletPage.getBalanceOnWalletTableByIndex(0)).waitForDisplayed()
+
+        await browserWalletPage.waitForText(await browserWalletPage.getBalanceOnWalletTableByIndex(0), expectedBalance.toString())
+        const updatedAmount = parseFloat((await (await browserWalletPage.getBalanceOnWalletTableByIndex(0)).getText()).split(" POINT")[0])
 
         expect(updatedAmount).toEqual(expectedBalance)
 
