@@ -39,19 +39,20 @@ jobs:
         run: gunzip -c point-v0.2.xx1-Linux-Debian-Ubuntu.tar.gz | tar xopf -
       - name: Install Point
         run: sudo dpkg -i point.deb && sudo apt-get install -f
-      - name: Check dpkg
-        run: sudo dpkg -L point
       - name: Install XVFB
         run: sudo apt-get install xvfb
       - name: See procs
-        run: sudo ps aux
+        run: sudo ps -ef
       - name: See point procs
-        run: sudo ps aux | grep point
+        run: sudo ps -ef | grep point
       - name: Run Tests
         run: xvfb-run --auto-servernum npm run simple-test-linux
       - name: Run node
         if: always()
         run: ${HOME}/.point/bin/linux/point &
+      - name: See point procs 2
+        if: always()
+        run: sudo ps -ef | grep point
       - name: Run Tests
         if: always()
         run: xvfb-run --auto-servernum npm run simple-test-linux
@@ -64,7 +65,7 @@ jobs:
       - name: See files home
         if: always()
         run: ls -fal $HOME
-      - name: See files home 2
+      - name: See files home 3
         if: always()
         run: ls -fal /home/runner
       - name: See files home point
