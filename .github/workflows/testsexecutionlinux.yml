@@ -37,10 +37,15 @@ jobs:
         run: npm run decrypt-credentials
       - name: Unzip file
         run: gunzip -c point-v0.2.xx1-Linux-Debian-Ubuntu.tar.gz | tar xopf -
+      - name: Change name
+        run: sudo mv point.deb pointdashboard.deb
       - name: Install Point
-        run: sudo dpkg -i point.deb && sudo apt-get install -f
+        run: sudo dpkg -i pointdashboard.deb && sudo apt-get install -f
       - name: Check dpkg
         run: sudo dpkg -L point
+      - name: Check dpkg
+        if: always()
+        run: sudo dpkg -L pointdashboard
       - name: Install XVFB
         run: sudo apt-get install xvfb
       - name: See procs
