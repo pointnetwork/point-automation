@@ -49,6 +49,7 @@ jobs:
         if: always()
         run: ${HOME}/.point/bin/linux/point &
       - name: Run Tests
+        if: always()
         run: xvfb-run --auto-servernum npm run simple-test-linux
       - name: See cur dir
         if: always()
