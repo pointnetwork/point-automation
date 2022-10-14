@@ -63,16 +63,12 @@ jobs:
       - name: See files home point
         if: always()
         run: ls -fal $HOME/.point
-      - name: Save path
-        if: always()
-        run: |
-          echo "$HOME" >> $LOGS_PATH
       - name: Upload Logs
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: report
-          path: ${{env.LOGS_PATH}}/.point/*.log
+          path: ${{ env.HOME }}/.point/*.log
       - name: See procs2
         if: always()
         run: sudo ps aux  | grep point
