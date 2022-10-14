@@ -47,12 +47,12 @@ jobs:
         run: sudo ps aux | grep point
       - name: Run Tests
         run: xvfb-run --auto-servernum npm run simple-test-linux
-      - name: Run node
-        if: always()
-        run: ${HOME}/.point/bin/linux/point &
-      - name: Run Tests
-        if: always()
-        run: xvfb-run --auto-servernum npm run simple-test-linux
+      # - name: Run node
+      #   if: always()
+      #   run: ${HOME}/.point/bin/linux/point &
+      # - name: Run Tests
+      #   if: always()
+      #   run: xvfb-run --auto-servernum npm run simple-test-linux
       - name: See cur dir
         if: always()
         run: pwd
