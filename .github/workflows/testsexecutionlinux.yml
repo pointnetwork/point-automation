@@ -75,8 +75,14 @@ jobs:
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: report
+          name: logs
           path: /home/runner/.point/*.log
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: report
+          path: "tests/reports/html-reports/"
       - name: See procs2
         if: always()
         run: sudo ps aux  | grep point
