@@ -40,7 +40,7 @@ jobs:
       - name: Install Point
         run: sudo dpkg -i point.deb && sudo apt-get install -f
       - name: Check dpkg
-        run: sudo dpkg -L point.deb
+        run: sudo dpkg -L point
       - name: Install XVFB
         run: sudo apt-get install xvfb
       - name: See procs
