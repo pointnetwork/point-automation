@@ -63,6 +63,9 @@ jobs:
       - name: See files home point
         if: always()
         run: ls -fal $HOME/.point
+      - name: See files home point
+        if: always()
+        run: echo $HOME
       - name: Upload Logs
         uses: actions/upload-artifact@v1
         if: always()
