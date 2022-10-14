@@ -66,6 +66,7 @@ module.exports = {
                     args: configurationArgs
                 },
             },
+            waitforTimeout: 60000
         })
         await console.log("Firefox instance created!")
         return firefoxInstance

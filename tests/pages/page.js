@@ -1,6 +1,5 @@
-import BashProcesses from "../utilities/bash.processes";
-
 export default class Page {
+
 
   /** Method to open the page
    * @param url URL to open
@@ -122,7 +121,7 @@ export default class Page {
    */
   async waitForListToHaveElements(listElement) {
     let elementsDisplayed = false
-    let retries = 10
+    let retries = 60
 
     while (!elementsDisplayed && retries > 0) {
       if (listElement.length > 0) {
@@ -145,7 +144,7 @@ export default class Page {
     await browser.execute('arguments[0].click();', element)
   }
 
-  async switchToTab(tabName) {
+  async switchToTab(tabName, browser) {
     let retries = 20
     let switched = false
 
@@ -198,4 +197,47 @@ export default class Page {
         await console.log("Window not found")
     }
   }
+
+  async waitForListToBeGreaterThan(listElement, size) {
+    let elementsDisplayed = false
+    let retries = 60
+
+    while (!elementsDisplayed && retries > 0) {
+      if (listElement.length > size) {
+        elementsDisplayed = true
+      } else {
+        await browser.pause(1000)
+        retries = -1
+      }
+    }
+  }
+
+  async waitForSpinnerNotDisplayed(driver) {
+    const spinner = await driver.$("//div[contains(@class, 'spinner')]")
+    await spinner.waitForClickable()
+    await spinner.waitForClickable({reverse:true, timeout:30000})
+  }
+
+  async getSuccessMessageBrowser(firefox) {
+    return await firefox.$('//h2[text() = \'Success\']')
+  }
+
+  async getOkButtonSuccessMessageBrowser(firefox) {
+    return await firefox.$("//button[text() = 'OK']")
+  }
+
+  async getErrorMessageBrowser(firefox) {
+    return await firefox.$("//h2[text() = 'Something went wrong']")
+  }
+
+  async getErrorMessageDescriptionBrowser(firefox) {
+    return await firefox.$("#swal2-html-container")
+  }
+
+  async clickOnOkSuccessMessageBrowser(firefox) {
+    const button = await this.getOkButtonSuccessMessageBrowser(firefox)
+    await this.clickElement(button)
+  }
+
+
 }

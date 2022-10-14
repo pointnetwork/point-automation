@@ -17,7 +17,7 @@ describe('Open/Close Browser', () => {
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();
 
-        //Open firefox and create new identity
+        //Open firefox
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.changeToActiveWindow();
         await DashboardPage.waitForProcessesRunning();
@@ -29,6 +29,8 @@ describe('Open/Close Browser', () => {
 
         const firefox = await CommonSteps.createFirefoxInstance()
         await CommonSteps.openPointInNewFirefox(firefox);
+
+        //Enter to Identities
         const browserTopBarPage = await new BrowserTopBarPage(firefox)
         await browserTopBarPage.clickOnIdentities()
         const browserIdentitiesPage = await new BrowserIdentitiesPage(firefox)
@@ -40,14 +42,14 @@ describe('Open/Close Browser', () => {
         expect(browserIdentitiesPage.ownerColumnTable).toBeDisplayed("Handle column in table is not displayed")
         expect(browserIdentitiesPage.appColumnTable).toBeDisplayed("Handle column in table is not displayed")
         await browserIdentitiesPage.waitForListToHaveElements(await browserIdentitiesPage.allRows)
-        await browser.pause(2000)
         expect(await browserIdentitiesPage.allRows.length).toBeGreaterThan(0)
 
         const allRows = await browserIdentitiesPage.allRows.length
 
-        await browser.executeScript("", "window.scrollBy(0,1000)")
-        await browserIdentitiesPage.loadingSpinner.waitForDisplayed()
-        await browserIdentitiesPage.loadingSpinner.waitForDisplayed({reverse:true})
+        await browserIdentitiesPage.rowToScroll.scrollIntoView();
+        await browserIdentitiesPage.waitForSpinnerNotDisplayed(firefox)
+        await browserIdentitiesPage.waitForListToHaveElements(await browserIdentitiesPage.allRows)
+        await browserIdentitiesPage.waitForListToBeGreaterThan(await browserIdentitiesPage.allRows, allRows)
 
         expect(await browserIdentitiesPage.allRows.length).toBeGreaterThan(allRows)
     });

@@ -30,13 +30,13 @@ export default class BrowserIdentitiesPage extends Page {
         return this.driver.$$("//table//tbody//tr/td/..")
     }
 
-    get loadingSpinner() {
-        return $("//div[@role='status']")
+    get rowToScroll() {
+        return this.driver.$("//table//tbody//tr[99]")
     }
 
     async waitForPageToBeLoaded() {
+        await this.waitForSpinnerNotDisplayed(this.driver)
         await this.handleColumnTable.waitForDisplayed()
-        await this.loadingSpinner.waitForDisplayed({reverse:true})
         await super.waitForListToHaveElements(await this.allRows)
     }
 

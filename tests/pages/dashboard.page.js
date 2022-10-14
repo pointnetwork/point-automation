@@ -51,6 +51,14 @@ class DashboardPage extends Page {
         return $("//*[contains(text(), 'Trying to connect to Point Engine')]")
     }
 
+    get balanceValue() {
+        return $("//p[text()='Balance']/following-sibling::h6")
+    }
+
+    get accountAddress() {
+        return $("//p[text()='Account']/following-sibling::div//h6")
+    }
+
     async waitForDashboardDisplayed() {
         await this.pointDashboardTitle.waitForDisplayed();
     }
