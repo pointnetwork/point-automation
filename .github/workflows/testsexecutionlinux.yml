@@ -64,6 +64,9 @@ jobs:
       - name: See files home
         if: always()
         run: ls -fal $HOME
+      - name: See files home 2
+        if: always()
+        run: ls -fal /home/runner
       - name: See files home point
         if: always()
         run: ls -fal $HOME/.point
@@ -75,7 +78,7 @@ jobs:
         if: always()
         with:
           name: report
-          path: ${{ env.HOME }}/.point/*.log
+          path: /home/runner/.point/*.log
       - name: See procs2
         if: always()
         run: sudo ps aux  | grep point
