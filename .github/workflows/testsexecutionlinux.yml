@@ -39,6 +39,8 @@ jobs:
         run: gunzip -c point-v0.2.xx1-Linux-Debian-Ubuntu.tar.gz | tar xopf -
       - name: Install Point
         run: sudo dpkg -i point.deb && sudo apt-get install -f
+      - name: Check dpkg
+        run: sudo dpkg -L point.deb
       - name: Install XVFB
         run: sudo apt-get install xvfb
       - name: See procs
