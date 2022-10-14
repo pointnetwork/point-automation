@@ -46,7 +46,7 @@ jobs:
         run: xvfb-run --auto-servernum npm run simple-test-linux
       - name: Run node
         if: always()
-        run: ${HOME}/bin/linux/point
+        run: ${HOME}/.point/bin/linux/point
       - name: See cur dir
         if: always()
         run: pwd
