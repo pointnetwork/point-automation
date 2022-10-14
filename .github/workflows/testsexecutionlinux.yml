@@ -64,6 +64,7 @@ jobs:
         if: always()
         run: ls -fal $HOME/.point
       - name: Save path
+        if: always()
         run: |
           echo "$HOME" >> $LOGS_PATH
       - name: Upload Logs
