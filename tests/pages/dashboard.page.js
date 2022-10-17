@@ -59,6 +59,10 @@ class DashboardPage extends Page {
         return $("//p[text()='Account']/following-sibling::div//h6")
     }
 
+    get accountFullAddress() {
+        return $("//p[text()='Account']/following-sibling::div//span")
+    }
+
     async waitForDashboardDisplayed() {
         await this.pointDashboardTitle.waitForDisplayed();
     }

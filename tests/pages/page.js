@@ -109,6 +109,7 @@ export default class Page {
       if ((await element.getText()).toUpperCase().includes(text.toUpperCase())) {
         textChanged = true
       }
+
       await browser.pause(1000)
       timeout += 1
     }
@@ -152,6 +153,7 @@ export default class Page {
       try {
         await browser.switchWindow(tabName)
         switched = true
+        await browser.pause(2000)
       } catch (exception) {
         console.log('Tab was not opened yet. Retrying')
         await browser.pause(5000)
@@ -236,7 +238,23 @@ export default class Page {
 
   async clickOnOkSuccessMessageBrowser(firefox) {
     const button = await this.getOkButtonSuccessMessageBrowser(firefox)
-    await this.clickElement(button)
+    await this.clickElementAndWait(button, 1500)
+  }
+
+  async waitForTextDifferent(element, text) {
+    let textChanged = false
+    let timeout = 0
+
+    while (!textChanged && timeout <= 60) {
+      const newText = (await element.getText()).toUpperCase();
+      if (newText !== text.toUpperCase()) {
+        textChanged = true
+      }
+
+      await browser.pause(1000)
+      timeout += 1
+    }
+    await browser.pause(3000)
   }
 
 

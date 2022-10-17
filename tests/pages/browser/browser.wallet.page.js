@@ -1,4 +1,8 @@
 import Page from '../page'
+import path from "path";
+const Jimp = require("jimp");
+const fs = require('fs')
+const QrCode = require('qrcode-reader');
 
 export default class BrowserWalletPage extends Page {
     constructor(firefox) {
@@ -85,6 +89,7 @@ export default class BrowserWalletPage extends Page {
     async waitForPageToBeLoaded() {
         await this.walletTitle.waitForDisplayed()
         await super.waitForListToHaveElements(await this.allRowsWallet)
+        await browser.pause(3000)
     }
 
     async getCurrencyOnWalletTableByIndex(index) {
@@ -142,5 +147,51 @@ export default class BrowserWalletPage extends Page {
 
     async clickOnCancelButtonSendOption() {
         await super.clickElement(this.sendCancelButton)
+    }
+
+    async takeScreenshotQR() {
+        const filepath = path.join(
+            'tests/reports/html-reports/screenshots/qr.png'
+        )
+        await this.receivePointQRCode.saveScreenshot(filepath)
+    }
+
+    validateQRCode(address) {
+        const filepath = path.join(
+            'tests/reports/html-reports/screenshots/qr.png'
+        )
+        const buffer = fs.readFileSync(filepath);
+
+        Jimp.read(buffer, function(err, image) {
+            if (err) {
+                console.error(err);
+            }
+            let qrcode = new QrCode();
+            qrcode.callback = function(err, value) {
+                if (err) {
+                    console.error(err);
+                }
+                console.log("QR Code info : " + value.result)
+                expect(value.result).toHaveText(address)
+            };
+            qrcode.decode(image.bitmap);
+        });
+    }
+
+    async waitForBalance(balance) {
+        let found = false;
+        let retries = 3;
+
+        while(!found && retries > 0) {
+            const balanceFromRow = await this.getBalanceOnWalletTableByIndex(0)
+            if(balanceFromRow === balance) {
+                found = true;
+            }else{
+                retries -= 1;
+                await this.driver.refresh();
+                await this.waitForPageToBeLoaded();
+                await browser.pause(2000);
+            }
+        }
     }
 }

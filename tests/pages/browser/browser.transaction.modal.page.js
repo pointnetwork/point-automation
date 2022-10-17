@@ -20,7 +20,7 @@ export default class BrowserTransactionModalPage extends Page {
     }
 
     async clickOnAllow() {
-        await super.clickElement(this.allowButton)
+        await super.clickElementAndWait(this.allowButton, 2000)
     }
 
     async clickOnCancel() {

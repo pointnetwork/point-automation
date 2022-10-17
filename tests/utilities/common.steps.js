@@ -5,8 +5,7 @@ import InstallerTermsConditionsPage from "../pages/installer/installer.terms.con
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 import Utils from "./utils";
 import {remote} from "webdriverio";
-const BashProcesses = require('./bash.processes')
-const path = require('path')
+import DashboardPage from "../pages/dashboard.page";
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
@@ -16,12 +15,18 @@ module.exports = {
             await console.log("User is logged in")
         }
     },
-    async loginUser(processes=3) {
+    async loginUser(processes=3, secondUser=false) {
+        let credentials;
+
+        if(secondUser) {
+            credentials = Credentials.secondSecretWords;
+        }else {
+            credentials = Credentials.secretWords;
+        }
         await this.installAppIfIsRequired()
         await console.log("Logging in user...")
         await LoginPage.waitForLoginPage();
         await LoginPage.clickOnYesIHaveIt();
-        const credentials = Credentials.secretWords
         const credentialsSplit = credentials.split(' ')
         await LoginExistingAccountPage.fillSecretWords(credentialsSplit)
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
@@ -70,5 +75,14 @@ module.exports = {
         })
         await console.log("Firefox instance created!")
         return firefoxInstance
-    }
+    },
+    async logoutUserIfIsLoggedIn() {
+        try {
+            await DashboardPage.waitForDashboardDisplayed();
+            await DashboardPage.clickOnLogout();
+            await DashboardPage.confirmLogout();
+        }catch(exception){
+            await console.log("User is not logged in")
+        }
+    },
 }
