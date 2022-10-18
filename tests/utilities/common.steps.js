@@ -79,9 +79,10 @@ module.exports = {
     },
     async logoutUserIfIsLoggedIn() {
         try {
+            await console.log("Checking if it's necessary to logout user...")
+            await DashboardPage.waitForDashboardDisplayed();
             await BashProcesses.killAllFirefoxProcesses();
             await DashboardPage.waitForProcessesRunning(1);
-            await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.clickOnLogout();
             await DashboardPage.confirmLogout();
         }catch(exception){

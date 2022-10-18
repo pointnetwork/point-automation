@@ -116,6 +116,8 @@ describe('Open/Close Browser', () => {
 
         //Login with the second user again
         await BashProcesses.killAllFirefoxProcesses();
+        await DashboardPage.waitForProcessesRunning(1);
+
         await DashboardPage.clickOnLogout()
         await DashboardPage.confirmLogout();
         await CommonSteps.loginUser(3, true);
