@@ -37,7 +37,7 @@ jobs:
       - name: Install XVFB
         run: sudo apt-get install xvfb
       - name: Run Tests
-        run: xvfb-run --auto-servernum npm run simple-test-linux
+        run: xvfb-run --auto-servernum npm run test-linux
       - name: Upload HTML Report
         uses: actions/upload-artifact@v1
         if: always()
