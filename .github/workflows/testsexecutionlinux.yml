@@ -25,7 +25,7 @@ jobs:
       - name: Install FFMpeg
         run: sudo apt-get install ffmpeg
       - name: Download release
-        run: wget https://github.com/pointnetwork/pointnetwork-dashboard/releases/download/untagged-4cb76c9acb240a69147e/point-v0.2.xx1-Linux-Debian-Ubuntu.tar.gz
+        run: wget https://github.com/aalvarezpoint/alexisbuilds/releases/download/alexis/point-v0.2.xx1-Linux-Debian-Ubuntu.tar.gz
       - name: Decrypt credentials
         env:
           PASS_ENCRYPT_AUTOMATION: ${{ secrets.DECRYPT_CREDENTIALS_PASS }}
