@@ -36,6 +36,9 @@ jobs:
         run: sudo dpkg -i point.deb && sudo apt-get install -f
       - name: Install XVFB
         run: sudo apt-get install xvfb
+      - name: Setup firefox
+        uses: browser-actions/setup-firefox@latest
+      - run: firefox --version
       - name: Run Tests
         run: xvfb-run --auto-servernum npm run test-linux
       - name: Upload HTML Report
