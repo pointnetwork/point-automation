@@ -5,6 +5,7 @@ import BashProcesses from "../utilities/bash.processes";
 import BrowserTopBarPage from "../pages/browser/browser.top.bar.page";
 import BrowserWalletPage from "../pages/browser/browser.wallet.page";
 import BrowserTransactionModalPage from "../pages/browser/browser.transaction.modal.page";
+import Utils from "../utilities/utils";
 
 describe('Open/Close Browser', () => {
     it('Validate Wallet', async () => {
@@ -116,8 +117,10 @@ describe('Open/Close Browser', () => {
 
         //Login with the second user again
         await BashProcesses.killAllFirefoxProcesses();
+        await Utils.reloadSessionLinux();
+        await DashboardPage.waitForDashboardDisplayed();
+        await BashProcesses.killAllFirefoxProcesses();
         await DashboardPage.waitForProcessesRunning(1);
-        await DashboardPage.changeToActiveWindow();
 
         await DashboardPage.clickOnLogout()
         await DashboardPage.confirmLogout();
