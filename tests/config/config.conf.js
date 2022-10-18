@@ -89,7 +89,7 @@ exports.config = {
     waitforTimeout: 90000, // Default timeout for all waitFor* commands.
     connectionRetryTimeout: 30000, // Default timeout in milliseconds for request if Selenium Grid doesn't send response
     connectionRetryCount: 3, // Default request retries count
-    specFileRetries: 0,
+    specFileRetries: 1,
     specFileRetriesDelay: 10,
     specFileRetriesDeferred: false,
     framework: 'mocha',
@@ -212,6 +212,9 @@ exports.config = {
             console.log("Test case finished. Killing Firefox instances...")
             BashProcesses.killAllFirefoxProcesses().then(result => {
                 console.log("Firefox Killed correctly.")
+            });
+            BashProcesses.killAllPointProcesses().then(result => {
+                console.log("Point Killed correctly.")
             });
             browser.pause(5000);
         } catch (exception) {
