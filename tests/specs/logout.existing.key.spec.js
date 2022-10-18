@@ -14,6 +14,9 @@ describe('Open/Close Browser', () => {
         while(attempts > 0) {
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning(processesToWait);
+            expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
+            expect(DashboardPage.pointDashboardTitle).toHaveText('Point Dashboard');
+            expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
 
             //Logout
             await DashboardPage.clickOnLogout();
