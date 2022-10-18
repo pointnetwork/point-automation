@@ -6,6 +6,7 @@ import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 import Utils from "./utils";
 import {remote} from "webdriverio";
 import DashboardPage from "../pages/dashboard.page";
+import BashProcesses from "./bash.processes";
 
 module.exports = {
     async loginIfUserIsLoggedOut() {
@@ -78,6 +79,8 @@ module.exports = {
     },
     async logoutUserIfIsLoggedIn() {
         try {
+            await BashProcesses.killAllFirefoxProcesses();
+            await DashboardPage.waitForProcessesRunning(1);
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.clickOnLogout();
             await DashboardPage.confirmLogout();
