@@ -89,7 +89,7 @@ exports.config = {
     waitforTimeout: 90000, // Default timeout for all waitFor* commands.
     connectionRetryTimeout: 30000, // Default timeout in milliseconds for request if Selenium Grid doesn't send response
     connectionRetryCount: 3, // Default request retries count
-    specFileRetries: 0,
+    specFileRetries: 1,
     specFileRetriesDelay: 10,
     specFileRetriesDeferred: false,
     framework: 'mocha',
@@ -251,9 +251,11 @@ exports.config = {
             // './tests/specs/remove.point.folder.login.test.spec.js',
             // './tests/specs/remove.point.folder.signup.test.spec.js',
             // './tests/specs/open.close.browser.spec.js',
-            './tests/specs/verify.browser.page.spec.js',
-            './tests/specs/generate.new.key.new.identity.browser.spec.js',
-            './tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
+            // './tests/specs/verify.browser.page.spec.js',
+            // './tests/specs/generate.new.key.new.identity.browser.spec.js',
+            // './tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
+            './tests/specs/identities.pagination.browser.spec.js',
+            './tests/specs/wallet.browser.spec.js'
         ]
     },
 };
