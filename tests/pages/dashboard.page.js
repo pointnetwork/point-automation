@@ -118,7 +118,7 @@ class DashboardPage extends Page {
         }catch(exception) {
             await console.log("User is still logged in. Error : "+ exception)
         }
-        await Utils.reloadSessionLinux()
+        //await Utils.reloadSessionLinux()
         await super.changeToActiveWindow();
     }
 
