@@ -15,6 +15,8 @@ describe('Open/Close Browser', () => {
             await DashboardPage.waitForProcessesRunning(processesToWait);
 
             //Logout
+            await BashProcesses.killAllFirefoxProcesses();
+            await DashboardPage.waitForProcessesRunning(1);
             await DashboardPage.clickOnLogout();
             await DashboardPage.confirmLogout();
             await LoginPage.waitForPageToBeLoaded();

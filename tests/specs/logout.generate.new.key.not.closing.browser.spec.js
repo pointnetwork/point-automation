@@ -17,6 +17,8 @@ describe('Open/Close Browser', () => {
             expect(DashboardPage.pointDashboardTitle).toHaveText('Point Dashboard');
             expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
 
+            await BashProcesses.killAllFirefoxProcesses();
+            await DashboardPage.waitForProcessesRunning(1);
             await DashboardPage.clickOnLogout();
             await DashboardPage.confirmLogout();
             await LoginPage.waitForPageToBeLoaded();

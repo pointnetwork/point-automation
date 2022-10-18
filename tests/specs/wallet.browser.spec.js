@@ -19,6 +19,8 @@ describe('Open/Close Browser', () => {
         const receiveUserAddress = await DashboardPage.accountFullAddress.getText()
 
         //Login with the first user (the one that will send the transaction)
+        await BashProcesses.killAllFirefoxProcesses();
+        await DashboardPage.waitForProcessesRunning(1);
         await DashboardPage.clickOnLogout()
         await DashboardPage.confirmLogout();
 
