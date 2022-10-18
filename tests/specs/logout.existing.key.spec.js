@@ -19,6 +19,8 @@ describe('Open/Close Browser', () => {
             expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
 
             //Logout
+            await BashProcesses.killAllFirefoxProcesses();
+            await DashboardPage.waitForProcessesRunning(1);
             await DashboardPage.clickOnLogout();
             await DashboardPage.confirmLogout();
             await LoginPage.waitForPageToBeLoaded();
