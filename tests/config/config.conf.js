@@ -1,5 +1,7 @@
 // to use debug option run `DEBUG=true followed by your .conf.js`
 /* eslint-disable global-require */
+import Utils from "../utilities/utils";
+
 const wdioHtmlReporter = require('@rpii/wdio-html-reporter')
 const log4j = require('log4js')
 const path = require('path')
@@ -218,6 +220,8 @@ exports.config = {
                 console.log("Point Killed correctly.")
             });
             browser.pause(5000);
+            fs.unlinkSync(require('os').homedir() + "/.point/keystore/key.json");
+            Utils.rmDirIfExists(require('os').homedir() + "/.point/point_dashboard.lock")
         } catch (exception) {
         console.log("Error killing point when test case is finished.")
         }
@@ -250,16 +254,16 @@ exports.config = {
             './tests/specs/verify.browser.page.spec.js',
         ],
         github_actions_linux: [
-            './tests/specs/logout.existing.key.spec.js',
-            './tests/specs/logout.generate.new.key.spec.js',
-            './tests/specs/remove.point.folder.login.test.spec.js',
-            './tests/specs/remove.point.folder.signup.test.spec.js',
+            //'./tests/specs/logout.existing.key.spec.js',
+            //'./tests/specs/logout.generate.new.key.spec.js',
+            //'./tests/specs/remove.point.folder.login.test.spec.js',
+            //'./tests/specs/remove.point.folder.signup.test.spec.js',
             './tests/specs/open.close.browser.spec.js',
-            //'./tests/specs/wallet.browser.spec.js',
-            './tests/specs/verify.browser.page.spec.js',
-            './tests/specs/generate.new.key.new.identity.browser.spec.js',
-            './tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
-            //'./tests/specs/identities.pagination.browser.spec.js',
+            './tests/specs/wallet.browser.spec.js',
+            //'./tests/specs/verify.browser.page.spec.js',
+            //'./tests/specs/generate.new.key.new.identity.browser.spec.js',
+            //'./tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
+            './tests/specs/identities.pagination.browser.spec.js',
         ]
     },
 };
