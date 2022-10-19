@@ -216,7 +216,7 @@ exports.config = {
             BashProcesses.killAllPointProcesses().then(result => {
                 console.log("Point Killed correctly.")
             });
-            browser.pause(5000);
+            browser.pause(10000);
         } catch (exception) {
             console.log("Error killing point when test case is finished.")
         }
