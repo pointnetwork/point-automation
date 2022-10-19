@@ -13,6 +13,7 @@ import BrowserIdentitiesPage from "../pages/browser/browser.identities.page";
 
 describe('Open/Close Browser', () => {
     it('Validate pagination on Identities tab', async () => {
+        await CommonSteps.logoutUserIfIsLoggedIn();
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();

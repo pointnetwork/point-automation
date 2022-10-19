@@ -64,9 +64,7 @@ module.exports = {
         return require('os').homedir() + "/.point"
       }
     }else{
-      if(process.platform === "darwin") {
-        return require('os').homedir() + "/.point"
-      }
+      return require('os').homedir() + "/.point"
     }
   },
   async reloadSessionMac() {
