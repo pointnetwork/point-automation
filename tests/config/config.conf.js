@@ -254,7 +254,7 @@ exports.config = {
             // './tests/specs/remove.point.folder.login.test.spec.js',
             // './tests/specs/remove.point.folder.signup.test.spec.js',
             // './tests/specs/open.close.browser.spec.js',
-            './tests/specs/wallet.browser.spec.js',
+            // './tests/specs/wallet.browser.spec.js',
             './tests/specs/verify.browser.page.spec.js',
             './tests/specs/generate.new.key.new.identity.browser.spec.js',
             './tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
