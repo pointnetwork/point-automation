@@ -53,7 +53,6 @@ module.exports = {
         }
     },
     async createFirefoxInstance() {
-        await console.log("Creating Firefox instance...")
         let configurationArgs;
 
         if(browser.config.pipeline) {
@@ -62,19 +61,35 @@ module.exports = {
             configurationArgs = ['-profile', await Utils.getPointFolderPath() + "/keystore/liveprofile"]
         }
 
-        const firefoxInstance = await remote({
-            logLevel: "error",
-            path: '/', // remove `path` if you decided using something different from driver binaries.
-            capabilities: {
-                browserName: 'firefox',
-                acceptInsecureCerts: true,
-                'moz:firefoxOptions': {
-                    args: configurationArgs
-                },
-            },
-            waitforTimeout: 60000
-        })
-        await console.log("Firefox instance created!")
+        let retries = 2;
+        let found = false;
+        let firefoxInstance;
+
+        while(retries > 0 && !found) {
+            try {
+                await console.log("Creating Firefox instance...")
+
+                firefoxInstance = await remote({
+                    logLevel: "error",
+                    path: '/', // remove `path` if you decided using something different from driver binaries.
+                    capabilities: {
+                        browserName: 'firefox',
+                        acceptInsecureCerts: true,
+                        'moz:firefoxOptions': {
+                            args: configurationArgs
+                        },
+                    },
+                    waitforTimeout: 60000
+                })
+                found = true;
+                await console.log("Firefox instance created!")
+            } catch(exception) {
+                retries -= 1
+                browser.pause(5000);
+                await console.log("Error creating Firefox instance")
+            }
+        }
+
         return firefoxInstance
     },
     async logoutUserIfIsLoggedIn() {
