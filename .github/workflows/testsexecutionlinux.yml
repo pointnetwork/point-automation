@@ -38,6 +38,8 @@ jobs:
         run: sudo apt-get install xvfb
       - name: Setup firefox
         uses: browser-actions/setup-firefox@latest
+        with:
+          node-version: 16
       - run: firefox --version
       - name: Run Tests
         run: xvfb-run --auto-servernum npm run test-linux

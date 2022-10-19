@@ -208,18 +208,19 @@ exports.config = {
             console.log('It was not possible to take screenshot after test. Error : ' + exception)
         }
 
-        //try {
-        //console.log("Test case finished. Killing Firefox instances...")
-            // BashProcesses.killAllFirefoxProcesses().then(result => {
-            //     console.log("Firefox Killed correctly.")
-            // });
-            // BashProcesses.killAllPointProcesses().then(result => {
-            //     console.log("Point Killed correctly.")
-            // });
-            //browser.pause(10000);
-        //} catch (exception) {
-        //console.log("Error killing point when test case is finished.")
-        //}
+        try {
+            console.log("Test case finished. Killing Firefox instances...")
+            BashProcesses.killAllFirefoxProcesses().then(result => {
+                console.log("Firefox Killed correctly.")
+            });
+            browser.pause(5000);
+            BashProcesses.killAllPointProcesses().then(result => {
+                console.log("Point Killed correctly.")
+            });
+            browser.pause(5000);
+        } catch (exception) {
+        console.log("Error killing point when test case is finished.")
+        }
     },
     /**
      * Gets executed after all workers got shut down and the process is about to exit. It is not
