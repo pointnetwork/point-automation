@@ -23,13 +23,13 @@ Check this video with a demo of how to install and run the test cases : [Here](i
 
 1. Download this project
 2. Run command "npm install" in the root of this project
-3. Run any of the following commands according to the test cases that you want to execute : 
-   * "SECRET_WORDS=word1 word2 word3 npm run test-macos" => Run all the tests (MacOS)
-   * "SECRET_WORDS=word1 word2 word3 npm run test-linux" => Run all the tests (MacOS)
-   * "SECRET_WORDS=word1 word2 word3 npm run simple-test-linux" => Just one test (MacOS)
-   * "SECRET_WORDS=word1 word2 word3 npm run simple-test-macos" => Just one test (MacOS)
-
-*SECRET_WORDS environment variable should contain the secret words to login with a specific user.
+3. Run command "export PASS_ENCRYPT_AUTOMATION=passwordhere" --> Ask to Alexis or Brian for the password
+4. Run command "npm run decrypt-credentials", this will generate a JSON file in the project that contains the sensitive information
+5. Run any of the following commands according to the test cases that you want to execute : 
+   * "npm run test-macos" => Run all the tests (MacOS)
+   * "npm run test-linux" => Run all the tests (MacOS)
+   * "npm run simple-test-linux" => Just one test (MacOS)
+   * "npm run simple-test-macos" => Just one test (MacOS)
 
 
 # Reports
@@ -51,4 +51,4 @@ The tests were developed to support both instances at the same time just specify
 - Tests are not supported to run in Windows yet
 - For some tests a lot of complex and high-level processes are executed, so it can take some time to finish all the test executions.
 - Sometimes the tests fails if we have Point opened before running the test. Take care of this and close Point before running the tests.
-- There are issues running the Linux tests in a pipeline (WIP)
+
