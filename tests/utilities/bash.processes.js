@@ -163,7 +163,7 @@ module.exports = {
     async killSelenium() {
         await console.log("Killing Selenium")
         return new Promise((resolve) => {
-            childProcess.exec("kill $(ps aux | grep 'seleniu[m]' | awk '{print $2}')" , (err, stdout, stderr) => {
+            childProcess.exec("kill $(ps aux | grep 'webdrive[r]' | awk '{print $2}')" , (err, stdout, stderr) => {
                 console.log("Selenium definitely killed")
                 resolve(stdout)
             })
