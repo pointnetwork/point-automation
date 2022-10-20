@@ -211,7 +211,7 @@ exports.config = {
         }
 
         try {
-            console.log("Test case finished. Killing Firefox instances...")
+            console.log("Test case finished. Cleaning instance...")
             BashProcesses.killAllFirefoxProcesses().then(result => {
                 console.log("Firefox Killed correctly.")
             });
@@ -220,8 +220,18 @@ exports.config = {
                 console.log("Point Killed correctly.")
             });
             browser.pause(5000);
+            BashProcesses.killSelenium().then(result => {
+                console.log("Selenium Killed correctly.")
+            });
+            browser.pause(5000);
+            BashProcesses.killChrome().then(result => {
+                console.log("Chrome Killed correctly.")
+            });
+            browser.pause(5000);
             fs.unlinkSync(require('os').homedir() + "/.point/keystore/key.json");
+            browser.pause(2000);
             Utils.rmDirIfExists(require('os').homedir() + "/.point/point_dashboard.lock")
+            browser.pause(2000);
         } catch (exception) {
         console.log("Error killing point when test case is finished.")
         }

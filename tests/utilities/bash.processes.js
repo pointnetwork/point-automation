@@ -160,11 +160,11 @@ module.exports = {
             })
         })
     },
-    async killSeleniumMacOs() {
-        await console.log("Killing Selenium in MacOS")
+    async killSelenium() {
+        await console.log("Killing Selenium")
         return new Promise((resolve) => {
-            childProcess.exec("pkill -a selenium-standalone" , (err, stdout, stderr) => {
-                console.log("Selenium definitely killed in MacOS")
+            childProcess.exec("kill $(ps aux | grep 'seleniu[m]' | awk '{print $2}')" , (err, stdout, stderr) => {
+                console.log("Selenium definitely killed")
                 resolve(stdout)
             })
         })
@@ -197,5 +197,15 @@ module.exports = {
                 return resolve(stdout)
             })
         })
-    }
+    },
+    async killChrome() {
+        await console.log("Killing all Chrome Processes...")
+
+        return new Promise((resolve) => {
+            childProcess.exec("kill $(ps aux | grep 'chrom[e]' | awk '{print $2}')" , (err, stdout, stderr) => {
+                console.log("Chrome definitely killed")
+                resolve(stdout)
+            })
+        })
+    },
 };
