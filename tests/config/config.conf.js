@@ -220,10 +220,10 @@ exports.config = {
                 console.log("Point Killed correctly.")
             });
             browser.pause(5000);
-            BashProcesses.killSelenium().then(result => {
-                console.log("Selenium Killed correctly.")
-            });
-            browser.pause(5000);
+            // BashProcesses.killSelenium().then(result => {
+            //     console.log("Selenium Killed correctly.")
+            // });
+            // browser.pause(5000);
             BashProcesses.killChrome().then(result => {
                 console.log("Chrome Killed correctly.")
             });
