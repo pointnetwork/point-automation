@@ -211,22 +211,22 @@ exports.config = {
         }
 
         try {
-            console.log("Test case finished. Cleaning instance...")
-            BashProcesses.killAllFirefoxProcesses().then(result => {
-                console.log("Firefox Killed correctly.")
-            });
-            browser.pause(5000);
-            BashProcesses.killAllPointProcesses().then(result => {
-                console.log("Point Killed correctly.")
-            });
-            browser.pause(5000);
+            // console.log("Test case finished. Cleaning instance...")
+            // BashProcesses.killAllFirefoxProcesses().then(result => {
+            //     console.log("Firefox Killed correctly.")
+            // });
+            // browser.pause(5000);
+            // BashProcesses.killAllPointProcesses().then(result => {
+            //     console.log("Point Killed correctly.")
+            // });
+            // browser.pause(5000);
             // BashProcesses.killSelenium().then(result => {
             //     console.log("Selenium Killed correctly.")
             // });
             // browser.pause(5000);
-            BashProcesses.killChrome().then(result => {
-                console.log("Chrome Killed correctly.")
-            });
+            // BashProcesses.killChrome().then(result => {
+            //     console.log("Chrome Killed correctly.")
+            // });
             browser.pause(5000);
             fs.unlinkSync(require('os').homedir() + "/.point/keystore/key.json");
             browser.pause(2000);
