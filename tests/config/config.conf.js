@@ -224,10 +224,10 @@ exports.config = {
                 console.log("Selenium Killed correctly.")
             });
             browser.pause(5000);
-            BashProcesses.killChrome().then(result => {
-                console.log("Chrome Killed correctly.")
-            });
-            browser.pause(5000);
+            // BashProcesses.killChrome().then(result => {
+            //     console.log("Chrome Killed correctly.")
+            // });
+            // browser.pause(5000);
             fs.unlinkSync(require('os').homedir() + "/.point/keystore/key.json");
             browser.pause(2000);
             Utils.rmDirIfExists(require('os').homedir() + "/.point/point_dashboard.lock")
