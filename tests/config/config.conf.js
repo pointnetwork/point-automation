@@ -8,10 +8,8 @@ const path = require('path')
 const fs = require('fs')
 const drivers = {
     chrome: { version: '98.0.4758.102' },
-    firefox: { version: '0.31.0' },
+    firefox: { version: '0.32.0' },
 }
-const BashProcesses = require('../utilities/bash.processes')
-const video = require('wdio-video-reporter');
 
 function rmdir (dir) {
     try {
@@ -125,12 +123,12 @@ exports.config = {
                 useOnAfterCommandForScreenshot: false,
                 LOG: log4j.getLogger('default')
             }
-        ],
-        [video, {
-            saveAllVideos: false,       // If true, also saves videos for successful test cases
-            videoSlowdownMultiplier: 1, // Higher to get slower videos, lower for faster videos [Value 1-100],
-            outputDir: "./tests/reports/html-reports"
-        }],
+        ]
+        // [video, {
+        //     saveAllVideos: false,       // If true, also saves videos for successful test cases
+        //     videoSlowdownMultiplier: 1, // Higher to get slower videos, lower for faster videos [Value 1-100],
+        //     outputDir: "./tests/reports/html-reports"
+        // }],
     ],
     //
     // =====
@@ -206,9 +204,9 @@ exports.config = {
             const moment = require('moment')
 
             // if test passed, ignore, else take and save screenshot.
-            // if (test.passed) {
-            //     return
-            // }
+            if (test.passed) {
+                 return
+            }
             const timestamp = moment().format('YYYYMMDD-HHmmss.SSS')
             const filepath = path.join(
                 'tests/reports/html-reports/screenshots/',
@@ -220,7 +218,9 @@ exports.config = {
             console.log('It was not possible to take screenshot after test. Error : ' + exception)
         }
 
-        try {
+        browser.pause(5000)
+
+        //try {
             // console.log("Test case finished. Cleaning instance...")
             // BashProcesses.killAllFirefoxProcesses().then(result => {
             //     console.log("Firefox Killed correctly.")
@@ -237,9 +237,9 @@ exports.config = {
             // BashProcesses.killChrome().then(result => {
             //     console.log("Chrome Killed correctly.")
             // });
-        } catch (exception) {
-        console.log("Error killing point when test case is finished.")
-        }
+        //} catch (exception) {
+        //console.log("Error killing point when test case is finished.")
+        // }
     },
     /**
      * Gets executed after all workers got shut down and the process is about to exit. It is not
