@@ -34,7 +34,7 @@ jobs:
       - name: Run Tests
         run: |
           echo "Running Tests"
-          npm run test-linux
+          npm run test-macos
       - name: Upload HTML Report
         uses: actions/upload-artifact@v1
         if: always()
