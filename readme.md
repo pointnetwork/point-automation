@@ -26,7 +26,7 @@ Check this video with a demo of how to install and run the test cases : [Here](i
 3. Run command "export PASS_ENCRYPT_AUTOMATION=passwordhere" --> Ask to Alexis or Brian for the password
 4. Run command "npm run decrypt-credentials", this will generate a JSON file in the project that contains the sensitive information
 5. Run any of the following commands according to the test cases that you want to execute : 
-   * "npm run test-macos" => Run all the tests (MacOS)
+   * "npm run test-macos-local" => Run all the tests (MacOS)
    * "npm run test-linux" => Run all the tests (MacOS)
    * "npm run simple-test-linux" => Just one test (MacOS)
    * "npm run simple-test-macos" => Just one test (MacOS)
