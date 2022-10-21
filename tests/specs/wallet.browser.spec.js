@@ -6,10 +6,9 @@ import BrowserTopBarPage from "../pages/browser/browser.top.bar.page";
 import BrowserWalletPage from "../pages/browser/browser.wallet.page";
 import BrowserTransactionModalPage from "../pages/browser/browser.transaction.modal.page";
 
-describe('Open/Close Browser', () => {
+describe('Wallet', () => {
     it('Validate Wallet', async () => {
         //Login with second user (the one that will receive the transaction) and get the balance
-        await CommonSteps.logoutUserIfIsLoggedIn();
         await CommonSteps.loginUser(3, true);
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();

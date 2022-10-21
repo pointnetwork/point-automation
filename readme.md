@@ -36,6 +36,21 @@ Check this video with a demo of how to install and run the test cases : [Here](i
 
 An HTML file with the test execution report is generated automatically and it's saved after every execution in tests/reports/html-reports/suite-0-0/0-0/report.html
 
+# Run in Github Actions
+
+There are 2 jobs in Github Actions to run the tests remotely, the URL is : https://github.com/pointnetwork/point-automation/actions
+One of the jobs is to run the tests in Linux and the other one to run them in MacOS.
+These are the steps to run them : 
+
+1. Go to Github Actions URL
+2. Click on any of the jobs on the left side Actions navigation bar
+3. Click on "Run Workflow" button
+4. Select the branch where the YML file is (Main branch is the one selected by default)
+5. Select the branch where your tests are (Main branch is the one selected by default)
+6. Click on "Run Workflow" button
+7. Click on the new generated build
+8. Wait for the tests execution to finish
+
 # Electron
 
 As Point is an electron app that also opens a Firefox browser when the nodes are up, we have to open 2 browsers to interact with them : 

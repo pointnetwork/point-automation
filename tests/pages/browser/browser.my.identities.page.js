@@ -27,7 +27,7 @@ export default class BrowserMyIdentitiesPage extends Page {
     }
 
     async waitForPageToBeLoaded() {
-        await this.handleLink().waitForDisplayed();
+        await this.handleLink.waitForDisplayed();
     }
 
     async clickOnHandle() {

@@ -7,7 +7,7 @@ import LoginNewAccountPage from "../pages/login.new.account.page";
 import InstallerWelcomePage from '../pages/installer/installer.welcome.page'
 
 
-describe('Open/Close Browser', () => {
+describe('Remove .Point Folder and Signup', () => {
     it('Remove .point folder, cancel terms and conditions, accept terms and conditions and signup', async () => {
         let attempts = 1;
 

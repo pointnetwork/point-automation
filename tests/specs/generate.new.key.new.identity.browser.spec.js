@@ -9,7 +9,7 @@ import CommonSteps from "../utilities/common.steps";
 import CommonValidations from "../utilities/common.validations";
 import BashProcesses from "../utilities/bash.processes";
 
-describe('Open/Close Browser', () => {
+describe('Create new Key Identity', () => {
     it('Create new identity', async () => {
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();

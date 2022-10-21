@@ -81,6 +81,7 @@ module.exports = {
                     },
                     waitforTimeout: 60000
                 })
+                await firefoxInstance.maximizeWindow()
                 found = true;
                 await console.log("Firefox instance created!")
             } catch(exception) {

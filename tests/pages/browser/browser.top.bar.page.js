@@ -23,7 +23,7 @@ export default class BrowserTopBarPage extends Page {
     }
 
     get identityButton() {
-        return this.driver.$('//a[contains(@href, \'/identities/\']')
+        return this.driver.$('//a[contains(@href, \'/identities/\')]')
     }
 
     async clickOnWallet() {

@@ -4,7 +4,7 @@ import CommonSteps from "../utilities/common.steps";
 import CommonValidations from "../utilities/common.validations";
 import BashProcesses from "../utilities/bash.processes";
 
-describe('Open/Close Browser', () => {
+describe('Browser', () => {
     it('Open point and verify browser', async () => {
         await CommonSteps.loginIfUserIsLoggedOut();
 

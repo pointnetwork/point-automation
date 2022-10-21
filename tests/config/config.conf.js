@@ -172,6 +172,22 @@ exports.config = {
      */
     beforeSession() {
         require('@babel/register');
+        try {
+            console.log("Cleaning Session")
+            let path;
+
+            if(browser.config.pipelineType === "macOs"){
+                path = "/Users/runner/.point"
+            }else{
+                path = require('os').homedir() + "/.point"
+            }
+
+            fs.unlinkSync(path + "/keystore/key.json");
+            Utils.rmDirIfExists(path + "/point_dashboard.lock")
+            console.log("Session was cleaned")
+        } catch (exception) {
+            console.log("Error killing point when test case is finished.")
+        }
     },
     /**
      // Gets executed before test execution begins. At this point you can access all global
@@ -187,17 +203,12 @@ exports.config = {
         global.assert = chai.assert;
         global.should = chai.should();
         console.log("Browser version : " + browser.capabilities['browserVersion'])
-        try {
-            console.log("Cleaning Session")
-            browser.pause(5000);
-            fs.unlinkSync(require('os').homedir() + "/.point/keystore/key.json");
-            browser.pause(2000);
-            Utils.rmDirIfExists(require('os').homedir() + "/.point/point_dashboard.lock")
-            browser.pause(2000);
-        } catch (exception) {
-            console.log("Error killing point when test case is finished.")
-        }
     },
+    /**
+     * Function to be executed before a test (in Mocha/Jasmine only)
+     * @param {Object} test    test object
+     * @param {Object} context scope object the test was executed with
+     */
     afterTest (test) {
         try {
             const path = require('path')

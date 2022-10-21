@@ -4,7 +4,7 @@ import LoginPage from '../pages/login.page'
 import LoginNewAccountPage from '../pages/login.new.account.page';
 import CommonSteps from "../utilities/common.steps";
 
-describe('Open/Close Browser', () => {
+describe('Logout and Signup not closing browser', () => {
     it('Open dashboard, Logout, generate a new key not closing browser 3 times.', async () => {
         let attempts = 3;
         await CommonSteps.loginIfUserIsLoggedOut();

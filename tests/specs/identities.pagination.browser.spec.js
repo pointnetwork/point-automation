@@ -11,9 +11,8 @@ import BashProcesses from "../utilities/bash.processes";
 import BrowserTopBarPage from "../pages/browser/browser.top.bar.page";
 import BrowserIdentitiesPage from "../pages/browser/browser.identities.page";
 
-describe('Open/Close Browser', () => {
+describe('Identities', () => {
     it('Validate pagination on Identities tab', async () => {
-        await CommonSteps.logoutUserIfIsLoggedIn();
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();

@@ -47,11 +47,15 @@ export default class BrowserIdentityPage extends Page {
     }
 
     get addDeployerAddButton() {
-        return this.driver.$("//h5[text() = 'Deployers']/..//button[text() = 'Add']")
+        return this.driver.$("//h3[text() = 'Deployers:']/following-sibling::div//button")
+    }
+
+    get allIKVRows() {
+        return this.driver.$$("(//table)[2]//tbody//tr")
     }
 
     async waitForPageToBeLoaded() {
-        await this.handleValue.waitForDisplayed()
+        await this.identityTitle.waitForDisplayed()
     }
 
     async clickOnDomainSpace() {
@@ -59,6 +63,7 @@ export default class BrowserIdentityPage extends Page {
     }
 
     async addNewEntry(key, value, version) {
+        await this.addDeployerAddButton.scrollIntoView()
         await super.setValueInElement(this.addNewEntryKeyTextbox, key)
         await super.setValueInElement(this.addNewEntryValueTextbox, value)
         await super.setValueInElement(this.addNewEntryVersionTextbox, version)
@@ -68,5 +73,9 @@ export default class BrowserIdentityPage extends Page {
     async addNewDeployer(address) {
         await super.setValueInElement(this.deployersAddressTextbox, address)
         await super.clickElement(this.addDeployerAddButton)
+    }
+
+    async clickOnAddNewEntryButton() {
+        await super.clickElement(this.addNewEntryAddButton)
     }
 }

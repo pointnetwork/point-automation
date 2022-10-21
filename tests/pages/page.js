@@ -125,7 +125,7 @@ export default class Page {
     let retries = 60
 
     while (!elementsDisplayed && retries > 0) {
-      if (listElement.length > 0) {
+      if (await listElement.length > 0) {
         elementsDisplayed = true
       } else {
         await browser.pause(1000)
@@ -153,7 +153,7 @@ export default class Page {
       try {
         await browser.switchWindow(tabName)
         switched = true
-        await browser.pause(2000)
+        await browser.pause(5000)
       } catch (exception) {
         console.log('Tab was not opened yet. Retrying')
         await browser.pause(5000)
@@ -205,7 +205,7 @@ export default class Page {
     let retries = 60
 
     while (!elementsDisplayed && retries > 0) {
-      if (listElement.length > size) {
+      if (await listElement.length > size) {
         elementsDisplayed = true
       } else {
         await browser.pause(1000)
@@ -215,9 +215,13 @@ export default class Page {
   }
 
   async waitForSpinnerNotDisplayed(driver) {
-    const spinner = await driver.$("//div[contains(@class, 'spinner')]")
-    await spinner.waitForClickable()
-    await spinner.waitForClickable({reverse:true, timeout:30000})
+    try {
+      const spinner = await driver.$("//div[contains(@class, 'spinner')]")
+      await spinner.waitForClickable({timeout: 5000})
+      await spinner.waitForClickable({reverse:true, timeout:30000})
+    }catch(exception){
+      await console.log("Spinner was not displayed")
+    }
   }
 
   async getSuccessMessageBrowser(firefox) {
@@ -257,5 +261,17 @@ export default class Page {
     await browser.pause(3000)
   }
 
+  async waitForListToHaveLength(listElement, size) {
+    let elementsDisplayed = false
+    let retries = 60
 
+    while (!elementsDisplayed && retries > 0) {
+      if (listElement.length === size) {
+        elementsDisplayed = true
+      } else {
+        await browser.pause(1000)
+        retries = -1
+      }
+    }
+  }
 }

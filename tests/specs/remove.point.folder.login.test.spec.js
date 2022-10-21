@@ -6,7 +6,7 @@ import CommonSteps from "../utilities/common.steps";
 import DashboardPage from "../pages/dashboard.page";
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 
-describe('Open/Close Browser', () => {
+describe('Remove .Point Folder and Login', () => {
     it('Remove .point folder, cancel terms and conditions, accept terms and conditions and login', async () => {
         let attempts = 1;
 
