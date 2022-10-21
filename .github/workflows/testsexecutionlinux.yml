@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Download release
-        run: wget https://github.com/aalvarezpoint/alexisbuilds/releases/download/alexis/point-v0.2.xx1-Linux-Debian-Ubuntu.tar.gz
+        run: wget https://github.com/pointnetwork/pointnetwork-dashboard/releases/download/v0.2.xx1/point-v0.2.xx1-Linux-Debian-Ubuntu.tar.gz
       - name: Decrypt credentials
         env:
           PASS_ENCRYPT_AUTOMATION: ${{ secrets.DECRYPT_CREDENTIALS_PASS }}
