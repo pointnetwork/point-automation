@@ -54,6 +54,34 @@ export default class BrowserIdentityPage extends Page {
         return this.driver.$$("(//table)[2]//tbody//tr")
     }
 
+    async getIkvNameByRowIndex(index) {
+        return this.driver.$("(//table)[2]//tbody//tr["+index+"]//td[1]")
+    }
+
+    async getIkvValueByRowIndex(index) {
+        return this.driver.$("(//table)[2]//tbody//tr["+index+"]//td[2]")
+    }
+
+    async getIkvValueEditTextboxByRowIndex(index) {
+        return this.driver.$("(//table)[2]//tbody//tr["+index+"]//td[2]//input")
+    }
+
+    async getkvVersionByRowIndex(index) {
+        return this.driver.$("(//table)[2]//tbody//tr["+index+"]//td[3]")
+    }
+
+    async getIkvEditButtonByRowIndex(index) {
+        return this.driver.$("(//table)[2]//tbody//tr["+index+"]//td[4]//button")
+    }
+
+    async getIkvSaveButtonByRowIndex(index) {
+        return this.driver.$("(//table)[2]//tbody//tr["+index+"]//td[4]//button[1]")
+    }
+
+    async getIkvCancelButtonByRowIndex(index) {
+        return this.driver.$("(//table)[2]//tbody//tr["+index+"]//td[4]//button[2]")
+    }
+
     async waitForPageToBeLoaded() {
         await this.identityTitle.waitForDisplayed()
     }
@@ -63,7 +91,7 @@ export default class BrowserIdentityPage extends Page {
     }
 
     async addNewEntry(key, value, version) {
-        await this.addDeployerAddButton.scrollIntoView()
+        await this.moveToLastIkvRow();
         await super.setValueInElement(this.addNewEntryKeyTextbox, key)
         await super.setValueInElement(this.addNewEntryValueTextbox, value)
         await super.setValueInElement(this.addNewEntryVersionTextbox, version)
@@ -77,5 +105,22 @@ export default class BrowserIdentityPage extends Page {
 
     async clickOnAddNewEntryButton() {
         await super.clickElement(this.addNewEntryAddButton)
+    }
+
+    async clickOnEditButtonOnRow(row) {
+        const element = await this.getIkvEditButtonByRowIndex(row)
+        await super.clickElement(element)
+    }
+
+    async editValueOnRow(row, value) {
+        const element = await this.getIkvValueEditTextboxByRowIndex(row)
+        await super.setValueInElement(element, value)
+        await super.clickElement(await this.getIkvSaveButtonByRowIndex(row))
+    }
+
+    async moveToLastIkvRow() {
+        await browser.pause(5000)
+        await this.addDeployerAddButton.scrollIntoView()
+        await browser.pause(2000)
     }
 }
