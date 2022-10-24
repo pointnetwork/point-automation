@@ -124,11 +124,6 @@ exports.config = {
                 LOG: log4j.getLogger('default')
             }
         ]
-        // [video, {
-        //     saveAllVideos: false,       // If true, also saves videos for successful test cases
-        //     videoSlowdownMultiplier: 1, // Higher to get slower videos, lower for faster videos [Value 1-100],
-        //     outputDir: "./tests/reports/html-reports"
-        // }],
     ],
     //
     // =====
@@ -155,8 +150,6 @@ exports.config = {
             outputDir: './tests/reports/html-reports/',
             filename: 'master-report.html',
             reportTitle: 'Master Report'
-            // to use the template override option, can point to your own file in the test project:
-            // templateFilename: path.resolve(__dirname, '../template/wdio-html-reporter-alt-template.hbs')
         })
 
         reportAggregator.clean()
@@ -210,6 +203,7 @@ exports.config = {
      * @param {Object} context scope object the test was executed with
      */
     afterTest (test) {
+        console.log("Finishing Test case...")
         try {
             const path = require('path')
             const moment = require('moment')
@@ -228,29 +222,7 @@ exports.config = {
         } catch (exception) {
             console.log('It was not possible to take screenshot after test. Error : ' + exception)
         }
-
-        browser.pause(5000)
-
-        //try {
-            // console.log("Test case finished. Cleaning instance...")
-            // BashProcesses.killAllFirefoxProcesses().then(result => {
-            //     console.log("Firefox Killed correctly.")
-            // });
-            // browser.pause(5000);
-            // BashProcesses.killAllPointProcesses().then(result => {
-            //     console.log("Point Killed correctly.")
-            // });
-            // browser.pause(5000);
-            // BashProcesses.killSelenium().then(result => {
-            //     console.log("Selenium Killed correctly.")
-            // });
-            // browser.pause(5000);
-            // BashProcesses.killChrome().then(result => {
-            //     console.log("Chrome Killed correctly.")
-            // });
-        //} catch (exception) {
-        //console.log("Error killing point when test case is finished.")
-        // }
+        console.log("Test case finished!")
     },
     /**
      * Gets executed after all workers got shut down and the process is about to exit. It is not
@@ -269,17 +241,6 @@ exports.config = {
     },
     suites: {
         github_actions: [
-            './tests/specs/open.close.browser.spec.js',
-            './tests/specs/remove.point.folder.login.test.spec.js',
-            './tests/specs/remove.point.folder.signup.test.spec.js',
-            './tests/specs/logout.existing.key.spec.js',
-            './tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
-            './tests/specs/logout.generate.new.key.spec.js',
-            './tests/specs/open.close.dashboard.spec.js',
-            './tests/specs/generate.new.key.new.identity.browser.spec.js',
-            './tests/specs/verify.browser.page.spec.js',
-        ],
-        github_actions_linux: [
             './tests/specs/logout.existing.key.spec.js',
             './tests/specs/logout.generate.new.key.spec.js',
             './tests/specs/remove.point.folder.login.test.spec.js',
@@ -290,6 +251,7 @@ exports.config = {
             './tests/specs/logout.generate.new.key.not.closing.browser.spec.js',
             './tests/specs/wallet.browser.spec.js',
             './tests/specs/identities.pagination.browser.spec.js',
+            './tests/specs/identity.add.ikv.browser.spec.js',
         ]
     },
 };

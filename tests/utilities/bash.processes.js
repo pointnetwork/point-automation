@@ -4,10 +4,12 @@ module.exports = {
     async getFirefoxProcess() {
         let found = false;
         let timeout = 15;
+        let isRunning = false;
         await console.log("Getting firefox process");
 
         while(!found && timeout > 0) {
-            if(await this.isProcessRunning(await this.getFirefoxProcessName(), "firefox")){
+            isRunning = await this.isProcessRunning(await this.getFirefoxProcessName(), "firefox")
+            if(isRunning){
                 found = true;
                 await console.log("Firefox is running");
             }else {
@@ -15,7 +17,7 @@ module.exports = {
                 await browser.pause(2000);
             }
         }
-        return await this.isProcessRunning(await this.getFirefoxProcessName(), "firefox")
+        return isRunning;
     },
     async getCommandToRun(processName) {
         switch (process.platform) {
