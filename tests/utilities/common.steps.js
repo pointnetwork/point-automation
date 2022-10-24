@@ -81,7 +81,10 @@ module.exports = {
                     },
                     waitforTimeout: 60000
                 })
-                await firefoxInstance.maximizeWindow()
+
+                if(process.platform === "darwin") {
+                    await firefoxInstance.maximizeWindow()
+                }
                 found = true;
                 await console.log("Firefox instance created!")
             } catch(exception) {
