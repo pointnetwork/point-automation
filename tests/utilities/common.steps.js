@@ -32,9 +32,6 @@ module.exports = {
         await LoginExistingAccountPage.fillSecretWords(credentialsSplit)
         await LoginExistingAccountPage.clickOnConfirmAndLoginButton();
         await browser.pause(5000)
-        // if(process.platform === "linux") {
-        //     await Utils.reloadSessionLinux()
-        // }
         await LoginPage.changeToActiveWindow();
     },
     async openPointInNewFirefox(instance) {
