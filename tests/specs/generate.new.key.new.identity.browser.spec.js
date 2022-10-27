@@ -10,9 +10,6 @@ import CommonValidations from "../utilities/common.validations";
 import BashProcesses from "../utilities/bash.processes";
 
 describe('Create new Key Identity', () => {
-    afterEach(async() => {
-        await BashProcesses.killAllFirefoxProcesses();
-    })
     it('Create new identity', async () => {
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();

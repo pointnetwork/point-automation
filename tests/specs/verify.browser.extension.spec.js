@@ -6,9 +6,6 @@ import BashProcesses from "../utilities/bash.processes";
 import BrowserFirefoxAddOnsPage from "../pages/browser/browser.firefox.add.ons.page";
 
 describe('Browser', () => {
-    afterEach(async() => {
-        await BashProcesses.killAllFirefoxProcesses();
-    })
     it('Open point and verify browser', async () => {
         await CommonSteps.loginIfUserIsLoggedOut();
 

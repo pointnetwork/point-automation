@@ -8,9 +8,6 @@ import {faker} from "@faker-js/faker";
 import BrowserTransactionModalPage from "../pages/browser/browser.transaction.modal.page";
 
 describe('Identity / IKV', () => {
-    afterEach(async() => {
-        await BashProcesses.killAllFirefoxProcesses();
-    })
     it('Validate an IKV can be added correctly', async () => {
         //Login
         await CommonSteps.loginIfUserIsLoggedOut();

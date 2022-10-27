@@ -5,9 +5,6 @@ import CommonValidations from "../utilities/common.validations";
 import BashProcesses from "../utilities/bash.processes";
 
 describe('Browser', () => {
-    afterEach(async() => {
-        await BashProcesses.killAllFirefoxProcesses();
-    })
     it('Open point and verify browser', async () => {
         await CommonSteps.loginIfUserIsLoggedOut();
 

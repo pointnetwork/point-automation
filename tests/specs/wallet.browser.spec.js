@@ -7,9 +7,6 @@ import BrowserWalletPage from "../pages/browser/browser.wallet.page";
 import BrowserTransactionModalPage from "../pages/browser/browser.transaction.modal.page";
 
 describe('Wallet', () => {
-    afterEach(async() => {
-        await BashProcesses.killAllFirefoxProcesses();
-    })
     it('Validate Wallet', async () => {
         //Login with second user (the one that will receive the transaction) and get the balance
         await CommonSteps.loginUser(3, true);

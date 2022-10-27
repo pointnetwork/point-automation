@@ -9,9 +9,6 @@ import BrowserTransactionModalPage from "../pages/browser/browser.transaction.mo
 import Credentials from "../resources/decryptedcredentials.json";
 
 describe('Identity / Deployer', () => {
-    afterEach(async() => {
-        await BashProcesses.killAllFirefoxProcesses();
-    })
     it('Validate a Deployer can be added correctly', async () => {
         //Login
         await CommonSteps.loginIfUserIsLoggedOut();
