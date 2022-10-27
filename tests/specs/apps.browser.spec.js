@@ -14,6 +14,9 @@ import BrowserAppsPage from "../pages/browser/browser.apps.page";
 import BrowserIdentityPage from "../pages/browser/browser.identity.page";
 
 describe('Identities', () => {
+    afterEach(async() => {
+        await BashProcesses.killAllFirefoxProcesses();
+    })
     it('Validate pagination on Apps tab', async () => {
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();

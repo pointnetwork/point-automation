@@ -3,6 +3,7 @@ import BrowserHomePage from '../pages/browser/browser.home.page'
 import CommonSteps from "../utilities/common.steps";
 import CommonValidations from "../utilities/common.validations";
 import BashProcesses from "../utilities/bash.processes";
+import BrowserFirefoxAddOnsPage from "../pages/browser/browser.firefox.add.ons.page";
 
 describe('Browser', () => {
     afterEach(async() => {
@@ -27,5 +28,13 @@ describe('Browser', () => {
         const browserHome = await new BrowserHomePage(firefox)
         await browserHome.waitForPageToBeLoaded();
         await CommonValidations.isFirefoxPageDisplayed(browserHome);
+        await firefox.url("about:addons")
+
+        const browserFirefoxAddOnsPage = await new BrowserFirefoxAddOnsPage(firefox);
+        expect(await browserFirefoxAddOnsPage.addOnTitle).toBeDisplayed();
+        expect(await browserFirefoxAddOnsPage.addOnTitle).toHaveText("Point Network");
+        expect(await browserFirefoxAddOnsPage.addOnTrigger).toBeDisplayed();
+        expect(await browserFirefoxAddOnsPage.addOnDescription).toBeDisplayed();
+        expect(await browserFirefoxAddOnsPage.addOnDescription).toHaveText("A Browser Extension for Point Network");
     });
 });
