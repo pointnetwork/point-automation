@@ -274,4 +274,26 @@ export default class Page {
       }
     }
   }
+
+  async switchToTabByIndex(index, browser) {
+    let retries = 20
+    let switched = false
+
+    while (retries > 0 && !switched) {
+      try {
+        const windows = await browser.getWindowHandles()
+        let activeWindow = windows[index]
+        if (activeWindow.constructor === Array) {
+          activeWindow = activeWindow[0]
+        }
+        await browser.switchToWindow(activeWindow)
+        switched = true
+        await browser.pause(5000)
+      } catch (exception) {
+        console.log('Firefox Tab was not opened yet. Retrying')
+        await browser.pause(5000)
+        retries -= 1
+      }
+    }
+  }
 }
