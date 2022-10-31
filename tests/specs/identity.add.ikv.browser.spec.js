@@ -7,8 +7,17 @@ import BrowserIdentityPage from "../pages/browser/browser.identity.page";
 import {faker} from "@faker-js/faker";
 import BrowserTransactionModalPage from "../pages/browser/browser.transaction.modal.page";
 
+let browserIdentityPage
+let ikvRows
+let firefox
+let browserTransactionModalPage
+const name = faker.commerce.productName()
+const value = faker.commerce.productName()
+const version = "1.0.2"
+let newLength
+
 describe('Identity / IKV', () => {
-    it('Validate an IKV can be added correctly', async () => {
+    it('Identity Table, IKV table, Deployers table validations and IKV can be added/edited correctly (Validate UI tables)', async () => {
         //Login
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
@@ -25,13 +34,13 @@ describe('Identity / IKV', () => {
         expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
 
         //Open firefox instance
-        const firefox = await CommonSteps.createFirefoxInstance()
+        firefox = await CommonSteps.createFirefoxInstance()
         await CommonSteps.openPointInNewFirefox(firefox);
 
         //Enter to personal identity
         const browserTopBarPage = await new BrowserTopBarPage(firefox)
         await browserTopBarPage.clickOnIdentityButton()
-        const browserIdentityPage = await new BrowserIdentityPage(firefox)
+        browserIdentityPage = await new BrowserIdentityPage(firefox)
         await browserIdentityPage.waitForPageToBeLoaded()
 
         //Assertions on personal identity page
@@ -47,22 +56,22 @@ describe('Identity / IKV', () => {
         expect(browserIdentityPage.deployersAddressTextbox).toBeDisplayed("Deployers textbox is not displayed")
         expect(browserIdentityPage.addDeployerAddButton).toBeDisplayed("Deployers Add button is not displayed")
         await browserIdentityPage.waitForListToHaveElements(await browserIdentityPage.allIKVRows)
-        const ikvRows = await browserIdentityPage.allIKVRows.length
+    })
+    it('Identity Table, IKV table, Deployers table validations and IKV can be added/edited correctly (Add and cancel new IKV)', async () => {
+        ikvRows = await browserIdentityPage.allIKVRows.length
 
         //Add a new IKV entry
-        const name = faker.commerce.productName()
-        const value = faker.commerce.productName()
-        const version = "1.0.2"
         await browserIdentityPage.addNewEntry(name, value, version)
         await browserIdentityPage.switchToTab("Point Confirmation Window", firefox)
-        const browserTransactionModalPage = await new BrowserTransactionModalPage(firefox)
+        browserTransactionModalPage = await new BrowserTransactionModalPage(firefox)
 
         //Cancel the transaction
         await browserTransactionModalPage.clickOnCancel()
         await browserTransactionModalPage.switchToTab("Point Explorer", firefox)
         await browserIdentityPage.waitForListToHaveLength(await browserIdentityPage.allIKVRows, ikvRows)
         expect(await browserIdentityPage.allIKVRows.length).toEqual(ikvRows)
-
+    })
+    it('Identity Table, IKV table, Deployers table validations and IKV can be added/edited correctly (Add and Allow new IKV)', async () => {
         //Allow the transaction
         await browserIdentityPage.clickOnAddNewEntryButton()
         await browserIdentityPage.switchToTab("Point Confirmation Window", firefox)
@@ -75,14 +84,15 @@ describe('Identity / IKV', () => {
         await browserIdentityPage.waitForListToBeGreaterThan(await browserIdentityPage.allIKVRows, ikvRows)
 
         //Assertions on new IKV entry
-        const newLength = await browserIdentityPage.allIKVRows.length
-        const newExpectedLength = ikvRows+1
+        newLength = await browserIdentityPage.allIKVRows.length
+        const newExpectedLength = ikvRows + 1
         expect(newLength).toEqual(newExpectedLength)
         await browserIdentityPage.moveToLastIkvRow()
         expect(await (await browserIdentityPage.getIkvNameByRowIndex(newLength)).getText()).toEqual(name)
         expect(await (await browserIdentityPage.getIkvValueByRowIndex(newLength)).getText()).toEqual(value)
         expect(await (await browserIdentityPage.getkvVersionByRowIndex(newLength)).getText()).toEqual(version)
-
+    })
+    it('Identity Table, IKV table, Deployers table validations and IKV can be added/edited correctly (Edit IKV row)', async () => {
         //Edit the added entry
         await browserIdentityPage.clickOnEditButtonOnRow(newLength)
         const newValue = faker.commerce.productName()

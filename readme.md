@@ -19,8 +19,6 @@ Before running the automated tests, the user needs to have installed :
 
 # Installation
 
-Check this video with a demo of how to install and run the test cases : [Here](installation.mp4)
-
 1. Download this project
 2. Run command "npm install" in the root of this project
 3. Run command "export PASS_ENCRYPT_AUTOMATION=passwordhere" --> Ask to Alexis or Brian for the password
@@ -30,6 +28,7 @@ Check this video with a demo of how to install and run the test cases : [Here](i
    * "npm run test-linux" => Run all the tests (MacOS)
    * "npm run simple-test-linux" => Just one test (MacOS)
    * "npm run simple-test-macos" => Just one test (MacOS)
+6. Wait for the execution to be finished and don't touch anything in your machine. That can cause failures in the test if it loses the focus.
 
 
 # Reports

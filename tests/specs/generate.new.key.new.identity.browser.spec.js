@@ -9,8 +9,9 @@ import CommonSteps from "../utilities/common.steps";
 import CommonValidations from "../utilities/common.validations";
 import BashProcesses from "../utilities/bash.processes";
 
-describe('Create new Key Identity', () => {
+describe('Sign Up', () => {
     it('Create new identity', async () => {
+        //Login
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();
@@ -42,11 +43,14 @@ describe('Create new Key Identity', () => {
         await DashboardPage.launchPointBrowserButton.waitForDisplayed();
         expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
 
+        //Enter new Identity username
         const firefox = await CommonSteps.createFirefoxInstance()
         await CommonSteps.openPointInNewFirefox(firefox);
         const browserFinalStepPage = await new BrowserFinalStepSignupPage(firefox)
         await browserFinalStepPage.waitForPageToBeLoaded();
         await browserFinalStepPage.enterUsername(Utils.getRandomString() + Utils.getRandomNumber())
+
+        //Click on Register and validate that principal page is displayed
         await browserFinalStepPage.clickOnRegisterButton();
         await browserFinalStepPage.clickOnSureButton();
         const browserHome = await new BrowserHomePage(firefox)

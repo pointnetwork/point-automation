@@ -30,7 +30,6 @@ describe('Logout and Signup', () => {
             await LoginNewAccountPage.enterThreeFirstWords(words[0], words[2], words[11]);
             await LoginNewAccountPage.clickOnConfirmAndLoginButton();
             await DashboardPage.changeToActiveWindow();
-
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning();
 

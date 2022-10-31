@@ -4,8 +4,9 @@ import CommonSteps from "../utilities/common.steps";
 import CommonValidations from "../utilities/common.validations";
 import BashProcesses from "../utilities/bash.processes";
 
-describe('Browser', () => {
-    it('Open point and verify browser', async () => {
+describe('Firefox Browser', () => {
+    it('Open point and verify browser opens Point principal page automatically', async () => {
+        //Login
         await CommonSteps.loginIfUserIsLoggedOut();
 
         //Open dashboard and browser
@@ -19,6 +20,7 @@ describe('Browser', () => {
         await DashboardPage.launchPointBrowserButton.waitForDisplayed();
         expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
 
+        //Open Point
         const firefox = await CommonSteps.createFirefoxInstance()
         await CommonSteps.openPointInNewFirefox(firefox);
         const browserHome = await new BrowserHomePage(firefox)

@@ -7,9 +7,13 @@ import BrowserIdentityPage from "../pages/browser/browser.identity.page";
 import {faker} from "@faker-js/faker";
 import BrowserTransactionModalPage from "../pages/browser/browser.transaction.modal.page";
 import Credentials from "../resources/decryptedcredentials.json";
+let firefox
+let browserIdentityPage
+let browserTransactionModalPage
+let expectedStatus
 
 describe('Identity / Deployer', () => {
-    it('Validate a Deployer can be added correctly', async () => {
+    it('Revoke, Add, Reactivate and Assertions on deployer table (Revoke deployer)', async () => {
         //Login
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
@@ -26,19 +30,21 @@ describe('Identity / Deployer', () => {
         expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
 
         //Open firefox instance
-        const firefox = await CommonSteps.createFirefoxInstance()
+        firefox = await CommonSteps.createFirefoxInstance()
         await CommonSteps.openPointInNewFirefox(firefox);
 
         //Enter to personal identity
         const browserTopBarPage = await new BrowserTopBarPage(firefox)
         await browserTopBarPage.clickOnIdentityButton()
-        const browserIdentityPage = await new BrowserIdentityPage(firefox)
+        browserIdentityPage = await new BrowserIdentityPage(firefox)
         await browserIdentityPage.waitForPageToBeLoaded()
 
         //Revoke deployer
-        const expectedStatus = await browserIdentityPage.revokeDeployerIfDisplayed()
-        const browserTransactionModalPage = await new BrowserTransactionModalPage(firefox)
-
+        expectedStatus = await browserIdentityPage.revokeDeployerIfDisplayed()
+        browserTransactionModalPage = await new BrowserTransactionModalPage(firefox)
+        expect(await browserIdentityPage.getDeployerStatusByRowIndex(1)).toHaveText("Revoked")
+    })
+    it('Revoke, Add, Reactivate and Assertions on deployer table (Add new deployer)', async () => {
         //Add new deployer
         const address = Credentials.accountSecondUser
         await browserIdentityPage.addNewDeployer(address)
@@ -50,6 +56,7 @@ describe('Identity / Deployer', () => {
         expect(await browserIdentityPage.successDeployerOkButton).toBeDisplayed()
         await browserIdentityPage.clickOnDeployerAddedOkButton()
 
+        //Refresh page to see the changes
         await firefox.refresh()
         await browserIdentityPage.waitForPageToBeLoaded()
         await browserIdentityPage.deployersTable.waitForDisplayed()
@@ -60,15 +67,18 @@ describe('Identity / Deployer', () => {
         expect(await browserIdentityPage.getDeployerAddressByRowIndex(1)).toHaveText(address)
         expect(await browserIdentityPage.getDeployerStatusByRowIndex(1)).toHaveText(expectedStatus)
         expect(await browserIdentityPage.getDeployerDateByRowIndex(1)).toBeDisplayed()
-
+    })
+    it('Revoke, Add, Reactivate and Assertions on deployer table (Reactivate deployer)', async () => {
         //Reactivate
         await browserIdentityPage.clickOnReactivateButtonByIndexIfNeeded(expectedStatus, 1)
 
+        //Refresh page to see the changes
         await firefox.refresh()
         await browserIdentityPage.waitForPageToBeLoaded()
         await browserIdentityPage.deployersTable.waitForDisplayed()
         await browserIdentityPage.moveToFirstDeployer()
 
+        //Assertions on Deployers table
         expect(await browserIdentityPage.getDeployerNameByRowIndex(1)).toHaveText("@alexistesttwo")
         expect(await browserIdentityPage.getDeployerAddressByRowIndex(1)).toHaveText(address)
         expect(await browserIdentityPage.getDeployerStatusByRowIndex(1)).toHaveText("Allowed")

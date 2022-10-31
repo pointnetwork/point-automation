@@ -12,9 +12,12 @@ import BrowserTopBarPage from "../pages/browser/browser.top.bar.page";
 import BrowserIdentitiesPage from "../pages/browser/browser.identities.page";
 import BrowserAppsPage from "../pages/browser/browser.apps.page";
 import BrowserIdentityPage from "../pages/browser/browser.identity.page";
+let browserTopBarPage
+let browserAppsPage
+let browserIdentityPage
 
 describe('Identities', () => {
-    it('Validate pagination on Apps tab', async () => {
+    it('Handle link, App Link and pagination validations on Apps tab (Validate pagination and UI)', async () => {
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();
@@ -29,13 +32,14 @@ describe('Identities', () => {
         await DashboardPage.launchPointBrowserButton.waitForDisplayed();
         expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
 
+        //Create firefox instance
         const firefox = await CommonSteps.createFirefoxInstance()
         await CommonSteps.openPointInNewFirefox(firefox);
 
         //Enter to Apps
-        const browserTopBarPage = await new BrowserTopBarPage(firefox)
+        browserTopBarPage = await new BrowserTopBarPage(firefox)
         await browserTopBarPage.clickOnApps()
-        const browserAppsPage = await new BrowserAppsPage(firefox)
+        browserAppsPage = await new BrowserAppsPage(firefox)
         await browserAppsPage.waitForPageToBeLoaded();
 
         //Assertions on Apps Table
@@ -56,10 +60,11 @@ describe('Identities', () => {
         expect(await browserAppsPage.allRows.length).toBeGreaterThan(allRows)
 
         await browserAppsPage.firstRowToScroll.scrollIntoView();
-
+    })
+    it('Handle link, App Link and pagination validations on Apps tab (Click on Handle)', async () => {
         //Click on Handle
         await browserAppsPage.clickOnHandleByIndex(0)
-        const browserIdentityPage = await new BrowserIdentityPage(firefox)
+        browserIdentityPage = await new BrowserIdentityPage(firefox)
         await browserIdentityPage.waitForPageToBeLoaded()
 
         //Assertions on identity page
@@ -68,7 +73,8 @@ describe('Identities', () => {
         expect(browserIdentityPage.ownerValue).toBeDisplayed("Owner is not displayed")
         expect(browserIdentityPage.communicationPublicKeyValue).toBeDisplayed("Communication Public Key is not displayed")
         expect(browserIdentityPage.domainSpaceValue).toBeDisplayed("Domain space is not displayed")
-
+    })
+    it('Handle link, App Link and pagination validations on Apps tab (Click on App)', async () => {
         await browserTopBarPage.clickOnApps()
         await browserAppsPage.waitForPageToBeLoaded();
         const url = (await browserAppsPage.getAppOnRowByIndex(0)).getUrl();

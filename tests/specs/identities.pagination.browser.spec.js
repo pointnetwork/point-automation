@@ -13,6 +13,7 @@ import BrowserIdentitiesPage from "../pages/browser/browser.identities.page";
 
 describe('Identities', () => {
     it('Validate pagination on Identities tab', async () => {
+        //Login
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();
@@ -35,6 +36,7 @@ describe('Identities', () => {
         await browserTopBarPage.clickOnIdentities()
         const browserIdentitiesPage = await new BrowserIdentitiesPage(firefox)
 
+        //Validate table
         await browserIdentitiesPage.waitForPageToBeLoaded();
         expect(browserIdentitiesPage.title).toBeDisplayed("Title is not displayed")
         expect(browserIdentitiesPage.totalLabel).toBeDisplayed("Total is not displayed")
@@ -44,13 +46,16 @@ describe('Identities', () => {
         await browserIdentitiesPage.waitForListToHaveElements(await browserIdentitiesPage.allRows)
         expect(await browserIdentitiesPage.allRows.length).toBeGreaterThan(0)
 
+        //Get current rows
         const allRows = await browserIdentitiesPage.allRows.length
 
+        //Scroll down
         await browserIdentitiesPage.rowToScroll.scrollIntoView();
         await browserIdentitiesPage.waitForSpinnerNotDisplayed(firefox)
         await browserIdentitiesPage.waitForListToHaveElements(await browserIdentitiesPage.allRows)
         await browserIdentitiesPage.waitForListToBeGreaterThan(await browserIdentitiesPage.allRows, allRows)
 
+        //Validate current rows displayed
         expect(await browserIdentitiesPage.allRows.length).toBeGreaterThan(allRows)
     });
 });

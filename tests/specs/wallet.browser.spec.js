@@ -6,17 +6,26 @@ import BrowserTopBarPage from "../pages/browser/browser.top.bar.page";
 import BrowserWalletPage from "../pages/browser/browser.wallet.page";
 import BrowserTransactionModalPage from "../pages/browser/browser.transaction.modal.page";
 
-describe('Wallet', () => {
-    it('Validate Wallet', async () => {
+let browserWalletPage
+let receiveUserAddress
+let firefox
+let browserTransactionModalPage
+let userBalance
+let userBalanceDashboardValue
+let receiveUserBalance
+
+describe('Browser - Wallet', () => {
+    it('Displays Address, Balance, Currency and Send/Receive currency. (Get Information from Receiver user)', async () => {
         //Login with second user (the one that will receive the transaction) and get the balance
         await CommonSteps.loginUser(3, true);
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();
 
-        let receiveUserBalance = await DashboardPage.balanceValue.getText()
+        receiveUserBalance = await DashboardPage.balanceValue.getText()
         receiveUserBalance = parseFloat(receiveUserBalance.split(" POINT")[0])
-        const receiveUserAddress = await DashboardPage.accountFullAddress.getText()
-
+        receiveUserAddress = await DashboardPage.accountFullAddress.getText()
+    })
+    it('Displays Address, Balance, Currency and Send/Receive currency. (Validate Data in Wallet in Sender user)', async () => {
         //Login with the first user (the one that will send the transaction)
         await BashProcesses.killAllFirefoxProcesses();
         await DashboardPage.waitForProcessesRunning(1);
@@ -36,17 +45,17 @@ describe('Wallet', () => {
         await browser.pause(10000)
         await DashboardPage.launchPointBrowserButton.waitForDisplayed();
         expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
-        const userBalance = await DashboardPage.balanceValue.getText()
+        userBalance = await DashboardPage.balanceValue.getText()
         const userAddress = await DashboardPage.accountAddress.getText()
 
         //Open Firefox
-        const firefox = await CommonSteps.createFirefoxInstance()
+        firefox = await CommonSteps.createFirefoxInstance()
         await CommonSteps.openPointInNewFirefox(firefox);
 
         //Enter to Wallet
         const browserTopBarPage = await new BrowserTopBarPage(firefox)
         await browserTopBarPage.clickOnWallet()
-        const browserWalletPage = await new BrowserWalletPage(firefox)
+        browserWalletPage = await new BrowserWalletPage(firefox)
         await browserWalletPage.waitForPageToBeLoaded()
 
         //Validate that the Address and the Balance matches to what is displayed in the dashboard
@@ -55,11 +64,12 @@ describe('Wallet', () => {
         const balanceFirstRowCalculation = parseFloat(balanceFirstRow.split(" POINT")[0])
 
         const userBalanceValue = parseFloat(parseFloat(userBalance.split(" POINT")[0]).toFixed(8))
-        const userBalanceDashboardValue = parseFloat(userBalance.split(" POINT")[0])
+        userBalanceDashboardValue = parseFloat(userBalance.split(" POINT")[0])
 
         expect(userBalanceValue).toEqual(balanceFirstRowCalculation)
         expect(addressFirstRow).toContain(userAddress)
-
+    })
+    it('Displays Address, Balance, Currency and Send/Receive currency. (Validate Receive Modal)', async () => {
         //Assertions on "Receive" option
         await browserWalletPage.clickOnReceiveButtonOnWalletTableByIndex(0)
         await browserWalletPage.receiveCopyPasteIcon.waitForDisplayed()
@@ -75,14 +85,15 @@ describe('Wallet', () => {
         await browserWalletPage.clickOnCopyPasteButton()
         expect(await browserWalletPage.receiveCopyPasteCheckMark).toBeDisplayed({message: "Copy paste function didn't work"});
         await browserWalletPage.clickOnCloseButton()
-
+    })
+    it('Displays Address, Balance, Currency and Send/Receive currency. (Send Higher amount)', async () => {
         //Send an amount higher to what we have in the wallet (Negative scenario)
         await browserWalletPage.clickOnSendButtonOnWalletTableByIndex(0)
         await browserWalletPage.enterSendAddress(receiveUserAddress)
         await browserWalletPage.enterSendValue("10")
         await browserWalletPage.clickOnSendButtonSendOption()
         await browserWalletPage.switchToTab("Point Confirmation Window", firefox)
-        const browserTransactionModalPage = await new BrowserTransactionModalPage(firefox)
+        browserTransactionModalPage = await new BrowserTransactionModalPage(firefox)
         await browserTransactionModalPage.clickOnAllow()
         await browserWalletPage.switchToTab("Point Explorer", firefox)
 
@@ -92,7 +103,8 @@ describe('Wallet', () => {
         expect(await browserWalletPage.getErrorMessageDescriptionBrowser(firefox)).toHaveText("Error: rpc error: code = Unknown desc = rpc error: code = Internal desc = insufficient balance for transfer: unknown request")
         await browserWalletPage.clickOnOkSuccessMessageBrowser(firefox)
         await browserWalletPage.clickOnCancelButtonSendOption()
-
+    })
+    it('Displays Address, Balance, Currency and Send/Receive currency. (Send Valid amount and validate decreased balance)', async () => {
         //Send a valid amount (Positive scenario)
         await browserWalletPage.clickOnSendButtonOnWalletTableByIndex(0)
         await browserWalletPage.enterSendAddress(receiveUserAddress)
@@ -112,11 +124,13 @@ describe('Wallet', () => {
         let updatedAmount = await DashboardPage.balanceValue.getText()
         updatedAmount = parseFloat(updatedAmount.split(" POINT")[0]);
         expect(updatedAmount).toBeLessThan(userBalanceDashboardValue)
-
+    })
+    it('Displays Address, Balance, Currency and Send/Receive currency. (Validate received amount)', async () => {
         //Login with the second user again
         await BashProcesses.killAllFirefoxProcesses();
         await DashboardPage.waitForProcessesRunning(1);
 
+        //Logout/Login
         await DashboardPage.clickOnLogout()
         await DashboardPage.confirmLogout();
         await CommonSteps.loginUser(3, true);

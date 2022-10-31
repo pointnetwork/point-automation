@@ -10,13 +10,14 @@ describe('Logout and Signup not closing browser', () => {
         await CommonSteps.loginIfUserIsLoggedOut();
 
         while(attempts > 0) {
-            //Logout
+            //Validate Point is open
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning();
             expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
             expect(DashboardPage.pointDashboardTitle).toHaveText('Point Dashboard');
             expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
 
+            //Logout
             await BashProcesses.killAllFirefoxProcesses();
             await DashboardPage.waitForProcessesRunning(1);
             await DashboardPage.clickOnLogout();
@@ -32,7 +33,6 @@ describe('Logout and Signup not closing browser', () => {
             await LoginNewAccountPage.enterThreeFirstWords(words[0], words[2], words[11]);
             await LoginNewAccountPage.clickOnConfirmAndLoginButton();
             await DashboardPage.changeToActiveWindow();
-
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning();
 

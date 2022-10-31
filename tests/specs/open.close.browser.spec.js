@@ -5,11 +5,10 @@ import LoginPage from "../pages/login.page";
 
 describe('Open/Close Browser', () => {
     it('Open dashboard and close Firefox 5 times', async () => {
-        let attempts = 1;
+        let attempts = 5;
         await CommonSteps.loginIfUserIsLoggedOut()
 
         while(attempts > 0) {
-
              //Open dashboard and browser
              await DashboardPage.waitForDashboardDisplayed();
              await DashboardPage.waitForProcessesRunning();
@@ -23,12 +22,13 @@ describe('Open/Close Browser', () => {
             await DashboardPage.launchPointBrowserButton.waitForDisplayed();
             expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
 
+            //Logout
             await DashboardPage.clickOnLogout()
             await DashboardPage.confirmLogout();
-
             await LoginPage.waitForPageToBeLoaded();
             expect(await LoginPage.noGenerateOneButton).toBeDisplayed();
 
+            //Login
             await CommonSteps.loginUser();
 
             attempts -= 1;

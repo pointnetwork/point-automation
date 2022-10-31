@@ -12,6 +12,7 @@ describe('Logout with an existing key', () => {
         await CommonSteps.loginIfUserIsLoggedOut();
 
         while(attempts > 0) {
+            //Validate Point is opened
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning(processesToWait);
             expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
@@ -28,7 +29,6 @@ describe('Logout with an existing key', () => {
 
             //Login
             await CommonSteps.loginUser();
-
             await DashboardPage.waitForDashboardDisplayed();
             await DashboardPage.waitForProcessesRunning();
 
@@ -38,6 +38,7 @@ describe('Logout with an existing key', () => {
             await DashboardPage.waitForProcessesRunning(1);
             await DashboardPage.launchPointBrowserButton.waitForDisplayed();
             expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
+
             attempts -= 1;
             processesToWait = 1;
             await console.log("Times to run : " + attempts);
