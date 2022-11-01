@@ -15,6 +15,7 @@ import BrowserIdentityPage from "../pages/browser/browser.identity.page";
 let browserTopBarPage
 let browserAppsPage
 let browserIdentityPage
+let firefox
 
 describe('Identities', () => {
     it('Handle link, App Link and pagination validations on Apps tab (Validate pagination and UI)', async () => {
@@ -33,7 +34,7 @@ describe('Identities', () => {
         expect(await DashboardPage.launchPointBrowserButton).toBeDisplayed();
 
         //Create firefox instance
-        const firefox = await CommonSteps.createFirefoxInstance()
+        firefox = await CommonSteps.createFirefoxInstance()
         await CommonSteps.openPointInNewFirefox(firefox);
 
         //Enter to Apps

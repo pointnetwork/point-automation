@@ -1,6 +1,7 @@
 // to use debug option run `DEBUG=true followed by your .conf.js`
 /* eslint-disable global-require */
 import Utils from "../utilities/utils";
+import BashProcesses from "../utilities/bash.processes";
 
 const wdioHtmlReporter = require('@rpii/wdio-html-reporter')
 const log4j = require('log4js')
@@ -51,7 +52,7 @@ exports.config = {
     // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
-    specs: ['./tests/specs/*.js'],
+    specs: ['./tests/specs/**/*.js'],
     // Patterns to exclude.
     exclude: [],
     pipeline: false,
@@ -89,7 +90,7 @@ exports.config = {
     waitforTimeout: 90000, // Default timeout for all waitFor* commands.
     connectionRetryTimeout: 30000, // Default timeout in milliseconds for request if Selenium Grid doesn't send response
     connectionRetryCount: 3, // Default request retries count
-    specFileRetries: 1,
+    specFileRetries: 0,
     specFileRetriesDelay: 10,
     specFileRetriesDeferred: false,
     framework: 'mocha',
@@ -177,6 +178,7 @@ exports.config = {
 
             fs.unlinkSync(path + "/keystore/key.json");
             Utils.rmDirIfExists(path + "/point_dashboard.lock")
+            global.firefoxInstance = undefined
             console.log("Session was cleaned")
         } catch (exception) {
             console.log("Error killing point when test case is finished.")
@@ -202,6 +204,12 @@ exports.config = {
      * @param {Object} test    test object
      * @param {Object} context scope object the test was executed with
      */
+    after: function (result, capabilities, specs) {
+        return new Promise((resolve, reject) => {
+            BashProcesses.killAllFirefoxProcesses();
+            return resolve()
+        })
+    },
     afterTest (test) {
         console.log("Finishing Test case...")
         try {
@@ -219,6 +227,16 @@ exports.config = {
             )
             browser.saveScreenshot(filepath)
             process.emit('test:screenshot', filepath)
+
+            if(global.firefoxInstance) {
+                const filepathFf = path.join(
+                    'tests/reports/html-reports/screenshots/',
+                    `${timestamp}-FF.png`
+                )
+                global.firefoxInstance.saveScreenshot(filepathFf)
+                process.emit('test:screenshot', filepathFf)
+            }
+
         } catch (exception) {
             console.log('It was not possible to take screenshot after test. Error : ' + exception)
         }

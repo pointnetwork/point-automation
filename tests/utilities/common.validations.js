@@ -8,10 +8,10 @@ module.exports = {
         return fs.existsSync("/Applications/point.app")
     },
     async isFirefoxPageDisplayed(browserHomePage) {
-        expect(browserHomePage.titleLabel).toHaveTextContaining('Welcome to Web 3.0');
-        expect(browserHomePage.walletButton).toBeDisplayed();
-        expect(browserHomePage.blogButton).toBeDisplayed();
-        expect(browserHomePage.pointSocialButton).toBeDisplayed();
-        expect(browserHomePage.emailButton).toBeDisplayed();
+        expect(await browserHomePage.titleLabel).toHaveTextContaining('Welcome to Web 3.0');
+        expect(await browserHomePage.walletButton).toBeDisplayed();
+        expect(await browserHomePage.blogButton).toBeDisplayed();
+        expect(await browserHomePage.pointSocialButton).toBeDisplayed();
+        expect(await browserHomePage.emailButton).toBeDisplayed();
     }
 }

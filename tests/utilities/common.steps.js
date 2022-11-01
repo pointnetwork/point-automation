@@ -91,6 +91,7 @@ module.exports = {
             }
         }
 
+        global.firefoxInstance = firefoxInstance
         return firefoxInstance
     },
     async logoutUserIfIsLoggedIn() {
