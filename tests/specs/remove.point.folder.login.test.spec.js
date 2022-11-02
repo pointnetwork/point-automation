@@ -14,7 +14,9 @@ describe('Remove Point Folder', () => {
             //Remove .point folder and reload session
             await BashProcesses.killAllPointProcesses();
             await BashProcesses.killAllFirefoxProcesses();
+            await browser.pause(3000)
             Utils.rmDirIfExists(await Utils.getPointFolderPath());
+            await browser.pause(3000)
             await browser.reloadSession();
 
             //Cancel installation and reload session

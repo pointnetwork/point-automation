@@ -18,7 +18,17 @@ export default class BrowserFirefoxAddOnsPage extends Page {
         return this.driver.$('.card-contents .addon-description')
     }
 
+    get extensionButton() {
+        return this.driver.$("button[name = 'extension']")
+    }
+
     async waitForPageLoaded() {
         await this.addOnTitle.waitForDisplayed()
+    }
+
+    async clickOnExtensions() {
+        if(await this.extensionButton.isDisplayed()) {
+            await super.clickElement(await this.extensionButton)
+        }
     }
 }

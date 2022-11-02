@@ -106,7 +106,7 @@ module.exports = {
             await console.log("User is not logged in")
         }
     },
-    async openPointExtension(firefox) {
-        await firefox.url(Credentials.pointExtensionUrl)
+    async openPointExtension(firefox, url) {
+        await firefox.url(url + Credentials.pointExtensionUrl)
     }
 }

@@ -8,6 +8,7 @@ import BrowserTopBarPage from "../pages/browser/browser.top.bar.page";
 import BrowserWalletPage from "../pages/browser/browser.wallet.page";
 import BrowserFirefoxExtensionPage from "../pages/browser/browser.firefox.extension.page";
 import BrowserIdentityPage from "../pages/browser/browser.identity.page";
+import BrowserFirefoxMemoryPage from "../pages/browser/browser.firefox.memory.page";
 
 let firefox
 let balanceFirstRowCalculation
@@ -16,6 +17,7 @@ let userId
 let browserFirefoxExtensionPage
 let browserHome
 let browserWalletPage
+let extensionUrl
 
 describe('Point SDK Extension UI', () => {
     after(function () {
@@ -63,6 +65,7 @@ describe('Point SDK Extension UI', () => {
         //Open Firefox ADDONS page
         await firefox.url("about:addons")
         const browserFirefoxAddOnsPage = await new BrowserFirefoxAddOnsPage(firefox);
+        await browserFirefoxAddOnsPage.clickOnExtensions();
 
         //Validate that Extension is installed correctly
         expect(await browserFirefoxAddOnsPage.addOnTitle).toBeDisplayed();
@@ -73,7 +76,14 @@ describe('Point SDK Extension UI', () => {
     })
     it('Displays Identity, Address & Token Balance', async () => {
         //Open Extension
-        await CommonSteps.openPointExtension(firefox)
+        await firefox.url("about:memory")
+        const browserFirefoxMemoryPage = await new BrowserFirefoxMemoryPage(firefox);
+        await browserFirefoxMemoryPage.waitForPageLoaded()
+        await browserFirefoxMemoryPage.clickOnMeasureButton()
+        await browserFirefoxMemoryPage.enterFilter("Point Network")
+        extensionUrl = await browserFirefoxMemoryPage.getExtensionURL()
+
+        await CommonSteps.openPointExtension(firefox, extensionUrl)
         browserFirefoxExtensionPage = await new BrowserFirefoxExtensionPage(firefox);
         await browserFirefoxExtensionPage.waitForPageLoaded();
 
@@ -115,7 +125,7 @@ describe('Point SDK Extension UI', () => {
     })
     it('Allows to click on My Wallet)', async () => {
         //Click on My Wallet button
-        await CommonSteps.openPointExtension(firefox)
+        await CommonSteps.openPointExtension(firefox, extensionUrl)
         await browserFirefoxExtensionPage.waitForPageLoaded();
         await browserFirefoxExtensionPage.clickOnMyWalletButton();
         await browserFirefoxExtensionPage.switchToTabByIndex(2, firefox);
