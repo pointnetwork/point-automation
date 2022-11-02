@@ -10,6 +10,9 @@ import CommonValidations from "../utilities/common.validations";
 import BashProcesses from "../utilities/bash.processes";
 
 describe('Sign Up', () => {
+    after(function () {
+        BashProcesses.killAllFirefoxProcesses();
+    })
     it('Create new identity', async () => {
         //Login
         await CommonSteps.loginIfUserIsLoggedOut();

@@ -15,7 +15,10 @@ let userBalanceDashboardValue
 let receiveUserBalance
 
 describe('Browser - Wallet', () => {
-    it('Displays Address, Balance, Currency and Send/Receive currency. (Get Information from Receiver user)', async () => {
+    after(function () {
+        BashProcesses.killAllFirefoxProcesses();
+    })
+    it('Get Information from Receiver user', async () => {
         //Login with second user (the one that will receive the transaction) and get the balance
         await CommonSteps.loginUser(3, true);
         await DashboardPage.waitForDashboardDisplayed();
@@ -25,7 +28,7 @@ describe('Browser - Wallet', () => {
         receiveUserBalance = parseFloat(receiveUserBalance.split(" POINT")[0])
         receiveUserAddress = await DashboardPage.accountFullAddress.getText()
     })
-    it('Displays Address, Balance, Currency and Send/Receive currency. (Validate Data in Wallet in Sender user)', async () => {
+    it('Sender User - Displays Address, Balance and Currency', async () => {
         //Login with the first user (the one that will send the transaction)
         await BashProcesses.killAllFirefoxProcesses();
         await DashboardPage.waitForProcessesRunning(1);
@@ -69,7 +72,7 @@ describe('Browser - Wallet', () => {
         expect(userBalanceValue).toEqual(balanceFirstRowCalculation)
         expect(addressFirstRow).toContain(userAddress)
     })
-    it('Displays Address, Balance, Currency and Send/Receive currency. (Validate Receive Modal)', async () => {
+    it('Displays receive modal', async () => {
         //Assertions on "Receive" option
         await browserWalletPage.clickOnReceiveButtonOnWalletTableByIndex(0)
         await browserWalletPage.receiveCopyPasteIcon.waitForDisplayed()
@@ -86,7 +89,7 @@ describe('Browser - Wallet', () => {
         expect(await browserWalletPage.receiveCopyPasteCheckMark).toBeDisplayed({message: "Copy paste function didn't work"});
         await browserWalletPage.clickOnCloseButton()
     })
-    it('Displays Address, Balance, Currency and Send/Receive currency. (Send Higher amount)', async () => {
+    it('Does not allow to send higher amount', async () => {
         //Send an amount higher to what we have in the wallet (Negative scenario)
         await browserWalletPage.clickOnSendButtonOnWalletTableByIndex(0)
         await browserWalletPage.enterSendAddress(receiveUserAddress)
@@ -104,7 +107,7 @@ describe('Browser - Wallet', () => {
         await browserWalletPage.clickOnOkSuccessMessageBrowser(firefox)
         await browserWalletPage.clickOnCancelButtonSendOption()
     })
-    it('Displays Address, Balance, Currency and Send/Receive currency. (Send Valid amount and validate decreased balance)', async () => {
+    it('Allows to send valid amount and validate decreased balance', async () => {
         //Send a valid amount (Positive scenario)
         await browserWalletPage.clickOnSendButtonOnWalletTableByIndex(0)
         await browserWalletPage.enterSendAddress(receiveUserAddress)
@@ -125,7 +128,7 @@ describe('Browser - Wallet', () => {
         updatedAmount = parseFloat(updatedAmount.split(" POINT")[0]);
         expect(updatedAmount).toBeLessThan(userBalanceDashboardValue)
     })
-    it('Displays Address, Balance, Currency and Send/Receive currency. (Validate received amount)', async () => {
+    it('Displays received amount', async () => {
         //Login with the second user again
         await BashProcesses.killAllFirefoxProcesses();
         await DashboardPage.waitForProcessesRunning(1);

@@ -18,7 +18,10 @@ let browserHome
 let browserWalletPage
 
 describe('Point SDK Extension UI', () => {
-    it('Displays Identity, Address & Token Balance. Allows user to click to wallet and Point Home page. (Validate Extension is Installed)', async () => {
+    after(function () {
+        BashProcesses.killAllFirefoxProcesses();
+    })
+    it('Extension is Installed in Firefox', async () => {
         //Login
         await CommonSteps.loginIfUserIsLoggedOut();
 
@@ -68,7 +71,7 @@ describe('Point SDK Extension UI', () => {
         expect(await browserFirefoxAddOnsPage.addOnDescription).toBeDisplayed();
         expect(await browserFirefoxAddOnsPage.addOnDescription).toHaveText("A Browser Extension for Point Network");
     })
-    it('Displays Identity, Address & Token Balance. Allows user to click to wallet and Point Home page. (Open Extension and validate UI)', async () => {
+    it('Displays Identity, Address & Token Balance', async () => {
         //Open Extension
         await CommonSteps.openPointExtension(firefox)
         browserFirefoxExtensionPage = await new BrowserFirefoxExtensionPage(firefox);
@@ -87,7 +90,7 @@ describe('Point SDK Extension UI', () => {
         expect(await browserFirefoxExtensionPage.loggedInAsId).toHaveText(userId)
         expect(await browserFirefoxExtensionPage.availableBalance).toHaveText(balanceFirstRowCalculation)
     })
-    it('Displays Identity, Address & Token Balance. Allows user to click to wallet and Point Home page. (Validate Global Chain ID selector)', async () => {
+    it('Displays Global Chain ID selector', async () => {
         await browserFirefoxExtensionPage.clickOnGlobalChainIdSelector()
         expect(await browserFirefoxExtensionPage.optionsSelector.length).toBeGreaterThan(1)
         expect(await browserFirefoxExtensionPage.optionsSelector[0]).toHaveText("mainnet")
@@ -103,14 +106,14 @@ describe('Point SDK Extension UI', () => {
 
         await browserFirefoxExtensionPage.clickOnGlobalChainSelectorOptionByIndex(0)
     })
-    it('Displays Identity, Address & Token Balance. Allows user to click to wallet and Point Home page. (Validate Point Explorer)', async () => {
+    it('Allows to click on Point Explorer', async () => {
         //Click on Point Explorer button
         await browserFirefoxExtensionPage.clickOnPointExplorer();
         await browserFirefoxExtensionPage.switchToTabByIndex(1, firefox);
         await browserHome.waitForPageToBeLoaded();
         expect(browserHome.blogButton).toBeDisplayed({message: "User was not redirected to Point"})
     })
-    it('Displays Identity, Address & Token Balance. Allows user to click to wallet and Point Home page. (Validate My Wallet)', async () => {
+    it('Allows to click on My Wallet)', async () => {
         //Click on My Wallet button
         await CommonSteps.openPointExtension(firefox)
         await browserFirefoxExtensionPage.waitForPageLoaded();

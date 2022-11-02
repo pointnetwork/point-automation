@@ -12,6 +12,9 @@ import BrowserTopBarPage from "../pages/browser/browser.top.bar.page";
 import BrowserIdentitiesPage from "../pages/browser/browser.identities.page";
 
 describe('Identities', () => {
+    after(function () {
+        BashProcesses.killAllFirefoxProcesses();
+    })
     it('Validate pagination on Identities tab', async () => {
         //Login
         await CommonSteps.loginIfUserIsLoggedOut();

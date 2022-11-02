@@ -17,8 +17,11 @@ let browserAppsPage
 let browserIdentityPage
 let firefox
 
-describe('Identities', () => {
-    it('Handle link, App Link and pagination validations on Apps tab (Validate pagination and UI)', async () => {
+describe('Apps tab', () => {
+    after(function () {
+        BashProcesses.killAllFirefoxProcesses();
+    })
+    it('Validate pagination in Apps page and information in Table', async () => {
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
         await DashboardPage.waitForProcessesRunning();
@@ -62,7 +65,7 @@ describe('Identities', () => {
 
         await browserAppsPage.firstRowToScroll.scrollIntoView();
     })
-    it('Handle link, App Link and pagination validations on Apps tab (Click on Handle)', async () => {
+    it('Allows user to click on Handle', async () => {
         //Click on Handle
         await browserAppsPage.clickOnHandleByIndex(0)
         browserIdentityPage = await new BrowserIdentityPage(firefox)
@@ -75,7 +78,7 @@ describe('Identities', () => {
         expect(browserIdentityPage.communicationPublicKeyValue).toBeDisplayed("Communication Public Key is not displayed")
         expect(browserIdentityPage.domainSpaceValue).toBeDisplayed("Domain space is not displayed")
     })
-    it('Handle link, App Link and pagination validations on Apps tab (Click on App)', async () => {
+    it('Allows user to click on App', async () => {
         await browserTopBarPage.clickOnApps()
         await browserAppsPage.waitForPageToBeLoaded();
         const url = (await browserAppsPage.getAppOnRowByIndex(0)).getUrl();

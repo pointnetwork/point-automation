@@ -11,9 +11,13 @@ let firefox
 let browserIdentityPage
 let browserTransactionModalPage
 let expectedStatus
+let address
 
 describe('Identity / Deployer', () => {
-    it('Revoke, Add, Reactivate and Assertions on deployer table (Revoke deployer)', async () => {
+    after(function () {
+        BashProcesses.killAllFirefoxProcesses();
+    })
+    it('Allows to revoke a deployer', async () => {
         //Login
         await CommonSteps.loginIfUserIsLoggedOut();
         await DashboardPage.waitForDashboardDisplayed();
@@ -44,9 +48,9 @@ describe('Identity / Deployer', () => {
         browserTransactionModalPage = await new BrowserTransactionModalPage(firefox)
         expect(await browserIdentityPage.getDeployerStatusByRowIndex(1)).toHaveText("Revoked")
     })
-    it('Revoke, Add, Reactivate and Assertions on deployer table (Add new deployer)', async () => {
+    it('Allows to add a new deployer', async () => {
         //Add new deployer
-        const address = Credentials.accountSecondUser
+        address = Credentials.accountSecondUser
         await browserIdentityPage.addNewDeployer(address)
         await browserIdentityPage.switchToTab("Point Confirmation Window", firefox)
         await browserTransactionModalPage.clickOnAllow()
@@ -59,7 +63,6 @@ describe('Identity / Deployer', () => {
         //Refresh page to see the changes
         await firefox.refresh()
         await browserIdentityPage.waitForPageToBeLoaded()
-        await browserIdentityPage.deployersTable.waitForDisplayed()
         await browserIdentityPage.moveToFirstDeployer()
 
         //Assertions on Deployers table
@@ -68,7 +71,7 @@ describe('Identity / Deployer', () => {
         expect(await browserIdentityPage.getDeployerStatusByRowIndex(1)).toHaveText(expectedStatus)
         expect(await browserIdentityPage.getDeployerDateByRowIndex(1)).toBeDisplayed()
     })
-    it('Revoke, Add, Reactivate and Assertions on deployer table (Reactivate deployer)', async () => {
+    it('Allows to reactivate a deployer', async () => {
         //Reactivate
         await browserIdentityPage.clickOnReactivateButtonByIndexIfNeeded(expectedStatus, 1)
 
