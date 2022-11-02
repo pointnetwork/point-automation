@@ -6,6 +6,9 @@ on:
         description: Automated Tests branch to use
         required: true
         default: main
+  push:
+    branches:
+      - 'main'
 jobs:
   mac-os-test:
     runs-on: macos-latest
