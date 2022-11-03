@@ -5,8 +5,8 @@ import LoginNewAccountPage from '../pages/login.new.account.page';
 
 describe('Logout and Signup not closing browser', function () {
     this.retries(1)
-    after(function() {
-        BashProcesses.killAllPointProcesses();
+    after(async() => {
+        await BashProcesses.killAllPointProcesses();
     })
     it('Open dashboard, Logout, generate a new key not closing browser 3 times.', async () => {
         let attempts = 3;

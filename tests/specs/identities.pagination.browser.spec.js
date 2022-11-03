@@ -6,9 +6,9 @@ import BrowserIdentitiesPage from "../pages/browser/browser.identities.page";
 
 describe('Identities', function () {
     this.retries(1)
-    after(function () {
-        BashProcesses.killAllFirefoxProcesses();
-        BashProcesses.killAllPointProcesses();
+    after(async() => {
+        await BashProcesses.killAllFirefoxProcesses();
+        await BashProcesses.killAllPointProcesses();
     })
     it('Validate pagination on Identities tab', async () => {
         //Login

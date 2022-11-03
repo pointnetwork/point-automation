@@ -5,8 +5,8 @@ import CommonSteps from "../utilities/common.steps";
 
 describe('Logout with an existing key', function () {
     this.retries(1)
-    after(function() {
-        BashProcesses.killAllPointProcesses();
+    after(async() => {
+        await BashProcesses.killAllPointProcesses();
     })
     it('Open dashboard, Logout, import existing key and close browser 3 times.', async () => {
         let attempts = 3;

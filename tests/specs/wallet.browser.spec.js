@@ -16,9 +16,9 @@ let receiveUserBalance
 
 describe('Browser - Wallet', function () {
     this.retries(1)
-    after(function () {
-        BashProcesses.killAllFirefoxProcesses();
-        BashProcesses.killAllPointProcesses();
+    after(async() => {
+        await BashProcesses.killAllFirefoxProcesses();
+        await BashProcesses.killAllPointProcesses();
     })
     it('Get Information from Receiver user', async () => {
         //Login with second user (the one that will receive the transaction) and get the balance

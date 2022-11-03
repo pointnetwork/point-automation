@@ -9,8 +9,8 @@ import InstallerWelcomePage from '../pages/installer/installer.welcome.page'
 
 describe('Remove Point Folder', function () {
     this.retries(1)
-    after(function() {
-        BashProcesses.killAllPointProcesses();
+    after(async() => {
+        await BashProcesses.killAllPointProcesses();
     })
     it('Remove .point folder, cancel terms and conditions, accept terms and conditions and signup', async () => {
         let attempts = 3;

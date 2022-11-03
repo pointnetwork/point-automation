@@ -4,8 +4,8 @@ import CommonSteps from "../utilities/common.steps";
 
 describe('Open/Close Dashboard', function () {
     this.retries(1)
-    after(function() {
-        BashProcesses.killAllPointProcesses();
+    after(async() => {
+        await BashProcesses.killAllPointProcesses();
     })
     it('Open and close dashboard 5 times', async () => {
         let attempts = 5;

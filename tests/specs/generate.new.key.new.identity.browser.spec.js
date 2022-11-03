@@ -11,9 +11,9 @@ import BashProcesses from "../utilities/bash.processes";
 
 describe('Sign Up', function () {
     this.retries(1)
-    after(function () {
-        BashProcesses.killAllFirefoxProcesses();
-        BashProcesses.killAllPointProcesses();
+    after(async() => {
+        await BashProcesses.killAllFirefoxProcesses();
+        await BashProcesses.killAllPointProcesses();
     })
     it('Create new identity', async () => {
         await LoginPage.waitForPageToBeLoaded();

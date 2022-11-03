@@ -5,8 +5,8 @@ import LoginPage from "../pages/login.page";
 
 describe('Open/Close Browser', function () {
     this.retries(1)
-    after(function() {
-        BashProcesses.killAllPointProcesses();
+    after(async() => {
+        await BashProcesses.killAllPointProcesses();
     })
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 5;

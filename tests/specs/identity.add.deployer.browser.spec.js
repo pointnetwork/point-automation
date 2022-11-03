@@ -14,9 +14,9 @@ let address
 
 describe('Identity / Deployer', function () {
     this.retries(1)
-    after(function () {
-        BashProcesses.killAllFirefoxProcesses();
-        BashProcesses.killAllPointProcesses();
+    after(async() => {
+        await BashProcesses.killAllFirefoxProcesses();
+        await BashProcesses.killAllPointProcesses();
     })
     it('Allows to revoke a deployer', async () => {
         //Login

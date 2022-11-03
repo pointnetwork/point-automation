@@ -6,9 +6,9 @@ import BashProcesses from "../utilities/bash.processes";
 
 describe('Firefox Browser', function () {
     this.retries(1)
-    after(function () {
-        BashProcesses.killAllFirefoxProcesses();
-        BashProcesses.killAllPointProcesses();
+    after(async() => {
+        await BashProcesses.killAllFirefoxProcesses();
+        await BashProcesses.killAllPointProcesses();
     })
     it('Open point and verify browser opens Point principal page automatically', async () => {
         //Login

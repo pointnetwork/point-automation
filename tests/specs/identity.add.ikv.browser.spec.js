@@ -18,9 +18,9 @@ let newLength
 
 describe('Identity / IKV', function () {
     this.retries(1)
-    after(function () {
-        BashProcesses.killAllFirefoxProcesses();
-        BashProcesses.killAllPointProcesses();
+    after(async() => {
+        await BashProcesses.killAllFirefoxProcesses();
+        await BashProcesses.killAllPointProcesses();
     })
     it('Displays Table, IKV table and Deployers table', async () => {
         //Login
