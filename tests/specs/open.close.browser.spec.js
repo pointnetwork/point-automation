@@ -3,18 +3,24 @@ import BashProcesses from '../utilities/bash.processes'
 import CommonSteps from "../utilities/common.steps";
 import LoginPage from "../pages/login.page";
 
-describe('Open/Close Browser', () => {
+describe('Open/Close Browser', function () {
+    this.retries(1)
+    after(function() {
+        BashProcesses.killAllPointProcesses();
+    })
     it('Open dashboard and close Firefox 5 times', async () => {
         let attempts = 5;
-        await CommonSteps.loginIfUserIsLoggedOut()
 
         while(attempts > 0) {
-             //Open dashboard and browser
-             await DashboardPage.waitForDashboardDisplayed();
-             await DashboardPage.waitForProcessesRunning();
-             expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
-             expect(DashboardPage.pointDashboardTitle).toHaveText('Point Dashboard');
-             expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
+            //Login
+            await CommonSteps.loginUser();
+
+            //Open dashboard and browser
+            await DashboardPage.waitForDashboardDisplayed();
+            await DashboardPage.waitForProcessesRunning();
+            expect(await BashProcesses.getFirefoxProcess()).toEqual(true);
+            expect(DashboardPage.pointDashboardTitle).toHaveText('Point Dashboard');
+            expect(DashboardPage.pointDashboardVersion).toBeDisplayed();
 
             //Kill firefox and check process is stopped
             await BashProcesses.killAllFirefoxProcesses();
@@ -27,9 +33,6 @@ describe('Open/Close Browser', () => {
             await DashboardPage.confirmLogout();
             await LoginPage.waitForPageToBeLoaded();
             expect(await LoginPage.noGenerateOneButton).toBeDisplayed();
-
-            //Login
-            await CommonSteps.loginUser();
 
             attempts -= 1;
             await console.log("Times to run : " + attempts);

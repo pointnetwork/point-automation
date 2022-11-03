@@ -4,9 +4,11 @@ import CommonSteps from "../utilities/common.steps";
 import CommonValidations from "../utilities/common.validations";
 import BashProcesses from "../utilities/bash.processes";
 
-describe('Firefox Browser', () => {
+describe('Firefox Browser', function () {
+    this.retries(1)
     after(function () {
         BashProcesses.killAllFirefoxProcesses();
+        BashProcesses.killAllPointProcesses();
     })
     it('Open point and verify browser opens Point principal page automatically', async () => {
         //Login

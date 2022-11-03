@@ -19,9 +19,11 @@ let browserHome
 let browserWalletPage
 let extensionUrl
 
-describe('Point SDK Extension UI', () => {
+describe('Point SDK Extension UI', function () {
+    this.retries(1)
     after(function () {
         BashProcesses.killAllFirefoxProcesses();
+        BashProcesses.killAllPointProcesses();
     })
     it('Extension is Installed in Firefox', async () => {
         //Login

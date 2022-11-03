@@ -4,7 +4,6 @@ import CommonSteps from "../utilities/common.steps";
 import BashProcesses from "../utilities/bash.processes";
 import BrowserTopBarPage from "../pages/browser/browser.top.bar.page";
 import BrowserIdentityPage from "../pages/browser/browser.identity.page";
-import {faker} from "@faker-js/faker";
 import BrowserTransactionModalPage from "../pages/browser/browser.transaction.modal.page";
 import Credentials from "../resources/decryptedcredentials.json";
 let firefox
@@ -13,9 +12,11 @@ let browserTransactionModalPage
 let expectedStatus
 let address
 
-describe('Identity / Deployer', () => {
+describe('Identity / Deployer', function () {
+    this.retries(1)
     after(function () {
         BashProcesses.killAllFirefoxProcesses();
+        BashProcesses.killAllPointProcesses();
     })
     it('Allows to revoke a deployer', async () => {
         //Login

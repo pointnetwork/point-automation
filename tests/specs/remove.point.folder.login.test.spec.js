@@ -6,13 +6,16 @@ import CommonSteps from "../utilities/common.steps";
 import DashboardPage from "../pages/dashboard.page";
 import InstallerWelcomePage from "../pages/installer/installer.welcome.page";
 
-describe('Remove Point Folder', () => {
+describe('Remove Point Folder', function () {
+    this.retries(1)
+    after(function() {
+        BashProcesses.killAllPointProcesses();
+    })
     it('Remove .point folder, cancel terms and conditions, accept terms and conditions and login', async () => {
         let attempts = 3;
 
         while(attempts > 0) {
             //Remove .point folder and reload session
-            await BashProcesses.killAllPointProcesses();
             await BashProcesses.killAllFirefoxProcesses();
             await browser.pause(3000)
             Utils.rmDirIfExists(await Utils.getPointFolderPath());

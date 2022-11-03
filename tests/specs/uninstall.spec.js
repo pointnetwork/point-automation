@@ -3,7 +3,7 @@ import CommonSteps from "../utilities/common.steps";
 import CommonValidations from "../utilities/common.validations";
 
 //toDo: Uninstall option is enabled just in Windows for now
-describe.skip('Uninstaller', () => {
+describe.skip('Uninstaller', function () {
     it('Uninstall app from Settings, and install it again', async () => {
         let attempts = 2;
         await CommonSteps.loginIfUserIsLoggedOut();

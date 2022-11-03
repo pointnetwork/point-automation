@@ -9,21 +9,13 @@ import CommonSteps from "../utilities/common.steps";
 import CommonValidations from "../utilities/common.validations";
 import BashProcesses from "../utilities/bash.processes";
 
-describe('Sign Up', () => {
+describe('Sign Up', function () {
+    this.retries(1)
     after(function () {
         BashProcesses.killAllFirefoxProcesses();
+        BashProcesses.killAllPointProcesses();
     })
     it('Create new identity', async () => {
-        //Login
-        await CommonSteps.loginIfUserIsLoggedOut();
-        await DashboardPage.waitForDashboardDisplayed();
-        await DashboardPage.waitForProcessesRunning();
-
-        //Logout user
-        await BashProcesses.killAllFirefoxProcesses();
-        await DashboardPage.waitForProcessesRunning(1);
-        await DashboardPage.clickOnLogout();
-        await DashboardPage.confirmLogout();
         await LoginPage.waitForPageToBeLoaded();
         expect(await LoginPage.noGenerateOneButton).toBeDisplayed();
 

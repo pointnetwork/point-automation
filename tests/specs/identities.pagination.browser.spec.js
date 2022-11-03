@@ -1,19 +1,14 @@
 import DashboardPage from '../pages/dashboard.page'
-import LoginPage from '../pages/login.page'
-import LoginNewAccountPage from '../pages/login.new.account.page';
-import BrowserFinalStepSignupPage from '../pages/browser/browser.final.step.signup.page';
-import BrowserHomePage from '../pages/browser/browser.home.page';
-import Utils from '../utilities/utils';
-
 import CommonSteps from "../utilities/common.steps";
-import CommonValidations from "../utilities/common.validations";
 import BashProcesses from "../utilities/bash.processes";
 import BrowserTopBarPage from "../pages/browser/browser.top.bar.page";
 import BrowserIdentitiesPage from "../pages/browser/browser.identities.page";
 
-describe('Identities', () => {
+describe('Identities', function () {
+    this.retries(1)
     after(function () {
         BashProcesses.killAllFirefoxProcesses();
+        BashProcesses.killAllPointProcesses();
     })
     it('Validate pagination on Identities tab', async () => {
         //Login

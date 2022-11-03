@@ -16,9 +16,11 @@ const value = faker.commerce.productName()
 const version = "1.0.2"
 let newLength
 
-describe('Identity / IKV', () => {
+describe('Identity / IKV', function () {
+    this.retries(1)
     after(function () {
         BashProcesses.killAllFirefoxProcesses();
+        BashProcesses.killAllPointProcesses();
     })
     it('Displays Table, IKV table and Deployers table', async () => {
         //Login
@@ -71,6 +73,7 @@ describe('Identity / IKV', () => {
         //Cancel the transaction
         await browserTransactionModalPage.clickOnCancel()
         await browserTransactionModalPage.switchToTab("Point Explorer", firefox)
+        await browserIdentityPage.moveToLastIkvRow()
         await browserIdentityPage.waitForListToHaveLength(await browserIdentityPage.allIKVRows, ikvRows)
         expect(await browserIdentityPage.allIKVRows.length).toEqual(ikvRows)
     })
@@ -87,6 +90,7 @@ describe('Identity / IKV', () => {
         await browserIdentityPage.waitForListToBeGreaterThan(await browserIdentityPage.allIKVRows, ikvRows)
 
         //Assertions on new IKV entry
+        await browserIdentityPage.moveToLastIkvRow()
         newLength = await browserIdentityPage.allIKVRows.length
         const newExpectedLength = ikvRows + 1
         await browserIdentityPage.waitForListToHaveLength(await browserIdentityPage.allIKVRows, ikvRows+1)

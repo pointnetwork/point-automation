@@ -10,9 +10,12 @@ let browserAppsPage
 let browserIdentityPage
 let firefox
 
-describe('Apps tab', () => {
+describe('Apps tab', function () {
+    this.retries(1)
+
     after(function () {
         BashProcesses.killAllFirefoxProcesses();
+        BashProcesses.killAllPointProcesses();
     })
     it('Validate pagination in Apps page and information in Table', async () => {
         await CommonSteps.loginIfUserIsLoggedOut();

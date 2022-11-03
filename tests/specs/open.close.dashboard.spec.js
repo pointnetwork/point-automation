@@ -2,7 +2,11 @@ import DashboardPage from '../pages/dashboard.page'
 import BashProcesses from '../utilities/bash.processes'
 import CommonSteps from "../utilities/common.steps";
 
-describe('Open/Close Dashboard', () => {
+describe('Open/Close Dashboard', function () {
+    this.retries(1)
+    after(function() {
+        BashProcesses.killAllPointProcesses();
+    })
     it('Open and close dashboard 5 times', async () => {
         let attempts = 5;
         await CommonSteps.loginIfUserIsLoggedOut();
